@@ -18,6 +18,6 @@ definePageMeta({
             Back to Home
         </NuxtLink>
 
-        <slot />
+        <NuxtPage />
     </div>
 </template>
