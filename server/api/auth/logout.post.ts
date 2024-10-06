@@ -1,4 +1,4 @@
-import { lucia } from "../utils/auth";
+import { lucia } from "~~/server/utils/auth";
 
 export default eventHandler(async (event) => {
   if (!event.context.session) {
