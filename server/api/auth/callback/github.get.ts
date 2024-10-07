@@ -31,11 +31,10 @@ export default defineEventHandler(async (event) => {
     const githubUserResponse = await fetch("https://api.github.com/user", {
       headers: {
         Authorization: `Bearer ${tokens.accessToken()}`,
+        "User-Agent": "lucia",
       },
     });
-    console.log("Parsing user", await githubUserResponse.text());
     const githubUser: GitHubUser = await githubUserResponse.json();
-    console.log("User", githubUser);
     // Replace this with your own DB client.
     const existingUser = await db.query.oauthAccount.findFirst({
       where: and(
