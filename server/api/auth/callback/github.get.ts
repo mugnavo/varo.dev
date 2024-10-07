@@ -27,15 +27,13 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    console.log("Validating code");
     const tokens = await github.validateAuthorizationCode(code);
-    console.log("Fetching user", tokens);
     const githubUserResponse = await fetch("https://api.github.com/user", {
       headers: {
         Authorization: `Bearer ${tokens.accessToken()}`,
       },
     });
-    console.log("Parsing user", githubUserResponse);
+    console.log("Parsing user", await githubUserResponse.text());
     const githubUser: GitHubUser = await githubUserResponse.json();
     console.log("User", githubUser);
     // Replace this with your own DB client.
