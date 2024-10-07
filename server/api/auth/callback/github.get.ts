@@ -71,7 +71,7 @@ export default defineEventHandler(async (event) => {
     appendHeader(event, "Set-Cookie", lucia.createSessionCookie(session.id).serialize());
     return sendRedirect(event, "/");
   } catch (e) {
-    console.error(e);
+    console.log(e);
     // the specific error message depends on the provider
     if (e instanceof OAuth2RequestError) {
       // invalid code
