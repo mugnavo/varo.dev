@@ -12,14 +12,14 @@ const { signIn } = useAuth();
             Logo here
             <div class="flex flex-col gap-2">
                 <button
-                    @click="signIn('github')"
                     class="py-2 px-4 bg-slate-950 transition-colors text-white w-fit hover:bg-slate-800 rounded-md"
+                    @click="signIn('github')"
                 >
                     Sign in with GitHub
                 </button>
                 <button
-                    @click="signIn('google')"
                     class="py-2 px-4 bg-slate-950 transition-colors text-white w-fit hover:bg-slate-800 rounded-md"
+                    @click="signIn('google')"
                 >
                     Sign in with Google
                 </button>

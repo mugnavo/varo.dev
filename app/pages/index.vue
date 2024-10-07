@@ -25,8 +25,8 @@ const { user, signOut } = useAuth();
             </div>
 
             <button
-                @click="signOut()"
                 class="py-2 px-4 bg-red-700 transition-colors text-white w-fit hover:bg-red-600 rounded-md"
+                @click="signOut()"
             >
                 Sign out
             </button>

@@ -8,6 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "db": "drizzle-kit"
   },
   "dependencies": {
@@ -16,6 +18,7 @@
     "@nuxt/eslint": "^0.5.7",
     "@nuxt/fonts": "^0.7.2",
     "@nuxthub/core": "^0.7.24",
+    "@vant/nuxt": "^1.0.6",
     "@vueuse/core": "^11.0.3",
     "drizzle-orm": "^0.33.0",
     "nuxt": "^3.13.2",

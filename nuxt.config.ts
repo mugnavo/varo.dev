@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     "@hebilicious/authjs-nuxt",
     "nuxt-typed-router",
     "nuxt-build-cache",
+    "@vant/nuxt",
   ],
 
   authJs: {
