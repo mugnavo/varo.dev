@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { user, signOut } = useAuth();
+const { user, clear } = useUserSession();
 
 </script>
 <template>
@@ -26,7 +26,7 @@ const { user, signOut } = useAuth();
 
             <button
                 class="py-2 px-4 bg-red-700 transition-colors text-white w-fit hover:bg-red-600 rounded-md"
-                @click="signOut()"
+                @click="clear"
             >
                 Sign out
             </button>
