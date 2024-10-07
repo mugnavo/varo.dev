@@ -9,13 +9,18 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
 
-  modules: ["@nuxt/eslint", "@nuxtjs/tailwindcss", "@nuxthub/core"],
   modules: [
+    "@pinia/nuxt",
     "@nuxt/eslint",
+    "@nuxt/fonts",
+    "@vueuse/nuxt",
     "@nuxthub/core",
     "@nuxtjs/tailwindcss",
     "@hebilicious/authjs-nuxt",
+    "nuxt-typed-router",
+    "nuxt-build-cache",
   ],
+
   authJs: {
     guestRedirectTo: "/", // please lang ko change ani master
     authenticatedRedirectTo: "/dashboard", // kani sad
