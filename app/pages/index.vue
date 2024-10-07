@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const user = useUser();
+const { user, signOut } = useAuth();
+
 </script>
 <template>
     <div class="flex flex-col gap-4 p-6">
@@ -13,7 +14,7 @@ const user = useUser();
             v-if="user"
             class="flex flex-col gap-2"
         >
-            <p>Welcome back, {{ user.name || user.firstName }}!</p>
+            <p>Welcome back, {{ user.name }}!</p>
             <NuxtLink
                 class="py-2 px-4 bg-slate-950 transition-colors text-white w-fit hover:bg-slate-800 rounded-md"
                 to="/dashboard"
@@ -23,17 +24,12 @@ const user = useUser();
                 <pre>{{ JSON.stringify(user, null, 2) }}</pre>
             </div>
 
-            <form
-                method="POST"
-                action="/api/auth/logout"
+            <button
+                @click="signOut()"
+                class="py-2 px-4 bg-red-700 transition-colors text-white w-fit hover:bg-red-600 rounded-md"
             >
-                <button
-                    type="submit"
-                    class="py-2 px-4 bg-red-700 transition-colors text-white w-fit hover:bg-red-600 rounded-md"
-                >
-                    Sign out
-                </button>
-            </form>
+                Sign out
+            </button>
         </div>
         <div
             v-else
