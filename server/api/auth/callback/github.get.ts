@@ -1,4 +1,4 @@
-import { OAuth2RequestError } from "arctic";
+import { ArcticFetchError, OAuth2RequestError } from "arctic";
 import { and, eq } from "drizzle-orm";
 import { generateIdFromEntropySize } from "lucia";
 
@@ -77,6 +77,13 @@ export default defineEventHandler(async (event) => {
       // invalid code
       throw createError({
         status: 400,
+      });
+    }
+
+    if (e instanceof ArcticFetchError) {
+      console.error(e.name, e.message, e.cause, e.stack);
+      throw createError({
+        status: 500,
       });
     }
     throw createError({
