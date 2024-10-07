@@ -1,4 +1,4 @@
-import { ArcticFetchError, OAuth2RequestError } from "arctic";
+import { OAuth2RequestError } from "arctic";
 import { and, eq } from "drizzle-orm";
 import { generateIdFromEntropySize } from "lucia";
 
@@ -27,14 +27,17 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    console.log("Validating code");
     const tokens = await github.validateAuthorizationCode(code);
+    console.log("Fetching user", tokens);
     const githubUserResponse = await fetch("https://api.github.com/user", {
       headers: {
         Authorization: `Bearer ${tokens.accessToken()}`,
       },
     });
+    console.log("Parsing user", githubUserResponse);
     const githubUser: GitHubUser = await githubUserResponse.json();
-
+    console.log("User", githubUser);
     // Replace this with your own DB client.
     const existingUser = await db.query.oauthAccount.findFirst({
       where: and(
@@ -80,12 +83,6 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    if (e instanceof ArcticFetchError) {
-      console.error(e.name, e.message, e.cause, e.stack);
-      throw createError({
-        status: 500,
-      });
-    }
     throw createError({
       status: 500,
     });
