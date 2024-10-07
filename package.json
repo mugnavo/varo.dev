@@ -7,12 +7,14 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "nuxi": "pnpm dlx nuxi"
   },
   "packageManager": "pnpm@9.12.0",
   "dependencies": {
     "@lucia-auth/adapter-drizzle": "^1.1.0",
     "@nuxt/eslint": "^0.5.7",
+    "@nuxthub/core": "^0.7.24",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "arctic": "^2.0.0-next.9",
     "drizzle-orm": "^0.33.0",
@@ -25,6 +27,7 @@
   "devDependencies": {
     "drizzle-kit": "^0.24.2",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8"
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "wrangler": "^3.80.0"
   }
 }
