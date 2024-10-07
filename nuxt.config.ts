@@ -10,14 +10,14 @@ export default defineNuxtConfig({
   modules: ["@nuxt/eslint", "@nuxtjs/tailwindcss", "@nuxthub/core"],
 
   runtimeConfig: {
-    databaseUrl: "",
+    databaseUrl: process.env.NUXT_DATABASE_URL,
 
-    githubClientId: "",
-    githubClientSecret: "",
-    githubRedirectUri: "",
+    githubClientId: process.env.NUXT_GITHUB_CLIENT_ID,
+    githubClientSecret: process.env.NUXT_GITHUB_CLIENT_SECRET,
+    githubRedirectUri: process.env.NUXT_GITHUB_REDIRECT_URI,
 
-    googleClientId: "",
-    googleClientSecret: "",
-    googleRedirectUri: "",
+    googleClientId: process.env.NUXT_GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.NUXT_GOOGLE_CLIENT_SECRET,
+    googleRedirectUri: process.env.NUXT_GOOGLE_REDIRECT_URI,
   },
 });
