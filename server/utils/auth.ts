@@ -3,7 +3,11 @@ import { Lucia } from "lucia";
 
 import { GitHub } from "arctic";
 
-import { type User as DatabaseUser, session as sessionTable, user as userTable } from "../schemas";
+import {
+  type User as DatabaseUser,
+  session as sessionTable,
+  user as userTable,
+} from "../schemas";
 import { db } from "./db";
 
 const adapter = new DrizzlePostgreSQLAdapter(db, sessionTable, userTable);
@@ -31,14 +35,16 @@ declare module "lucia" {
   }
 }
 
+const runtimeConfig = useRuntimeConfig();
+
 // OAuth2 Providers
 export const github = new GitHub(
-  process.env.GITHUB_CLIENT_ID as string,
-  process.env.GITHUB_CLIENT_SECRET as string,
-  process.env.GITHUB_REDIRECT_URI || null
+  runtimeConfig.githubClientId,
+  runtimeConfig.githubClientSecret,
+  runtimeConfig.githubRedirectUri || null,
 );
 // export const google = new Google(
-//   process.env.GOOGLE_CLIENT_ID as string,
-//   process.env.GOOGLE_CLIENT_SECRET as string,
-//   process.env.GOOGLE_REDIRECT_URI as string
+//   runtimeConfig.googleClientId,
+//   runtimeConfig.googleClientSecret,
+//   runtimeConfig.googleRedirectUri,
 // );

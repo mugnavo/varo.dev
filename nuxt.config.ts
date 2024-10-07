@@ -8,4 +8,16 @@ export default defineNuxtConfig({
   },
 
   modules: ["@nuxt/eslint", "@nuxtjs/tailwindcss", "@nuxthub/core"],
+
+  runtimeConfig: {
+    databaseUrl: "",
+
+    githubClientId: "",
+    githubClientSecret: "",
+    githubRedirectUri: "",
+
+    googleClientId: "",
+    googleClientSecret: "",
+    googleRedirectUri: "",
+  },
 });
