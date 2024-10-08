@@ -12,129 +12,131 @@ import {
 
 // maybe convert to barrel file if we're using Nuxt Layers?
 
-export const matchStatusEnum = pgEnum("match_status_enum", [
+export const match_status_enum = pgEnum("match_status_enum", [
   "pending",
   "accepted",
   "rejected",
 ]);
 
-export const user = pgTable("user", {
-  id: text("id").primaryKey(),
-  name: text("name"),
-  firstName: text("first_name"),
-  lastName: text("last_name"),
-  avatarUrl: text("avatar_url"),
-  email: text("email").unique().notNull(),
+export const users = pgTable("users", {
+  id: text().primaryKey(),
+  name: text(),
+  first_name: text(),
+  last_name: text(),
+  avatar_url: text(),
+  email: text().unique().notNull(),
 
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at")
+  created_at: timestamp().defaultNow().notNull(),
+  updated_at: timestamp()
     .defaultNow()
     .notNull()
     .$onUpdate(() => new Date()),
-  setupAt: timestamp("setup_at"),
-  termsAcceptedAt: timestamp("terms_accepted_at"),
+  setup_at: timestamp(),
+  terms_accepted_at: timestamp(),
 
-  bio: text("bio"),
-  location: text("location"),
-  experienceLevel: integer("experience_level"),
-  availability: text("availability"),
+  bio: text(),
+  location: text(),
+  experience_level: integer(),
+  availability: text(),
 
   // TODO: should we use separate tables for these? (also for project table)
-  skills: text("skills")
+  skills: text()
     .array()
     .notNull()
     .default(sql`ARRAY[]::text[]`),
-  techStack: text("tech_stack")
+  tech_stack: text()
     .array()
     .notNull()
     .default(sql`ARRAY[]::text[]`),
-  interests: text("interests")
+  interests: text()
     .array()
     .notNull()
     .default(sql`ARRAY[]::text[]`),
 
-  embedding: vector("embedding", { dimensions: 1536 }),
+  embedding: vector({ dimensions: 1536 }),
 });
 
-export const oauthAccount = pgTable(
-  "oauth_account",
+export const oauthAccounts = pgTable(
+  "oauth_accounts",
   {
-    providerId: text("provider_id"),
-    providerUserId: text("provider_user_id"),
-    userId: text("user_id")
+    provider_id: text(),
+    provider_user_id: text(),
+    user_id: text()
       .notNull()
-      .references(() => user.id),
+      .references(() => users.id),
   },
-  (table) => ({ pk: primaryKey({ columns: [table.providerId, table.providerUserId] }) }),
+  (table) => ({
+    pk: primaryKey({ columns: [table.provider_id, table.provider_user_id] }),
+  }),
 );
 
-export const project = pgTable("project", {
-  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
-  name: text("name"),
-  description: text("description"),
-  repoUrl: text("repo_url"),
-  websiteUrl: text("website_url"),
-  ownerId: text("owner_id").references(() => user.id),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at")
+export const projects = pgTable("projects", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: text(),
+  description: text(),
+  repo_url: text(),
+  website_url: text(),
+  owner_id: text().references(() => users.id),
+  created_at: timestamp().defaultNow().notNull(),
+  updated_at: timestamp()
     .defaultNow()
     .notNull()
     .$onUpdate(() => new Date()),
 
-  matchEnabled: boolean("match_enabled").default(false), // or helpWanted?
-  skills: text("skills")
+  match_enabled: boolean().default(false), // or help_wanted?
+  skills: text()
     .array()
     .notNull()
     .default(sql`ARRAY[]::text[]`),
-  techStack: text("tech_stack")
+  tech_stack: text()
     .array()
     .notNull()
     .default(sql`ARRAY[]::text[]`),
-  categories: text("categories")
+  categories: text()
     .array()
     .notNull()
     .default(sql`ARRAY[]::text[]`),
-  helpDescription: text("help_description"),
+  help_description: text(),
 
-  embedding: vector("embedding", { dimensions: 1536 }),
+  embedding: vector({ dimensions: 1536 }),
 });
 
-export const userMatch = pgTable(
-  "user_match",
+export const userMatches = pgTable(
+  "user_matches",
   {
-    user1Id: text("user1_id").references(() => user.id),
-    user2Id: text("user2_id").references(() => user.id),
+    user1_id: text().references(() => users.id),
+    user2_id: text().references(() => users.id),
 
-    user1Status: matchStatusEnum("user_1_status").default("pending"),
-    user2Status: matchStatusEnum("user_2_status").default("pending"),
+    user1_status: match_status_enum().default("pending"),
+    user2_status: match_status_enum().default("pending"),
 
-    createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at")
+    created_at: timestamp().defaultNow().notNull(),
+    updated_at: timestamp()
       .defaultNow()
       .notNull()
       .$onUpdate(() => new Date()),
   },
-  (table) => ({ pk: primaryKey({ columns: [table.user1Id, table.user2Id] }) }),
+  (table) => ({ pk: primaryKey({ columns: [table.user1_id, table.user2_id] }) }),
 );
 
-export const projectMatch = pgTable(
-  "project_match",
+export const projectMatches = pgTable(
+  "project_matches",
   {
-    userId: text("user_id").references(() => user.id),
-    projectId: integer("project_id").references(() => project.id),
+    user_id: text().references(() => users.id),
+    project_id: integer().references(() => projects.id),
 
-    userStatus: matchStatusEnum("user_status").default("pending"),
-    projectStatus: matchStatusEnum("project_status").default("pending"),
+    user_status: match_status_enum().default("pending"),
+    project_status: match_status_enum().default("pending"),
 
-    createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at")
+    created_at: timestamp().defaultNow().notNull(),
+    updated_at: timestamp()
       .defaultNow()
       .notNull()
       .$onUpdate(() => new Date()),
   },
-  (table) => ({ pk: primaryKey({ columns: [table.userId, table.projectId] }) }),
+  (table) => ({ pk: primaryKey({ columns: [table.user_id, table.project_id] }) }),
 );
 
 // TODO: add indexes for faster lookups
 
-export type User = typeof user.$inferSelect;
+export type User = typeof users.$inferSelect;
