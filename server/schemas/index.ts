@@ -20,6 +20,7 @@ export const match_status_enum = pgEnum("match_status_enum", [
 
 export const users = pgTable("users", {
   id: text().primaryKey(),
+  username: text().unique(),
   name: text(),
   first_name: text(),
   last_name: text(),
