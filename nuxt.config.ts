@@ -24,13 +24,13 @@ export default defineNuxtConfig({
     databaseUrl: process.env.NUXT_DATABASE_URL,
 
     sessionPassword: process.env.NUXT_SESSION_PASSWORD,
-    baseUrl: process.env.NUXT_BASE_URL, // The URL of your deployed app (used for origin Check in production)
+    baseUrl: process.env.NUXT_BASE_URL,
 
     oauth: {
       github: {
         clientId: process.env.NUXT_GITHUB_CLIENT_ID,
         clientSecret: process.env.NUXT_GITHUB_CLIENT_SECRET,
-        redirectURL: process.env.NUXT_GITHUB_REDIRECT_URL,
+        redirectURL: process.env.NUXT_BASE_URL! + process.env.NUXT_GITHUB_REDIRECT_PATH,
       },
     },
   },
