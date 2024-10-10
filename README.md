@@ -1,3 +1,3 @@
-# tugma.dev
+# varo.dev
 
 TODO readme
