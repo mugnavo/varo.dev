@@ -4,7 +4,7 @@ const { user, clear } = useUserSession();
 </script>
 <template>
     <div class="flex flex-col gap-4 p-6">
-        <h1 class="text-4xl font-bold">Tugma.dev</h1>
+        <h1 class="text-4xl font-bold">varo.dev</h1>
         <div class="flex items-center gap-2">
             This is an unprotected page:
             <pre class="rounded-md border bg-slate-50 p-1">routes/index.tsx</pre>
