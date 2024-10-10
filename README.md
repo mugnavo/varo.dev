@@ -1,3 +1,5 @@
 # varo.dev
 
-TODO readme
+The matchmaking platform for developers, open-source projects, and indie hackers.
+
+WIP
