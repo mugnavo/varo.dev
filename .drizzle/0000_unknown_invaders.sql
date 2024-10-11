@@ -7,12 +7,12 @@ END $$;
 CREATE TABLE IF NOT EXISTS "oauth_accounts" (
 	"provider_id" text,
 	"provider_user_id" text,
-	"user_id" text NOT NULL,
+	"user_id" integer NOT NULL,
 	CONSTRAINT "oauth_accounts_provider_id_provider_user_id_pk" PRIMARY KEY("provider_id","provider_user_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "project_matches" (
-	"user_id" text,
+	"user_id" integer NOT NULL,
 	"project_id" integer,
 	"user_status" "match_status_enum" DEFAULT 'pending',
 	"project_status" "match_status_enum" DEFAULT 'pending',
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS "projects" (
 	"description" text,
 	"repo_url" text,
 	"website_url" text,
-	"owner_id" text,
+	"owner_id" integer NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	"match_enabled" boolean DEFAULT false,
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS "projects" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_matches" (
-	"user1_id" text,
-	"user2_id" text,
+	"user1_id" integer NOT NULL,
+	"user2_id" integer NOT NULL,
 	"user1_status" "match_status_enum" DEFAULT 'pending',
 	"user2_status" "match_status_enum" DEFAULT 'pending',
 	"created_at" timestamp DEFAULT now() NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS "user_matches" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "users_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
 	"username" text,
 	"name" text,
 	"first_name" text,
