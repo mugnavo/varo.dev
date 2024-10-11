@@ -19,7 +19,7 @@ export const match_status_enum = pgEnum("match_status_enum", [
 ]);
 
 export const users = pgTable("users", {
-  id: text().primaryKey(),
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
   username: text().unique(),
   name: text(),
   first_name: text(),
@@ -62,7 +62,7 @@ export const oauthAccounts = pgTable(
   {
     provider_id: text(),
     provider_user_id: text(),
-    user_id: text()
+    user_id: integer()
       .notNull()
       .references(() => users.id),
   },
@@ -77,7 +77,7 @@ export const projects = pgTable("projects", {
   description: text(),
   repo_url: text(),
   website_url: text(),
-  owner_id: text()
+  owner_id: integer()
     .notNull()
     .references(() => users.id),
   created_at: timestamp().defaultNow().notNull(),
@@ -107,10 +107,10 @@ export const projects = pgTable("projects", {
 export const userMatches = pgTable(
   "user_matches",
   {
-    user1_id: text()
+    user1_id: integer()
       .notNull()
       .references(() => users.id),
-    user2_id: text()
+    user2_id: integer()
       .notNull()
       .references(() => users.id),
 
@@ -129,7 +129,7 @@ export const userMatches = pgTable(
 export const projectMatches = pgTable(
   "project_matches",
   {
-    user_id: text()
+    user_id: integer()
       .notNull()
       .references(() => users.id),
     project_id: integer().references(() => projects.id),
