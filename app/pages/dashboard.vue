@@ -1,19 +1,19 @@
 <script setup lang="ts">
 definePageMeta({
-    middleware: "auth"
-})
+	middleware: "auth",
+});
 </script>
 <template>
-    <div class="flex flex-col gap-4 p-4">
-        <h1 class="text-4xl font-bold">Dashboard Layout</h1>
+	<div class="flex flex-col gap-4 p-4">
+		<h1 class="text-4xl font-bold">Dashboard Layout</h1>
 
-        <NuxtLink
-            class="py-2 px-4 bg-slate-950 transition-colors text-white w-fit hover:bg-slate-800 rounded-md"
-            to="/"
-        >
-            Back to Home
-        </NuxtLink>
+		<NuxtLink
+			class="w-fit rounded-md bg-slate-950 px-4 py-2 text-white transition-colors hover:bg-slate-800"
+			to="/"
+		>
+			Back to Home
+		</NuxtLink>
 
-        <NuxtPage />
-    </div>
+		<NuxtPage />
+	</div>
 </template>
