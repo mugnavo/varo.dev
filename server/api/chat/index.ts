@@ -5,7 +5,9 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event);
 
   const result = await streamText({
-    model: google("gemini-1.5-flash-latest"),
+    // https://ai.google.dev/gemini-api/docs/models/gemini
+    // model: google("gemini-1.5-flash-latest"),
+    model: google("gemini-1.5-flash-8b-latest"), // use flash-latest if this is too dumb
     messages: convertToCoreMessages(messages),
   });
 
