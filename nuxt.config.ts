@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     sessionPassword: process.env.NUXT_SESSION_PASSWORD,
     baseUrl: process.env.NUXT_BASE_URL,
 
-    googleGenerativeAiApiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+    googleGenerativeAiApiKey: process.env.NUXT_GOOGLE_GENERATIVE_AI_API_KEY,
 
     oauth: {
       github: {
