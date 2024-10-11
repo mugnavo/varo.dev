@@ -14,6 +14,7 @@ export default withNuxt(
         //   ignores: ["default"],
         // },
       ],
+      "vue/html-self-closing": ["off"],
     },
   },
 );

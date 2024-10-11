@@ -26,13 +26,11 @@
   "editor.minimap.renderCharacters": false,
 
   // set prettier as default formatter for json, ts, tsx, js, jsx, html, css
-  "[json][jsonc][typescript][typescriptreact][javascript][javascriptreact][html][css]": {
+  "[json][jsonc][typescript][typescriptreact][javascript][javascriptreact][html][css][vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[vue]": {
-    "editor.defaultFormatter": "Vue.volar"
-  },
-  "html.format.wrapAttributes": "force-expand-multiline",
+
+  // "html.format.wrapAttributes": "force-expand-multiline",
 
   // auto-format on save & paste
   "editor.formatOnSave": true,
