@@ -77,7 +77,9 @@ export const projects = pgTable("projects", {
   description: text(),
   repo_url: text(),
   website_url: text(),
-  owner_id: text().references(() => users.id),
+  owner_id: text()
+    .notNull()
+    .references(() => users.id),
   created_at: timestamp().defaultNow().notNull(),
   updated_at: timestamp()
     .defaultNow()
@@ -105,8 +107,12 @@ export const projects = pgTable("projects", {
 export const userMatches = pgTable(
   "user_matches",
   {
-    user1_id: text().references(() => users.id),
-    user2_id: text().references(() => users.id),
+    user1_id: text()
+      .notNull()
+      .references(() => users.id),
+    user2_id: text()
+      .notNull()
+      .references(() => users.id),
 
     user1_status: match_status_enum().default("pending"),
     user2_status: match_status_enum().default("pending"),
@@ -123,7 +129,9 @@ export const userMatches = pgTable(
 export const projectMatches = pgTable(
   "project_matches",
   {
-    user_id: text().references(() => users.id),
+    user_id: text()
+      .notNull()
+      .references(() => users.id),
     project_id: integer().references(() => projects.id),
 
     user_status: match_status_enum().default("pending"),
