@@ -7,7 +7,7 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
-    "**/.vinxi": true,
+    "**/.nuxt": true,
     "**/.vercel": true,
     "**/out": true,
     "**/build": true,
