@@ -35,6 +35,9 @@ export const users = pgTable("users", {
   setup_at: timestamp(),
   terms_accepted_at: timestamp(),
 
+  match_user: boolean().default(true),
+  match_project: boolean().default(true),
+
   bio: text(),
   location: text(),
   experience_level: integer(),
