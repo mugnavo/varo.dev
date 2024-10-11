@@ -25,7 +25,7 @@ export default defineOAuthGitHubEventHandler({
           avatar_url: user.avatar_url,
         },
       });
-      return sendRedirect(event, "/");
+      return sendRedirect(event, "/dashboard");
     }
 
     // register new user
@@ -57,7 +57,7 @@ export default defineOAuthGitHubEventHandler({
         avatar_url: user.avatar_url,
       },
     });
-    return sendRedirect(event, "/");
+    return sendRedirect(event, "/dashboard");
   },
   // Optional, will return a json error and 401 status code by default
   onError(event, error) {
