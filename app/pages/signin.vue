@@ -15,7 +15,6 @@ definePageMeta({
 				>
 					Sign in with GitHub
 				</button>
-				TODO: email/magic links?
 			</form>
 		</div>
 	</div>
