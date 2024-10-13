@@ -3,6 +3,7 @@ import { GithubSuccessEventHandler } from "~~/layers/auth/server/utils/callbacks
 import { oauthAccounts, users } from "~~/server/schemas";
 
 export default GithubSuccessEventHandler(async (event, { tokens, user }) => {
+	console.log("fetching user");
 	const existingUser = await db.query.oauthAccounts.findFirst({
 		where: and(
 			eq(oauthAccounts.provider_id, "github"),
