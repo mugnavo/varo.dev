@@ -20,8 +20,6 @@ export default defineNuxtConfig({
 	],
 
 	runtimeConfig: {
-		databaseUrl: process.env.NUXT_DATABASE_URL,
-
 		sessionPassword: process.env.NUXT_SESSION_PASSWORD,
 		baseUrl: process.env.NUXT_BASE_URL,
 
@@ -34,11 +32,6 @@ export default defineNuxtConfig({
 				redirectURL:
 					process.env.NUXT_BASE_URL! + process.env.NUXT_GITHUB_REDIRECT_PATH,
 			},
-		},
-	},
-	nitro: {
-		rollupConfig: {
-			external: ["pg-native", "pg-cloudflare"],
 		},
 	},
 });

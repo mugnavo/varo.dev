@@ -18,6 +18,7 @@
 		"@nuxt/eslint": "^0.5.7",
 		"@nuxt/fonts": "^0.10.0",
 		"@vant/nuxt": "^1.0.6",
+		"@vercel/postgres": "^0.10.0",
 		"@vueuse/core": "^11.1.0",
 		"ai": "^3.4.9",
 		"drizzle-orm": "^0.34.1",
@@ -25,7 +26,6 @@
 		"nuxt-auth-utils": "^0.4.4",
 		"nuxt-build-cache": "^0.1.1",
 		"nuxt-typed-router": "^3.7.0",
-		"pg": "^8.13.0",
 		"pinia": "^2.2.4",
 		"vue": "latest",
 		"zod": "^3.23.8"
@@ -33,7 +33,6 @@
 	"devDependencies": {
 		"@nuxtjs/tailwindcss": "^6.12.1",
 		"@pinia/nuxt": "^0.5.5",
-		"@types/pg": "^8.11.10",
 		"@vueuse/nuxt": "^11.1.0",
 		"drizzle-kit": "^0.25.0",
 		"prettier": "^3.3.3",
