@@ -38,7 +38,7 @@ export default defineNuxtConfig({
 	},
 	nitro: {
 		rollupConfig: {
-			external: ["cloudflare:sockets"],
+			external: ["pg-native", "pg-cloudflare"],
 		},
 	},
 });
