@@ -1,5 +1,5 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 
 import * as schema from "../schemas";
 
@@ -9,6 +9,6 @@ if (!runtimeConfig.databaseUrl) {
 	throw new Error("Missing NUXT_DATABASE_URL in env");
 }
 
-const driver = new pg.Pool({ connectionString: runtimeConfig.databaseUrl });
+const driver = postgres(runtimeConfig.databaseUrl);
 
 export const db = drizzle(driver, { schema });

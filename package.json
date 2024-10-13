@@ -25,8 +25,8 @@
 		"nuxt-auth-utils": "^0.4.4",
 		"nuxt-build-cache": "^0.1.1",
 		"nuxt-typed-router": "^3.7.0",
-		"pg": "^8.13.0",
 		"pinia": "^2.2.4",
+		"postgres": "^3.4.4",
 		"vue": "latest",
 		"zod": "^3.23.8"
 	},
