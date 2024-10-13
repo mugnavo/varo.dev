@@ -10,6 +10,9 @@ export default GithubSuccessEventHandler(async (event, { tokens, user }) => {
 		),
 	});
 
+	// TODO: remove
+	console.log(existingUser);
+
 	// login existing user
 	if (existingUser) {
 		// TODO: update user info if outdated?
