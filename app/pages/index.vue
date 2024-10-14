@@ -9,8 +9,8 @@ const { user, clear } = useUserSession();
 			<p>Welcome back, {{ user.name }}!</p>
 			<NuxtLink
 				class="w-fit rounded-md bg-slate-950 px-4 py-2 text-white transition-colors hover:bg-slate-800"
-				to="/dashboard"
-				>Go to Dashboard</NuxtLink
+				to="/app"
+				>Go to App</NuxtLink
 			>
 			<div>
 				More data:
