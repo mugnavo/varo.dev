@@ -17,13 +17,13 @@ export default defineEventHandler(async (event) => {
 	const { messages } = await readBody(event);
 
 	const systemPrompt = userData.embedding
-		? `Use the provided tools/functions accordingly, and respond with "I can't assist you with that" if the user asks about something irrelevant to the platform.`
-		: `The user hasn't setup their profile yet. If the user provides more information about themselves, call 'updateProfile' update their profile. Otherwise, force the user to provide more information about themselves and what they're looking for in the platform.`;
+		? `Call the provided tools accordingly, and respond with "I can't assist you with that" if the user asks about something irrelevant to the platform.`
+		: `The user hasn't setup their profile yet. If the user provides information about themselves, call the 'updateProfile' tool. Otherwise, force the user to provide more information about themselves and what they're looking for in the platform.`;
 
 	const result = await streamText({
 		model: chatModel,
 		system:
-			`You are an assistant for Varo.dev, a matchmaking platform for developers, open-source projects, and indie founders where users can match with other users, or with projects. Keep your responses short and concise. ` +
+			`You are a matchmaking assistant for Varo; a matchmaking platform for developers, open-source projects, and indie founders where users can match with other users, or with projects. Keep your responses short and concise. Only respond in plaintext, avoid markdown or code responses. ` +
 			systemPrompt,
 		tools: userData.embedding
 			? {
@@ -33,6 +33,7 @@ export default defineEventHandler(async (event) => {
 			: { updateProfile },
 
 		messages: convertToCoreMessages(messages),
+		maxSteps: 5,
 	});
 
 	return result.toDataStreamResponse();

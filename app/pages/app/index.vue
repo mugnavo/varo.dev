@@ -2,6 +2,11 @@
 import { useChat } from "@ai-sdk/vue";
 
 const { messages, input, handleSubmit } = useChat({ api: "/api/chat" });
+
+watch(messages, (newMessages) => {
+	console.log("updated");
+	console.log(newMessages);
+});
 </script>
 
 <template>
@@ -9,8 +14,13 @@ const { messages, input, handleSubmit } = useChat({ api: "/api/chat" });
 		class="stretch mx-auto flex w-full max-w-sm flex-col py-24 sm:max-w-md lg:max-w-lg"
 	>
 		<div v-for="m in messages" :key="m.id" class="whitespace-pre-wrap">
-			{{ m.role === "user" ? "User: " : "AI: " }}
-			{{ m.content }}
+			<div v-if="m.content.trim()">
+				{{ m.role === "user" ? "User: " : "AI: " }}
+				{{ m.content }}
+			</div>
+			<div v-else>
+				{{ m.toolInvocations?.[0]?.result || "..." }}
+			</div>
 		</div>
 		<form @submit="handleSubmit">
 			<input

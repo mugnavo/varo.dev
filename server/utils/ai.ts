@@ -12,6 +12,6 @@ const google = createGoogleGenerativeAI({
 
 // https://ai.google.dev/gemini-api/docs/models/gemini
 // use "gemini-1.5-flash-latest" if this is too dumb
-export const chatModel = google("gemini-1.5-flash-8b-latest");
+export const chatModel = google("gemini-1.5-flash-latest");
 
 export const embeddingModel = google.textEmbeddingModel("text-embedding-004");

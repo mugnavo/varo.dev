@@ -2,21 +2,23 @@ import { tool } from "ai";
 import { z } from "zod";
 
 export const updateProfile = tool({
-	description: `Update the user's profile based on provided information`,
+	description: `Update the user's profile based on provided information and initiates a match search.`,
 	parameters: z.object({
 		match_user: z
 			.boolean()
+			.optional()
 			.default(true)
 			.describe(
 				"Whether the user wants to match with other users. True by default.",
 			),
 		match_project: z
 			.boolean()
+			.optional()
 			.default(true)
 			.describe("Whether the user wants to match with projects. True by default."),
 
-		bio: z.string().describe("User's bio or description"),
-		location: z.string().describe("User's location"),
+		bio: z.string().optional().describe("User's bio or description"),
+		location: z.string().optional().describe("User's location"),
 		experience_level: z
 			.number()
 			.min(1)
@@ -30,12 +32,13 @@ export const updateProfile = tool({
 				"User's availability, ranging from 1 (least available/busy fulltime) to 5 (most available/not busy)",
 			),
 
-		skills: z.string().array().describe("Array of user's skills"),
+		skills: z.string().array().optional().describe("Array of user's skills"),
 		tech_stack: z
 			.string()
 			.array()
+			.optional()
 			.describe("Array of specific technologies the user is proficient in"),
-		interests: z.string().array().describe("Array of user's interests"),
+		interests: z.string().array().optional().describe("Array of user's interests"),
 	}),
 
 	execute: async (params) => {
@@ -44,6 +47,6 @@ export const updateProfile = tool({
 
 		// TODO: generate embeddings and save updated profile to database
 
-		return "Profile updated successfully.";
+		return { msg: "Profile updated successfully." };
 	},
 });
