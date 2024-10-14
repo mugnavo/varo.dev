@@ -32,8 +32,10 @@ export default defineEventHandler(async (event) => {
 				}
 			: { updateProfile },
 
+		experimental_toolCallStreaming: true,
+		maxSteps: 4,
+
 		messages: convertToCoreMessages(messages),
-		maxSteps: 5,
 	});
 
 	return result.toDataStreamResponse();
