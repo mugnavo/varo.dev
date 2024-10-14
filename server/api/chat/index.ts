@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
 			: { updateProfile },
 
 		experimental_toolCallStreaming: true,
-		maxSteps: 4,
+		maxSteps: 2,
 
 		messages: convertToCoreMessages(messages),
 	});

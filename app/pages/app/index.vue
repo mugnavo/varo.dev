@@ -23,7 +23,9 @@ watch(messages, (newMessages) => {
 
 			<!-- we can use tool invocation results to render components -->
 			<template v-for="toolInvoc in m.toolInvocations" :key="toolInvoc.toolCallId">
-				<template v-if="'result' in toolInvoc">{{ toolInvoc.result }}</template>
+				<template v-if="toolInvoc.state === 'result'">{{
+					toolInvoc.result
+				}}</template>
 			</template>
 		</div>
 		<form @submit="handleSubmit">
