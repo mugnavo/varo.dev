@@ -78,6 +78,9 @@ importers:
       sass:
         specifier: ^1.80.1
         version: 1.80.1
+      tailwindcss:
+        specifier: ^3.4.14
+        version: 3.4.14
 
 packages:
 

@@ -7,30 +7,17 @@ const { user, clear } = useUserSession();
 
 		<div v-if="user" class="flex flex-col gap-2">
 			<p>Welcome back, {{ user.name }}!</p>
-			<NuxtLink
-				class="w-fit rounded-md bg-slate-950 px-4 py-2 text-white transition-colors hover:bg-slate-800"
-				to="/app"
-				>Go to App</NuxtLink
-			>
+			<van-button type="success" class="w-fit" to="/app">Go to App</van-button>
 			<div>
 				More data:
 				<pre>{{ JSON.stringify(user, null, 2) }}</pre>
 			</div>
 
-			<button
-				class="w-fit rounded-md bg-red-700 px-4 py-2 text-white transition-colors hover:bg-red-600"
-				@click="clear"
-			>
-				Sign out
-			</button>
+			<van-button type="danger" class="w-fit" @click="clear"> Sign out </van-button>
 		</div>
 		<div v-else class="flex flex-col gap-2">
 			<p>You are not signed in.</p>
-			<NuxtLink
-				to="/signin"
-				class="w-fit rounded-md bg-slate-950 px-4 py-2 text-white transition-colors hover:bg-slate-800"
-				>Sign in</NuxtLink
-			>
+			<van-button type="primary" class="w-fit" to="/signin">Sign in</van-button>
 		</div>
 	</div>
 </template>
