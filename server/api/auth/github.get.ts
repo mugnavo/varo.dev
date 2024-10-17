@@ -11,6 +11,9 @@ export default defineOAuthGitHubEventHandler({
 				eq(oauthAccounts.provider_id, "github"),
 				eq(oauthAccounts.provider_user_id, user.id),
 			),
+			with: {
+				user: true,
+			},
 		});
 
 		// login existing user
@@ -23,6 +26,7 @@ export default defineOAuthGitHubEventHandler({
 					name: user.name,
 					email: user.email,
 					avatar_url: user.avatar_url,
+					finished_setup: !!existingUser.user.embedding,
 				},
 			});
 			return sendRedirect(event, "/app");
@@ -55,6 +59,7 @@ export default defineOAuthGitHubEventHandler({
 				name: user.name,
 				email: user.email,
 				avatar_url: user.avatar_url,
+				finished_setup: false,
 			},
 		});
 		return sendRedirect(event, "/app");

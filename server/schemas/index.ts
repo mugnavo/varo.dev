@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
 	boolean,
 	integer,
@@ -73,6 +73,10 @@ export const oauthAccounts = pgTable(
 		pk: primaryKey({ columns: [table.provider_id, table.provider_user_id] }),
 	}),
 );
+
+export const accountRelations = relations(oauthAccounts, ({ one }) => ({
+	user: one(users, { fields: [oauthAccounts.user_id], references: [users.id] }),
+}));
 
 export const projects = pgTable("projects", {
 	id: integer().primaryKey().generatedAlwaysAsIdentity(),
