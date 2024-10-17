@@ -34,4 +34,8 @@ export default defineNuxtConfig({
 			},
 		},
 	},
+
+	vant: {
+		defaultLocale: "en-US",
+	},
 });
