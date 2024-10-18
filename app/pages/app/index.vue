@@ -32,7 +32,7 @@ watch(messages, (newMessages) => {
 			<input
 				v-model="input"
 				:class="messages.length === 0 ? 'mb-[44vh]' : 'mb-16'"
-				class="fixed bottom-0 w-full max-w-sm rounded-2xl border border-stone-300 p-2.5 shadow-xl transition-all sm:max-w-md lg:max-w-lg"
+				class="fixed bottom-0 w-full max-w-sm rounded-2xl border border-zinc-300 p-2.5 shadow-xl transition-all sm:max-w-md lg:max-w-lg"
 				placeholder="Say something..."
 			/>
 		</form>

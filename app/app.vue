@@ -9,10 +9,10 @@
 
 <style lang="postcss">
 body {
-	@apply bg-stone-950 text-stone-300;
+	@apply bg-zinc-950 text-zinc-300;
 }
 
 * {
-	@apply border-stone-800;
+	@apply border-zinc-800;
 }
 </style>
