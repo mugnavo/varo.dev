@@ -151,7 +151,12 @@ const handleSubmit = () => {
 						<van-popup
 							v-model:show="showExperiencePicker"
 							round
-							position="bottom"
+							:position="isMobile ? 'bottom' : 'center'"
+							:style="
+								isMobile
+									? undefined
+									: { width: '100%', maxWidth: '400px' }
+							"
 						>
 							<van-picker
 								title="Experience Level"
@@ -174,7 +179,12 @@ const handleSubmit = () => {
 						<van-popup
 							v-model:show="showAvailabilityPicker"
 							round
-							position="bottom"
+							:position="isMobile ? 'bottom' : 'center'"
+							:style="
+								isMobile
+									? undefined
+									: { width: '100%', maxWidth: '400px' }
+							"
 						>
 							<van-picker
 								title="Availability"
