@@ -22,8 +22,8 @@
 		"@vant/nuxt": "^1.0.6",
 		"@vercel/postgres": "^0.10.0",
 		"@vueuse/core": "^11.1.0",
-		"ai": "^3.4.14",
-		"drizzle-orm": "^0.35.1",
+		"ai": "^3.4.16",
+		"drizzle-orm": "^0.35.2",
 		"nuxt": "^3.13.2",
 		"nuxt-auth-utils": "^0.4.4",
 		"nuxt-build-cache": "^0.1.1",
@@ -39,8 +39,9 @@
 		"drizzle-kit": "^0.26.2",
 		"prettier": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.8",
-		"sass": "^1.80.2",
-		"tailwindcss": "^3.4.14"
+		"sass": "^1.80.3",
+		"tailwindcss": "^3.4.14",
+		"typescript": "^5.6.3"
 	},
 	"overrides": {
 		"vue": "latest"

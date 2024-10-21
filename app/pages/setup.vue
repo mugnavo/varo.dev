@@ -72,13 +72,16 @@ const availColumns = [
 		value: 3,
 	},
 ];
-
-const onConfirm = ({ selectedOptions }: any) => {
+interface OnConfirmOptions {
+	selectedOptions: { value: number; text: string }[];
+}
+const onConfirm = ({ selectedOptions }: OnConfirmOptions) => {
+	const selectedValue = selectedOptions[0]?.value;
 	if (showExperiencePicker.value) {
-		experience_level.value = selectedOptions[0].value;
+		if (selectedValue) experience_level.value = selectedValue;
 		showExperiencePicker.value = false;
 	} else if (showAvailabilityPicker.value) {
-		availability.value = selectedOptions[0].value;
+		if (selectedValue) availability.value = selectedValue;
 		showAvailabilityPicker.value = false;
 	}
 };
