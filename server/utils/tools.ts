@@ -47,7 +47,7 @@ export const updateProfile = tool({
 		console.log("calling");
 		console.log(params);
 
-		// TODO: generate embeddings and save updated profile to database
+		// TODO: remove this execute function, since this should be executed on the client with pre-filled form data
 
 		return { msg: "Profile updated successfully." };
 	},
