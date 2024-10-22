@@ -2,7 +2,7 @@ import { tool } from "ai";
 import { z } from "zod";
 
 export const updateProfile = tool({
-	description: `Update the user's profile based on provided information and initiates a match search.`,
+	description: `Opens the UI for the user to update their profile, with optional parameters to pre-fill the form.`,
 	parameters: z.object({
 		match_user: z
 			.boolean()
@@ -23,11 +23,13 @@ export const updateProfile = tool({
 			.number()
 			.min(1)
 			.max(5)
+			.optional()
 			.describe("User's experience level, ranging from 1 (beginner) to 5 (expert)"),
 		availability: z
 			.number()
 			.min(1)
 			.max(5)
+			.optional()
 			.describe(
 				"User's availability, ranging from 1 (least available/busy fulltime) to 5 (most available/not busy)",
 			),
