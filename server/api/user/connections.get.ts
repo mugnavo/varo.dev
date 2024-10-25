@@ -28,8 +28,5 @@ export default defineEventHandler(async (event) => {
 		),
 	});
 
-	return Response.json(
-		{ users: userConnections, projects: projectConnections },
-		{ status: 200 },
-	);
+	return { users: userConnections, projects: projectConnections };
 });

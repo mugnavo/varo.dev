@@ -32,8 +32,5 @@ export default defineEventHandler(async (event) => {
 		),
 	});
 
-	return Response.json(
-		{ users: userSuggestions, projects: projectSuggestions },
-		{ status: 200 },
-	);
+	return { users: userSuggestions, projects: projectSuggestions };
 });

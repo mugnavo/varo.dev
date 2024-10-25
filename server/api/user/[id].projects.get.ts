@@ -12,5 +12,5 @@ export default defineEventHandler(async (event) => {
 		where: eq(projects.owner_id, id),
 	});
 
-	return Response.json({ projects: projectsResult }, { status: 200 });
+	return { projects: projectsResult };
 });

@@ -16,5 +16,5 @@ export default defineEventHandler(async (event) => {
 		return new Response("User not found", { status: 404 });
 	}
 
-	return Response.json({ user }, { status: 200 });
+	return { user };
 });

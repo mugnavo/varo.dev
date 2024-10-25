@@ -24,5 +24,5 @@ export default defineEventHandler(async (event) => {
 		),
 	});
 
-	return Response.json({ connected: !!projectConnected }, { status: 200 });
+	return { connected: !!projectConnected };
 });

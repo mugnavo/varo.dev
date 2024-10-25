@@ -203,5 +203,5 @@ export default defineEventHandler(async (event) => {
 		},
 	});
 
-	return Response.json({ msg: "Profile updated successfully." }, { status: 200 });
+	return { message: "Profile updated successfully." };
 });

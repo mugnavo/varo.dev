@@ -27,5 +27,5 @@ export default defineEventHandler(async (event) => {
 		),
 	});
 
-	return Response.json({ connected: !!userConnected }, { status: 200 });
+	return { connected: !!userConnected };
 });
