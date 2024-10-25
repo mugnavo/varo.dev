@@ -5,7 +5,7 @@ const openSidebar = ref(false);
 <template>
 	<Screen>
 		<Button icon="pi pi-bars" text @click="openSidebar = true" class="ml-4 mt-4" />
-		<TheSidebar v-model="openSidebar" :items="[]" />
+		<AppSidebar v-model="openSidebar" :items="[]" />
 		<slot />
 	</Screen>
 </template>

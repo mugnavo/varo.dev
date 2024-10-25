@@ -19,9 +19,11 @@ const { items } = defineProps<{
 }>();
 
 // Current user
-const { user } = useUserSession();
+const { user, clear } = useUserSession();
 const avatar = computed(() => user.value?.avatar_url);
 const initials = computed(() => toInitials(user.value?.name || ""));
+
+const isLoggingOut = ref(false);
 
 // test
 const { ask } = useQuery();
@@ -63,10 +65,10 @@ const askforsomething = async () => {
 			<Divider />
 
 			<Fill flex-col>
-				<TheSidebarItem :item="{ title: 'Marion', avatar: '/marion.png' }" />
+				<AppSidebarItem :item="{ title: 'Marion', avatar: '/marion.png' }" />
 				<strong class="text-surface-500 my-2 ml-2 text-sm">Connections</strong>
 				<Loader :finished="!loading">
-					<TheSidebarItem v-for="item in items" :item :key="item.title" />
+					<AppSidebarItem v-for="item in items" :item :key="item.title" />
 					<Empty
 						v-if="items.length == 0"
 						text="No connections yet"
@@ -77,7 +79,7 @@ const askforsomething = async () => {
 
 			<Divider />
 
-			<footer>
+			<footer class="flex">
 				<Button
 					icon="pi pi-user"
 					@click="askforsomething"
@@ -85,6 +87,21 @@ const askforsomething = async () => {
 					v-tip="'Profile'"
 				/>
 				<Button icon="pi pi-cog" link v-tip="'Settings'" />
+				<Button
+					icon="pi pi-sign-out"
+					severity="danger"
+					link
+					v-tip="'Sign out'"
+					class="ml-auto"
+					:loading="isLoggingOut"
+					@click="
+						async () => {
+							isLoggingOut = true;
+							await clear();
+							navigateTo('/');
+						}
+					"
+				/>
 			</footer>
 		</template>
 	</Drawer>
@@ -108,6 +125,6 @@ header {
 }
 
 footer {
-	@apply space-x-2 p-4 pt-1;
+	@apply gap-2 p-4 pt-1;
 }
 </style>
