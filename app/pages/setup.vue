@@ -82,9 +82,11 @@ const onConfirm = ({ selectedOptions }: OnConfirmOptions) => {
 	}
 };
 
+const isSubmitting = ref(false);
+
 const router = useRouter();
 const handleSubmit = async () => {
-	if (!user.value) return;
+	if (!user.value || isSubmitting.value) return;
 
 	if (!skills.value.length) {
 		return showToast("Please add at least one skill");
@@ -95,24 +97,33 @@ const handleSubmit = async () => {
 	if (!interests.value.length) {
 		return showToast("Please add at least one interest");
 	}
-
+	isSubmitting.value = true;
 	console.log("submitting");
 
-	await $fetch("/api/user", {
-		method: "POST",
-		body: JSON.stringify({
-			name: name.value,
-			bio: bio.value,
-			location: location.value,
-			experience_level: experience_level.value,
-			availability: availability.value,
-			skills: skills.value,
-			tech_stack: tech_stack.value,
-			interests: interests.value,
-			match_user: match_user.value,
-			match_project: match_project.value,
-		}),
-	});
+	try {
+		await $fetch("/api/user", {
+			method: "POST",
+			body: JSON.stringify({
+				name: name.value,
+				bio: bio.value,
+				location: location.value,
+				experience_level: experience_level.value,
+				availability: availability.value,
+				skills: skills.value,
+				tech_stack: tech_stack.value,
+				interests: interests.value,
+				match_user: match_user.value,
+				match_project: match_project.value,
+			}),
+		});
+	} catch (error) {
+		console.error(error);
+		showToast("An error occurred. Please try again later.");
+		return;
+	} finally {
+		isSubmitting.value = false;
+	}
+
 	// router.push("/app/");
 	// full page reload redirect to get updated session
 	window.location.href = "/app";
