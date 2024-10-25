@@ -16,6 +16,10 @@ export default defineEventHandler(async (event) => {
 				eq(userMatches.user2_status, "accepted"),
 			),
 		),
+		with: {
+			user1: true,
+			user2: true,
+		},
 	});
 
 	const projectConnections = await db.query.projectMatches.findMany({
@@ -26,6 +30,9 @@ export default defineEventHandler(async (event) => {
 				eq(projectMatches.user_status, "accepted"),
 			),
 		),
+		with: {
+			project: true,
+		},
 	});
 
 	return { users: userConnections, projects: projectConnections };
