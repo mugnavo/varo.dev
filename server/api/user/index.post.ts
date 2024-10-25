@@ -1,4 +1,4 @@
-import { and, cosineDistance, desc, eq, gt, ne, or, sql } from "drizzle-orm";
+import { and, cosineDistance, eq, gt, ne, or, sql } from "drizzle-orm";
 import { z } from "zod";
 import {
 	projectEmbeddings,
@@ -136,7 +136,6 @@ export default defineEventHandler(async (event) => {
 							eq(users.match_user, true),
 						),
 					)
-					.orderBy((t) => desc(t.userSimilarity))
 					.limit(10);
 
 				if (matchUsers.length) {
@@ -173,7 +172,6 @@ export default defineEventHandler(async (event) => {
 					.where(
 						and(gt(projectSimilarity, 0.6), eq(projects.match_enabled, true)),
 					)
-					.orderBy((t) => desc(t.projectSimilarity))
 					.limit(10);
 
 				if (matchProjects.length) {

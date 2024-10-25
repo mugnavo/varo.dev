@@ -1,5 +1,5 @@
 import { tool } from "ai";
-import { and, cosineDistance, desc, eq, gt, sql } from "drizzle-orm";
+import { and, cosineDistance, eq, gt, sql } from "drizzle-orm";
 import { z } from "zod";
 import { userEmbeddings, users } from "../schemas";
 import { generateEmbedding } from "./embedding";
@@ -41,7 +41,6 @@ export const searchDevelopers = tool({
 						eq(users.match_user, true),
 					),
 				)
-				.orderBy((t) => desc(t.embedding_similarity))
 				.limit(10);
 			console.log(matchUsers);
 		} catch (e) {
