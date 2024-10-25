@@ -90,6 +90,7 @@ const mappedMessages = useArrayMap(messages, (m) => {
 					:key="m.id"
 					:author="m.author"
 					:content="m.content"
+					:reverse="m.reverse"
 				/>
 			</template>
 		</Fill>
