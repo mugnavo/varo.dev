@@ -18,6 +18,10 @@ export default defineEventHandler(async (event) => {
 				ne(userMatches.user2_status, "rejected"),
 			),
 		),
+		with: {
+			user1: true,
+			user2: true,
+		},
 	});
 
 	const projectSuggestions = await db.query.projectMatches.findMany({
@@ -30,6 +34,9 @@ export default defineEventHandler(async (event) => {
 				ne(projectMatches.project_status, "rejected"),
 			),
 		),
+		with: {
+			project: true,
+		},
 	});
 
 	return { users: userSuggestions, projects: projectSuggestions };

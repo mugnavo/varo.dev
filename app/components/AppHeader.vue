@@ -4,11 +4,11 @@ const { loggedIn } = useUserSession();
 
 <template>
 	<header>
-		<strong>Varo.Dev</strong>
+		<strong>varo.dev</strong>
 		<form class="text-surface-950" method="GET">
 			<Button
 				v-if="loggedIn"
-				label="Goto App"
+				label="Go to app"
 				icon="pi pi-arrow-right"
 				icon-pos="right"
 				href="/app"

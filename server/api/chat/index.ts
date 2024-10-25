@@ -2,7 +2,7 @@ import { convertToCoreMessages, streamText } from "ai";
 import { eq } from "drizzle-orm";
 import { users } from "~~/server/schemas";
 import { chatModel } from "~~/server/utils/ai";
-import { searchDevelopers, searchProjects } from "~~/server/utils/tools";
+import { getTools } from "~~/server/utils/tools";
 
 export default defineEventHandler(async (event) => {
 	const { user } = await requireUserSession(event);
@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
 		system:
 			`You are a matchmaking assistant for Varo; a matchmaking platform for developers, open-source projects, and indie founders where users can match with other users, or with projects. Keep your responses short and concise. Only respond in plaintext, avoid markdown or code responses. ` +
 			systemPrompt,
-		tools: { searchDevelopers, searchProjects },
+		tools: getTools(user),
 
 		experimental_toolCallStreaming: true,
 		maxSteps: 4,
