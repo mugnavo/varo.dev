@@ -121,9 +121,8 @@ export default defineEventHandler(async (event) => {
 					embeddings[embeddings.length - 1].embedding,
 				)})`;
 
-				// TODO: remove duplicates via distinct?
 				const matchUsers = await tx
-					.select({
+					.selectDistinctOn([userEmbeddings.user_id], {
 						name: userEmbeddings.content,
 						userSimilarity,
 						user_id: userEmbeddings.user_id,
@@ -163,9 +162,8 @@ export default defineEventHandler(async (event) => {
 					embeddings[embeddings.length - 1].embedding,
 				)})`;
 
-				// TODO: remove duplicates via distinct?
 				const matchProjects = await tx
-					.select({
+					.selectDistinctOn([projectEmbeddings.project_id], {
 						name: projectEmbeddings.content,
 						projectSimilarity,
 						project_id: projectEmbeddings.project_id,

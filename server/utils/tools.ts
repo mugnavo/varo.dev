@@ -25,7 +25,7 @@ export const searchDevelopers = tool({
 		let matchUsers = [] as unknown;
 		try {
 			matchUsers = await db
-				.select({
+				.selectDistinctOn([userEmbeddings.user_id], {
 					embedding_similarity: userSimilarity,
 					embedding_content: userEmbeddings.content,
 					user_id: userEmbeddings.user_id,
