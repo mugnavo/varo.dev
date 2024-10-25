@@ -11,7 +11,6 @@ export default defineEventHandler(async (event) => {
 	}
 
 	const query = getQuery(event);
-	console.log(query);
 
 	const messages = await db.query.userMessages.findMany({
 		where: or(
