@@ -73,5 +73,7 @@ export const searchProjects = tool({
 	},
 });
 
-export type SearchDevelopersReturnType = ReturnType<typeof searchDevelopers.execute>;
-export type SearchProjectsReturnType = ReturnType<typeof searchProjects.execute>;
+export type SearchDevelopersReturnType = Awaited<
+	ReturnType<typeof searchDevelopers.execute>
+>;
+export type SearchProjectsReturnType = Awaited<ReturnType<typeof searchProjects.execute>>;
