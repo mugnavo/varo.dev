@@ -1,6 +1,7 @@
 import { tool } from "ai";
 import { and, cosineDistance, eq, gt, sql } from "drizzle-orm";
 import { z } from "zod";
+import { safeAwait } from "~~/layers/josh/utils/safeTry";
 import { userEmbeddings, users } from "../schemas";
 import { generateEmbedding } from "./embedding";
 
@@ -22,15 +23,24 @@ export const searchDevelopers = tool({
 
 		console.log(userSimilarity);
 
-		let matchUsers = [] as unknown;
-		try {
-			matchUsers = await db
+		const [_err, matchUsers] = await safeAwait(
+			db
 				.selectDistinctOn([userEmbeddings.user_id], {
 					embedding_similarity: userSimilarity,
 					embedding_content: userEmbeddings.content,
 					user_id: userEmbeddings.user_id,
 					user_name: users.name,
-					// todo add more fields from user
+					user_avatar: users.avatar_url,
+					user_location: users.location,
+					user_bio: users.bio,
+					user_username: users.username,
+					user_skills: users.skills,
+					user_tech_stack: users.tech_stack,
+					user_interests: users.interests,
+					user_availability: users.availability,
+					user_experience: users.experience_level,
+					user_match_user: users.match_user,
+					user_match_project: users.match_project,
 				})
 				.from(userEmbeddings)
 				.innerJoin(users, eq(userEmbeddings.user_id, users.id))
@@ -41,11 +51,9 @@ export const searchDevelopers = tool({
 						eq(users.match_user, true),
 					),
 				)
-				.limit(10);
-			console.log(matchUsers);
-		} catch (e) {
-			console.log(e);
-		}
+				.limit(10),
+		);
+		console.log(matchUsers);
 
 		return { component: "DeveloperList", developers: matchUsers };
 	},
