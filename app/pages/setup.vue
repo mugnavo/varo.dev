@@ -1,13 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-	middleware: "auth",
+	middleware: ["auth", "unfinished-setup"],
 });
 
 const { user } = useUserSession();
-
-if (user.value?.finished_setup) {
-	navigateTo("/app");
-}
 
 const name = ref(user.value?.name);
 const bio = ref("");
@@ -86,8 +82,13 @@ const onConfirm = ({ selectedOptions }: OnConfirmOptions) => {
 	}
 };
 
+const router = useRouter();
 const handleSubmit = () => {
+	if (!user.value) return;
+	user.value.finished_setup = true;
+
 	console.log("submitting");
+	router.push("/app/");
 };
 </script>
 ]

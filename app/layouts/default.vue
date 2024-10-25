@@ -1,4 +1,6 @@
 <!-- Default layout here -->
 <template>
-	<slot />
+	<Screen>
+		<slot />
+	</Screen>
 </template>
