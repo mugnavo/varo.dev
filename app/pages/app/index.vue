@@ -69,7 +69,6 @@ const { state: suggestions, isLoading: isSuggestionsLoading } = useSuggestions()
 		</Fill>
 
 		<form @submit="handleSubmit">
-			{{ suggestions.developers?.length }}
 			<input
 				v-model="input"
 				:class="messages.length === 0 ? 'mb-[44vh]' : 'mb-16'"
