@@ -142,8 +142,8 @@ export const userMatches = pgTable(
 			.notNull()
 			.references(() => users.id),
 
-		user1_status: match_status_enum().default("pending"),
-		user2_status: match_status_enum().default("pending"),
+		user1_status: match_status_enum().notNull().default("pending"),
+		user2_status: match_status_enum().notNull().default("pending"),
 
 		created_at: timestamp().defaultNow().notNull(),
 		updated_at: timestamp()
@@ -162,8 +162,8 @@ export const projectMatches = pgTable(
 			.references(() => users.id),
 		project_id: integer().references(() => projects.id),
 
-		user_status: match_status_enum().default("pending"),
-		project_status: match_status_enum().default("pending"),
+		user_status: match_status_enum().notNull().default("pending"),
+		project_status: match_status_enum().notNull().default("pending"),
 
 		created_at: timestamp().defaultNow().notNull(),
 		updated_at: timestamp()
