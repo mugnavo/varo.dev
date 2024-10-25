@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
 
 	let returnedMatch;
 	if (match) {
-		returnedMatch = await db
+		[returnedMatch] = await db
 			.update(userMatches)
 			.set({
 				user1_status:
@@ -43,14 +43,18 @@ export default defineEventHandler(async (event) => {
 					eq(userMatches.user1_id, match.user1_id),
 					eq(userMatches.user2_id, match.user2_id),
 				),
-			);
+			)
+			.returning();
 	} else {
-		returnedMatch = await db.insert(userMatches).values({
-			user1_id: user.id,
-			user2_id: body.user_id,
-			user1_status: user.id === body.user_id ? body.status : "pending",
-			user2_status: user.id === body.user_id ? "pending" : body.status,
-		});
+		[returnedMatch] = await db
+			.insert(userMatches)
+			.values({
+				user1_id: user.id,
+				user2_id: body.user_id,
+				user1_status: user.id === body.user_id ? body.status : "pending",
+				user2_status: user.id === body.user_id ? "pending" : body.status,
+			})
+			.returning();
 	}
 
 	return returnedMatch;
