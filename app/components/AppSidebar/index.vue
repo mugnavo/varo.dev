@@ -3,12 +3,16 @@ import { set } from "@vueuse/core";
 import * as yup from "yup";
 import type { QuerySchemaMeta } from "~~/layers/josh/components/DynamicForm/types";
 
+const route = useRoute("app-user");
+const other = computed(() => Number(route.params.user));
+
 export type SidebarItem = {
 	title: string;
 	subtitle?: string;
 	avatar?: string;
 	active?: boolean;
 	onClick?: Function;
+	route?: string;
 };
 
 const open = defineModel<boolean>({ default: false });
@@ -18,10 +22,15 @@ const { items } = defineProps<{
 	loading?: boolean;
 }>();
 
-const bot: SidebarItem = {
-	title: "Khent",
-	avatar: "/marion.png",
-};
+const bot = computed(
+	() =>
+		({
+			title: "Khent",
+			avatar: "/marion.png",
+			active: isNaN(other.value),
+			route: "/app",
+		}) as SidebarItem,
+);
 
 // Current user
 const { user, clear } = useUserSession();

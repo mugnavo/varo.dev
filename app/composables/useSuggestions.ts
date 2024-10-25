@@ -14,6 +14,8 @@ export const useSuggestions = () => {
 			const currentId = user.value.id;
 
 			const { users } = await $fetch("/api/user/suggestions");
+			const userIds = users.map((u) => getOther(currentId, u));
+      
 			const otherUsers = users.map((u) =>
 				getOther(currentId, {
 					user1_id: u.user1_id,

@@ -33,8 +33,8 @@ const { state: suggestions, isLoading: isSuggestionsLoading } = useSuggestions()
 <template>
 	<Fill flex-col class="hide mx-auto flex w-full max-w-sm sm:max-w-md lg:max-w-lg">
 		<Fill flex-col class="scrollbar-hidden">
-			<Loader :finished="!isSuggestionsLoading">
-				<ToolDeveloperList v-if="!!suggestions" :data="suggestions" />
+			<Loader :finished="!isSuggestionsLoading" v-if="!hasAskedForDevList">
+				<ToolDeveloperList :data="suggestions" v-if="!!suggestions" />
 			</Loader>
 			<div v-for="m in messages" :key="m.id" class="whitespace-pre-wrap">
 				<template v-if="m.content.trim()">

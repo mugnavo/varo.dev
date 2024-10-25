@@ -6,57 +6,22 @@ const openSidebar = ref(false);
 const { user } = useUserSession();
 
 // Connections
-const {
-	state: connections,
-	isLoading,
-	error,
-} = useAsyncState(
-	async () => {
-		const currentUser = user.value;
-		if (!currentUser) return { users: [], projects: [] };
+const connectionStore = useConnectionsStore();
+const { connections, isLoading } = storeToRefs(connectionStore);
 
-		const { projects, users } =
-			(await $fetch("/api/user/connections", { method: "GET" })) || {};
-		const userConns = users.map((u) =>
-			u.user1_id === currentUser.id ? u.user2_id : u.user1_id,
-		);
-
-		const usersData = await Promise.all(
-			userConns.map(async (id) => {
-				const { user } = await $fetch(`/api/user/:id`, {
-					method: "GET",
-					params: { id },
-				});
-				return user;
-			}),
-		);
-
-		const projectsData = (
-			await Promise.all(
-				userConns.map(async (id) => {
-					const project = await $fetch("/api/project/:id", {
-						method: "GET",
-						params: { id },
-					});
-					return project;
-				}),
-			)
-		).filter((p) => !!p);
-
-		return { users: usersData, projects: projectsData };
-	},
-	undefined,
-	{ shallow: false },
-);
-
+// Sidebar items
+const route = useRoute();
+const other = computed(() => Number(route.params.user));
 const usersConnections = computed(
 	() =>
 		connections.value?.users.map(
 			(u) =>
 				({
-					title: `${u.first_name} ${u.last_name}`,
+					title: u.name,
 					subtitle: u.email,
 					avatar: u.avatar_url,
+					active: other.value === u.id,
+					route: `/app/${u.id}`,
 				}) as SidebarItem,
 		) || [],
 );

@@ -11,14 +11,18 @@ const initials = computed(() => toInitials(avatar.value || ""));
 </script>
 
 <template>
-	<div class="root">
+	<a class="root" :class="{ active: item.active }" :href="item.route">
 		<Avatar :image="item.avatar" shape="circle" />
 		<h6>{{ item.title }}</h6>
-	</div>
+	</a>
 </template>
 
 <style lang="scss" scoped>
 .root {
-	@apply bg-surface-800 text-surface-300 mx-4 flex items-center gap-2 rounded p-2;
+	@apply mx-4 flex cursor-pointer items-center gap-2 rounded p-2 text-surface-300 hover:bg-surface-800;
+
+	&.active {
+		@apply bg-surface-700/80;
+	}
 }
 </style>
