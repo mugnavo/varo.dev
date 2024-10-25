@@ -55,7 +55,7 @@ export const searchDevelopers = tool({
 		);
 		console.log(matchUsers);
 
-		return { component: "DeveloperList", developers: matchUsers };
+		return { component: "DeveloperList" as const, developers: matchUsers };
 	},
 });
 
@@ -69,6 +69,9 @@ export const searchProjects = tool({
 		console.log("calling searchProjects");
 		console.log(params);
 
-		return { component: "ProjectList", props: params };
+		return { component: "ProjectList" as const, props: params };
 	},
 });
+
+export type SearchDevelopersReturnType = ReturnType<typeof searchDevelopers.execute>;
+export type SearchProjectsReturnType = ReturnType<typeof searchProjects.execute>;
