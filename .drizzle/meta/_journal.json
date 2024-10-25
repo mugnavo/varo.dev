@@ -8,6 +8,13 @@
       "when": 1729830102295,
       "tag": "0000_bitter_hitman",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1729830278770,
+      "tag": "0001_wonderful_lightspeed",
+      "breakpoints": true
     }
   ]
 }
