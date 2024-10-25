@@ -43,6 +43,7 @@ export const searchDevelopers = tool({
 				)
 				.orderBy((t) => desc(t.embedding_similarity))
 				.limit(10);
+			console.log(matchUsers);
 		} catch (e) {
 			console.log(e);
 		}

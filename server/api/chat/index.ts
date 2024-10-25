@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
 		tools: { searchDevelopers, searchProjects },
 
 		experimental_toolCallStreaming: true,
-		maxSteps: 2,
+		maxSteps: 4,
 
 		messages: convertToCoreMessages(messages),
 	});
