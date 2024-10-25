@@ -113,7 +113,9 @@ const handleSubmit = async () => {
 			match_project: match_project.value,
 		}),
 	});
-	router.push("/app/");
+	// router.push("/app/");
+	// full page reload redirect to get updated session
+	window.location.href = "/app";
 };
 </script>
 ]
