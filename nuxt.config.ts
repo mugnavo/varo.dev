@@ -1,5 +1,3 @@
-import Theme from "./assets/preset";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	compatibilityDate: "2024-10-07",
@@ -38,15 +36,6 @@ export default defineNuxtConfig({
 		},
 	},
 
-	primevue: {
-		options: {
-			theme: {
-				preset: Theme,
-			},
-			ripple: true,
-		},
-	},
-
 	app: {
 		head: {
 			bodyAttrs: {
@@ -55,15 +44,6 @@ export default defineNuxtConfig({
 			title: "Varo",
 		},
 	},
-
-	tailwindcss: {
-		configPath: "~/tailwind.config.ts",
-		cssPath: ["~/assets/base.scss", { injectPosition: 0 }],
-		exposeConfig: true,
-		viewer: false,
-	},
-
-	css: ["./assets/theme.scss", "primeicons/primeicons.css"],
 
 	vite: {
 		css: {
