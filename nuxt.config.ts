@@ -1,7 +1,9 @@
+import Theme from "./assets/preset";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	compatibilityDate: "2024-10-07",
-	devtools: { enabled: true },
+	devtools: { enabled: false },
 
 	future: {
 		compatibilityVersion: 4,
@@ -17,6 +19,7 @@ export default defineNuxtConfig({
 		"nuxt-typed-router",
 		"nuxt-build-cache",
 		"@vant/nuxt",
+		"@primevue/nuxt-module",
 	],
 
 	runtimeConfig: {
@@ -31,6 +34,43 @@ export default defineNuxtConfig({
 				clientSecret: process.env.NUXT_GITHUB_CLIENT_SECRET,
 				redirectURL:
 					process.env.NUXT_BASE_URL! + process.env.NUXT_GITHUB_REDIRECT_PATH,
+			},
+		},
+	},
+
+	primevue: {
+		options: {
+			theme: {
+				preset: Theme,
+			},
+			ripple: true,
+		},
+	},
+
+	app: {
+		head: {
+			bodyAttrs: {
+				class: "dark",
+			},
+			title: "Varo",
+		},
+	},
+
+	tailwindcss: {
+		configPath: "~/tailwind.config.ts",
+		cssPath: ["~/assets/base.scss", { injectPosition: 0 }],
+		exposeConfig: true,
+		viewer: false,
+	},
+
+	css: ["./assets/theme.scss", "primeicons/primeicons.css"],
+
+	vite: {
+		css: {
+			preprocessorOptions: {
+				scss: {
+					api: "modern-compiler", // or "modern"
+				},
 			},
 		},
 	},

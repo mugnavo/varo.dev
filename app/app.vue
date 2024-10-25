@@ -1,13 +1,18 @@
 <template>
 	<NuxtRouteAnnouncer />
+	<Toast position="bottom-right" />
+	<DynamicQuery />
 	<van-config-provider theme="dark">
 		<NuxtLayout>
 			<NuxtPage />
 		</NuxtLayout>
 	</van-config-provider>
+	<ClientOnly>
+		<Tooltip />
+	</ClientOnly>
 </template>
 
-<style lang="postcss">
+<style lang="scss">
 body {
 	@apply bg-zinc-950 text-zinc-300;
 }
