@@ -1,5 +1,5 @@
 import { and, eq } from "drizzle-orm";
-import { oauthAccounts, users } from "~~/server/schemas";
+import { oauthAccounts, userEmbeddings, users } from "~~/server/schemas";
 
 export default defineOAuthGitHubEventHandler({
 	config: {
@@ -18,6 +18,9 @@ export default defineOAuthGitHubEventHandler({
 
 		// login existing user
 		if (existingUser) {
+			const existingEmbeddings = await db.query.userEmbeddings.findFirst({
+				where: eq(userEmbeddings.user_id, existingUser.user_id),
+			});
 			// TODO: update user info if outdated?
 			await setUserSession(event, {
 				user: {
@@ -26,7 +29,7 @@ export default defineOAuthGitHubEventHandler({
 					name: user.name,
 					email: user.email,
 					avatar_url: user.avatar_url,
-					finished_setup: !!existingUser.user.embedding,
+					finished_setup: !!existingEmbeddings,
 				},
 			});
 			return sendRedirect(event, "/app");

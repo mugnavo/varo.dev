@@ -202,6 +202,10 @@ export const userEmbeddingRelations = relations(userEmbeddings, ({ one }) => ({
 	user: one(users, { fields: [userEmbeddings.user_id], references: [users.id] }),
 }));
 
+export const userRelations = relations(users, ({ many }) => ({
+	embeddings: many(userEmbeddings),
+}));
+
 export const projectEmbeddingRelations = relations(projectEmbeddings, ({ one }) => ({
 	project: one(projects, {
 		fields: [projectEmbeddings.project_id],
