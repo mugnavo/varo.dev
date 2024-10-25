@@ -1,3 +1,4 @@
+import { generateId } from "ai";
 import { relations, sql } from "drizzle-orm";
 import {
 	boolean,
@@ -9,7 +10,6 @@ import {
 	timestamp,
 	vector,
 } from "drizzle-orm/pg-core";
-import { useId } from "nuxt/app";
 
 // maybe convert to barrel file if we're using Nuxt Layers?
 
@@ -177,7 +177,7 @@ export const projectMatches = pgTable(
 export const userEmbeddings = pgTable("user_embeddings", {
 	id: text()
 		.primaryKey()
-		.$defaultFn(() => useId()),
+		.$defaultFn(() => generateId(20)),
 	user_id: integer()
 		.notNull()
 		.references(() => users.id),
@@ -187,7 +187,7 @@ export const userEmbeddings = pgTable("user_embeddings", {
 export const projectEmbeddings = pgTable("project_embeddings", {
 	id: text()
 		.primaryKey()
-		.$defaultFn(() => useId()),
+		.$defaultFn(() => generateId(20)),
 	project_id: integer()
 		.notNull()
 		.references(() => projects.id),
