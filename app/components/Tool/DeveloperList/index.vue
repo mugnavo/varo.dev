@@ -4,7 +4,12 @@ import type { SearchDevelopersReturnType } from "~~/server/utils/tools";
 const props = defineProps<{
 	data: SearchDevelopersReturnType;
 }>();
-const devs = computed(() => props.data.developers?.concat(...props.data.developers));
+const devs = computed(
+	() =>
+		props.data.developers?.toSorted(
+			(a, b) => b.embedding_similarity - a.embedding_similarity,
+		) || [],
+);
 export type DeveloperListItem = Exclude<typeof props.data.developers, null>[number];
 </script>
 

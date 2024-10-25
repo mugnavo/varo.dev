@@ -1,9 +1,38 @@
 <script setup lang="ts">
+import { set } from "@vueuse/core";
 import type { DeveloperListItem } from "./index.vue";
 
 const props = defineProps<{
 	item: DeveloperListItem;
 }>();
+
+const isAccepting = ref(false);
+const {
+	isLoading,
+	state: result,
+	execute: respond,
+} = useAsyncState(
+	async (connect: boolean) => {
+		set(isAccepting, connect);
+
+		const result = await $fetch("/api/user/match", {
+			method: "POST",
+			body: JSON.stringify({
+				user_id: props.item.user_id,
+				status: connect ? "accepted" : "rejected",
+			}),
+		});
+
+		if (!result) return;
+		const { user1_status, user2_status } = result || {};
+
+		if (user1_status === "accepted" && user2_status === "accepted") {
+			// Add user to connections
+		}
+	},
+	undefined,
+	{ immediate: false, resetOnExecute: true },
+);
 </script>
 
 <template>
@@ -25,7 +54,25 @@ const props = defineProps<{
 				<div>{{ item.user_bio }}</div>
 			</div>
 		</div>
-		<Button label="Connect" :rounded="false" class="!text-surface-900" />
+		<ButtonGroup class="flex rounded-none text-surface-900">
+			<Button
+				label="Connect"
+				class="flex-grow !rounded-none"
+				:rounded="false"
+				:loading="isLoading && isAccepting"
+				:disabled="isLoading && !isAccepting"
+				@click="respond(0, true)"
+			/>
+			<Button
+				icon="pi pi-ban"
+				class="!rounded-none"
+				severity="danger"
+				v-tip="'Avoid this dev'"
+				:loading="isLoading && !isAccepting"
+				:disabled="isLoading && isAccepting"
+				@click="respond(0, false)"
+			/>
+		</ButtonGroup>
 	</div>
 </template>
 

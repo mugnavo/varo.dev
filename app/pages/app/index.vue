@@ -21,11 +21,21 @@ const getComponent = (invoc: ToolInvocation & { state: "result" }) => {
 		return components[`Tool${capitalize(name)}`];
 	}
 };
+
+// Suggestions
+const { user } = useUserSession();
+const hasAskedForDevList = useArraySome(messages, (m) =>
+	m.toolInvocations?.some((inv) => inv.toolName === "searchDevelopers"),
+);
+const { state: suggestions, isLoading: isSuggestionsLoading } = useSuggestions();
 </script>
 
 <template>
 	<Fill flex-col class="hide mx-auto flex w-full max-w-sm sm:max-w-md lg:max-w-lg">
 		<Fill flex-col class="scrollbar-hidden">
+			<Loader :finished="!isSuggestionsLoading">
+				<ToolDeveloperList :data="suggestions" v-if="!!suggestions" />
+			</Loader>
 			<div v-for="m in messages" :key="m.id" class="whitespace-pre-wrap">
 				<template v-if="m.content.trim()">
 					{{ m.role === "user" ? "User: " : "AI: " }}
@@ -49,6 +59,7 @@ const getComponent = (invoc: ToolInvocation & { state: "result" }) => {
 		</Fill>
 
 		<form @submit="handleSubmit">
+			{{ suggestions.developers?.length }}
 			<input
 				v-model="input"
 				:class="messages.length === 0 ? 'mb-[44vh]' : 'mb-16'"
