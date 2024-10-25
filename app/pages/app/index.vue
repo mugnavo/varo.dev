@@ -63,7 +63,6 @@ const { state: suggestions, isLoading: isSuggestionsLoading } = useSuggestions()
 							:is="getComponent(toolInvoc)"
 							:data="toolInvoc.result"
 						/>
-						{{ toolInvoc.result }}
 					</template>
 				</template>
 			</div>
