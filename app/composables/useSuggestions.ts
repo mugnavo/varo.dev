@@ -43,8 +43,6 @@ export const useSuggestions = () => {
 				} as DeveloperListItem;
 			});
 
-			console.log(suggestions);
-
 			return {
 				component: "DeveloperList",
 				developers: suggestions || null,
