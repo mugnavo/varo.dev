@@ -15,6 +15,13 @@
       "when": 1729830278770,
       "tag": "0001_wonderful_lightspeed",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1729831225615,
+      "tag": "0002_keen_warhawk",
+      "breakpoints": true
     }
   ]
 }

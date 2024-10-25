@@ -182,6 +182,7 @@ export const userEmbeddings = pgTable("user_embeddings", {
 		.notNull()
 		.references(() => users.id),
 	embedding: vector({ dimensions: 768 }),
+	content: text().notNull(),
 	created_at: timestamp().defaultNow().notNull(),
 });
 
@@ -193,6 +194,7 @@ export const projectEmbeddings = pgTable("project_embeddings", {
 		.notNull()
 		.references(() => projects.id),
 	embedding: vector({ dimensions: 768 }),
+	content: text().notNull(),
 	created_at: timestamp().defaultNow().notNull(),
 });
 

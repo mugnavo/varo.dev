@@ -83,11 +83,25 @@ const onConfirm = ({ selectedOptions }: OnConfirmOptions) => {
 };
 
 const router = useRouter();
-const handleSubmit = () => {
+const handleSubmit = async () => {
 	if (!user.value) return;
-	user.value.finished_setup = true;
-
 	console.log("submitting");
+
+	await $fetch("/api/user", {
+		method: "POST",
+		body: JSON.stringify({
+			name: name.value,
+			bio: bio.value,
+			location: location.value,
+			experience_level: experience_level.value,
+			availability: availability.value,
+			skills: skills.value,
+			tech_stack: tech_stack.value,
+			interests: interests.value,
+			match_user: match_user.value,
+			match_project: match_project.value,
+		}),
+	});
 	router.push("/app/");
 };
 </script>
