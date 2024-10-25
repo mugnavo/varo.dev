@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
 
 	const projectsResult = await db.query.projects.findMany({
 		where: eq(projects.owner_id, id),
-		columns: { embedding: false },
 	});
 
 	return Response.json({ projects: projectsResult }, { status: 200 });

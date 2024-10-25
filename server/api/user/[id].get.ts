@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
 
 	const user = await db.query.users.findFirst({
 		where: eq(users.id, id),
-		columns: { embedding: false },
 	});
 
 	if (!user) {

@@ -9,6 +9,7 @@ import {
 	timestamp,
 	vector,
 } from "drizzle-orm/pg-core";
+import { useId } from "nuxt/app";
 
 // maybe convert to barrel file if we're using Nuxt Layers?
 
@@ -56,8 +57,6 @@ export const users = pgTable("users", {
 		.array()
 		.notNull()
 		.default(sql`ARRAY[]::text[]`),
-
-	embedding: vector({ dimensions: 768 }),
 });
 
 export const userMessages = pgTable("user_messages", {
@@ -119,8 +118,6 @@ export const projects = pgTable("projects", {
 		.notNull()
 		.default(sql`ARRAY[]::text[]`),
 	help_description: text(),
-
-	embedding: vector({ dimensions: 768 }),
 });
 
 export const projectMessages = pgTable("project_messages", {
@@ -176,6 +173,26 @@ export const projectMatches = pgTable(
 	},
 	(table) => ({ pk: primaryKey({ columns: [table.user_id, table.project_id] }) }),
 );
+
+export const userEmbeddings = pgTable("user_embeddings", {
+	id: text()
+		.primaryKey()
+		.$defaultFn(() => useId()),
+	user_id: integer()
+		.notNull()
+		.references(() => users.id),
+	embedding: vector({ dimensions: 768 }),
+});
+
+export const projectEmbeddings = pgTable("project_embeddings", {
+	id: text()
+		.primaryKey()
+		.$defaultFn(() => useId()),
+	project_id: integer()
+		.notNull()
+		.references(() => projects.id),
+	embedding: vector({ dimensions: 768 }),
+});
 
 export const userMatchRelations = relations(userMatches, ({ one }) => ({
 	user1: one(users, { fields: [userMatches.user1_id], references: [users.id] }),

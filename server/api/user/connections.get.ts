@@ -16,14 +16,6 @@ export default defineEventHandler(async (event) => {
 				eq(userMatches.user2_status, "accepted"),
 			),
 		),
-		with: {
-			user1: {
-				columns: { embedding: false },
-			},
-			user2: {
-				columns: { embedding: false },
-			},
-		},
 	});
 
 	const projectConnections = await db.query.projectMatches.findMany({
@@ -34,11 +26,6 @@ export default defineEventHandler(async (event) => {
 				eq(projectMatches.user_status, "accepted"),
 			),
 		),
-		with: {
-			project: {
-				columns: { embedding: false },
-			},
-		},
 	});
 
 	return Response.json(

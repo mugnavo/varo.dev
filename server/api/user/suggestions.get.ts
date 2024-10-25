@@ -18,14 +18,6 @@ export default defineEventHandler(async (event) => {
 				ne(userMatches.user2_status, "rejected"),
 			),
 		),
-		with: {
-			user1: {
-				columns: { embedding: false },
-			},
-			user2: {
-				columns: { embedding: false },
-			},
-		},
 	});
 
 	const projectSuggestions = await db.query.projectMatches.findMany({
@@ -38,11 +30,6 @@ export default defineEventHandler(async (event) => {
 				ne(projectMatches.project_status, "rejected"),
 			),
 		),
-		with: {
-			project: {
-				columns: { embedding: false },
-			},
-		},
 	});
 
 	return Response.json(
