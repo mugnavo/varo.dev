@@ -2,8 +2,6 @@
 definePageMeta({
 	layout: "landing",
 });
-
-const { user, clear } = useUserSession();
 </script>
 <template>
 	<div class="h-full w-full">

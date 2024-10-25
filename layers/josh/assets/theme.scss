@@ -3,7 +3,7 @@ body {
 }
 
 html {
-	@apply bg-surface-900 overflow-hidden;
+	@apply overflow-hidden bg-surface-900;
 	font-size: 14px;
 }
 
@@ -12,11 +12,21 @@ html {
 }
 
 .label {
-	@apply text-surface-300 text-sm;
+	@apply text-sm text-surface-300;
 }
 
 .card {
-	@apply ring-surface-300 dark:ring-surface-700 text-surface-700 dark:text-surface-200 bg-surface-50 dark:bg-surface-800/60 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 rounded-md p-2 shadow-sm ring-1 ring-inset focus-visible:ring-2;
+	@apply rounded-md bg-surface-50 p-2 text-surface-700 shadow-sm ring-1 ring-inset ring-surface-300 focus-visible:ring-2 focus-visible:ring-primary-500 dark:bg-surface-800/60 dark:text-surface-200 dark:ring-surface-700 dark:focus-visible:ring-primary-400;
+}
+
+/* Chrome, Safari and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+	display: none;
+}
+
+.scrollbar-hidden {
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
 }
 
 // Primevue Theming

@@ -18,6 +18,11 @@ const { items } = defineProps<{
 	loading?: boolean;
 }>();
 
+const bot: SidebarItem = {
+	title: "Khent",
+	avatar: "/marion.png",
+};
+
 // Current user
 const { user, clear } = useUserSession();
 const avatar = computed(() => user.value?.avatar_url);
@@ -65,8 +70,8 @@ const askforsomething = async () => {
 			<Divider />
 
 			<Fill flex-col>
-				<AppSidebarItem :item="{ title: 'Marion', avatar: '/marion.png' }" />
-				<strong class="text-surface-500 my-2 ml-2 text-sm">Connections</strong>
+				<AppSidebarItem :item="bot" />
+				<strong class="my-2 ml-2 text-sm text-surface-500">Connections</strong>
 				<Loader :finished="!loading">
 					<AppSidebarItem v-for="item in items" :item :key="item.title" />
 					<Empty
@@ -119,7 +124,7 @@ header {
 		}
 
 		span {
-			@apply text-surface-400 text-sm;
+			@apply text-sm text-surface-400;
 		}
 	}
 }
