@@ -65,6 +65,8 @@ const mappedMessages = useArrayMap(messages, (m) => {
 	const fromCurrent = m.sender_id === user.value?.id;
 	const sender = fromCurrent ? user.value : otherUser.value;
 
+	if (!sender) return undefined;
+
 	return {
 		id: m.id,
 		author: {
@@ -81,13 +83,15 @@ const mappedMessages = useArrayMap(messages, (m) => {
 <template>
 	<Fill flex-col class="hide mx-auto flex w-full max-w-sm sm:max-w-md lg:max-w-lg">
 		<Fill flex-col class="scrollbar-hidden">
-			<h2 class="text-2xl font-semibold">{{ otherUser.name }}</h2>
-			<ChatBubble
-				v-for="m in mappedMessages"
-				:key="m.id"
-				:author="m.author"
-				:content="m.content"
-			/>
+			<h2 class="text-2xl font-semibold">{{ otherUser?.name }}</h2>
+			<template v-for="m in mappedMessages">
+				<ChatBubble
+					v-if="m"
+					:key="m.id"
+					:author="m.author"
+					:content="m.content"
+				/>
+			</template>
 		</Fill>
 
 		<form @submit.prevent="() => handleSubmit()">

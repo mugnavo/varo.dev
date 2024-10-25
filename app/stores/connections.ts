@@ -49,7 +49,6 @@ export const useConnectionsStore = defineStore("connections", () => {
 	return {
 		connections,
 		isLoading,
-		error,
 		sync,
 	};
 });
