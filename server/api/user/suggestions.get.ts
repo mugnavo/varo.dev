@@ -11,9 +11,11 @@ export default defineEventHandler(async (event) => {
 	const userSuggestions = await db.query.userMatches.findMany({
 		where: and(
 			or(eq(userMatches.user1_id, user.id), eq(userMatches.user2_id, user.id)),
-			and(
-				ne(userMatches.user1_status, "accepted"),
-				ne(userMatches.user2_status, "accepted"),
+			or(
+				eq(userMatches.user1_status, "pending"),
+				eq(userMatches.user2_status, "pending"),
+			),
+			or(
 				ne(userMatches.user1_status, "rejected"),
 				ne(userMatches.user2_status, "rejected"),
 			),
@@ -38,6 +40,8 @@ export default defineEventHandler(async (event) => {
 			project: true,
 		},
 	});
+
+	console.log(userSuggestions);
 
 	return { users: userSuggestions, projects: projectSuggestions };
 });
