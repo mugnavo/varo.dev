@@ -131,7 +131,7 @@ export default defineEventHandler(async (event) => {
 					.innerJoin(users, eq(userEmbeddings.user_id, users.id))
 					.where(
 						and(
-							gt(userSimilarity, 0.6),
+							gt(userSimilarity, 0.5),
 							ne(userEmbeddings.user_id, user.id),
 							eq(users.match_user, true),
 						),
@@ -170,7 +170,7 @@ export default defineEventHandler(async (event) => {
 					.from(projectEmbeddings)
 					.innerJoin(projects, eq(projectEmbeddings.project_id, projects.id))
 					.where(
-						and(gt(projectSimilarity, 0.6), eq(projects.match_enabled, true)),
+						and(gt(projectSimilarity, 0.5), eq(projects.match_enabled, true)),
 					)
 					.limit(10);
 
