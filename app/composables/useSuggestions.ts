@@ -17,15 +17,14 @@ export const useSuggestions = () => {
 
 			const suggestions = await Promise.all(
 				userIds.map(async (id) => {
-					const { user } = await $fetch("/api/user/:id", {
+					const { user } = await $fetch(`/api/user/${id}`, {
 						method: "GET",
-						params: { id },
 					});
 					return {
 						embedding_content: "suggestion",
 						embedding_similarity: 1,
 						user_id: user.id,
-						user_name: `${user.first_name} ${user.last_name}`,
+						user_name: user.name,
 						user_avatar: user.avatar_url,
 						user_location: user.location,
 						user_bio: user.bio,
