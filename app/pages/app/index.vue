@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { ToolDeveloperList } from "#components";
 import { useChat } from "@ai-sdk/vue";
 import type { ToolInvocation } from "ai";
-import { ToolDeveloperList } from "#components";
 
 const { messages, input, handleSubmit } = useChat({
 	api: "/api/chat",
@@ -38,8 +38,19 @@ const { state: suggestions, isLoading: isSuggestionsLoading } = useSuggestions()
 			</Loader>
 			<div v-for="m in messages" :key="m.id" class="whitespace-pre-wrap">
 				<template v-if="m.content.trim()">
-					{{ m.role === "user" ? "User: " : "AI: " }}
-					{{ m.content }}
+					<ChatBubble
+						:author="
+							m.role === 'user'
+								? {
+										id: user!.id,
+										name: user!.username || user!.name,
+										avatar_url: user!.avatar_url,
+									}
+								: null
+						"
+						:content="m.content"
+						:reverse="m.role !== 'user'"
+					/>
 				</template>
 
 				<!-- we can use tool invocation results to render components -->
@@ -52,7 +63,6 @@ const { state: suggestions, isLoading: isSuggestionsLoading } = useSuggestions()
 							:is="getComponent(toolInvoc)"
 							:data="toolInvoc.result"
 						/>
-						{{ toolInvoc.result }}
 					</template>
 				</template>
 			</div>

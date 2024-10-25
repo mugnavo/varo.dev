@@ -1,4 +1,5 @@
 import type { DeveloperListItem } from "~/components/Tool/DeveloperList/index.vue";
+import type { User } from "~~/server/schemas";
 
 export const useSuggestions = () => {
 	const { user } = useUserSession();
@@ -14,31 +15,35 @@ export const useSuggestions = () => {
 
 			const { users } = await $fetch("/api/user/suggestions");
 			const userIds = users.map((u) => getOther(currentId, u));
-
-			const suggestions = await Promise.all(
-				userIds.map(async (id) => {
-					const { user } = await $fetch(`/api/user/${id}`, {
-						method: "GET",
-					});
-					return {
-						embedding_content: "suggestion",
-						embedding_similarity: 1,
-						user_id: user.id,
-						user_name: user.name,
-						user_avatar: user.avatar_url,
-						user_location: user.location,
-						user_bio: user.bio,
-						user_username: user.username,
-						user_skills: user.skills,
-						user_tech_stack: user.tech_stack,
-						user_interests: user.interests,
-						user_availability: user.availability,
-						user_experience: user.experience_level,
-						user_match_user: user.match_user,
-						user_match_project: user.match_project,
-					} as DeveloperListItem;
+      
+			const otherUsers = users.map((u) =>
+				getOther(currentId, {
+					user1_id: u.user1_id,
+					user2_id: u.user2_id,
+					user1: { ...u.user1 } as unknown as User,
+					user2: { ...u.user2 } as unknown as User,
 				}),
 			);
+
+			const suggestions = otherUsers.map((u) => {
+				return {
+					embedding_content: "suggestion",
+					embedding_similarity: 1,
+					user_id: u.id,
+					user_name: u.name,
+					user_avatar: u.avatar_url,
+					user_location: u.location,
+					user_bio: u.bio,
+					user_username: u.username,
+					user_skills: u.skills,
+					user_tech_stack: u.tech_stack,
+					user_interests: u.interests,
+					user_availability: u.availability,
+					user_experience: u.experience_level,
+					user_match_user: u.match_user,
+					user_match_project: u.match_project,
+				} as DeveloperListItem;
+			});
 
 			return {
 				component: "DeveloperList",
