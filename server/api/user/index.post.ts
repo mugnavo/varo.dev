@@ -121,6 +121,7 @@ export default defineEventHandler(async (event) => {
 					embeddings[embeddings.length - 1].embedding,
 				)})`;
 
+				// TODO: remove duplicates via distinct?
 				const matchUsers = await tx
 					.select({
 						name: userEmbeddings.content,
@@ -162,6 +163,7 @@ export default defineEventHandler(async (event) => {
 					embeddings[embeddings.length - 1].embedding,
 				)})`;
 
+				// TODO: remove duplicates via distinct?
 				const matchProjects = await tx
 					.select({
 						name: projectEmbeddings.content,

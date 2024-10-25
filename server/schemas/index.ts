@@ -198,6 +198,17 @@ export const projectEmbeddings = pgTable("project_embeddings", {
 	created_at: timestamp().defaultNow().notNull(),
 });
 
+export const userEmbeddingRelations = relations(userEmbeddings, ({ one }) => ({
+	user: one(users, { fields: [userEmbeddings.user_id], references: [users.id] }),
+}));
+
+export const projectEmbeddingRelations = relations(projectEmbeddings, ({ one }) => ({
+	project: one(projects, {
+		fields: [projectEmbeddings.project_id],
+		references: [projects.id],
+	}),
+}));
+
 export const userMatchRelations = relations(userMatches, ({ one }) => ({
 	user1: one(users, { fields: [userMatches.user1_id], references: [users.id] }),
 	user2: one(users, { fields: [userMatches.user2_id], references: [users.id] }),
