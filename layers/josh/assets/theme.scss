@@ -1,0 +1,35 @@
+body {
+	font-family: "DM Sans" !important;
+}
+
+html {
+	@apply bg-surface-900 overflow-hidden;
+	font-size: 14px;
+}
+
+.bg {
+	@apply bg-surface-900;
+}
+
+.label {
+	@apply text-surface-300 text-sm;
+}
+
+.card {
+	@apply ring-surface-300 dark:ring-surface-700 text-surface-700 dark:text-surface-200 bg-surface-50 dark:bg-surface-800/60 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 rounded-md p-2 shadow-sm ring-1 ring-inset focus-visible:ring-2;
+}
+
+// Primevue Theming
+$border-radius: 4px;
+
+.p-button {
+	@apply px-3 py-1 !important;
+	border-radius: $border-radius;
+}
+.p-inputtext {
+	@apply px-2 py-1.5 !important;
+	border-radius: $border-radius !important;
+}
+.p-divider-content {
+	@apply bg-surface-950 px-4 !important;
+}

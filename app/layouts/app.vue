@@ -1,8 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const openSidebar = ref(false);
+</script>
 
 <template>
 	<Screen>
-		<Sidebar />
+		<Button icon="pi pi-bars" text @click="openSidebar = true" class="ml-4 mt-4" />
+		<TheSidebar v-model="openSidebar" :items="[]" />
 		<slot />
 	</Screen>
 </template>
