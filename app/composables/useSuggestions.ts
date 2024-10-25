@@ -14,7 +14,6 @@ export const useSuggestions = () => {
 			const currentId = user.value.id;
 
 			const { users } = await $fetch("/api/user/suggestions");
-			console.log(users);
 			const otherUsers = users.map((u) =>
 				getOther(currentId, {
 					user1_id: u.user1_id,
@@ -24,7 +23,6 @@ export const useSuggestions = () => {
 				}),
 			);
 
-			console.log(otherUsers);
 			const suggestions = otherUsers.map((u) => {
 				return {
 					embedding_content: "suggestion",

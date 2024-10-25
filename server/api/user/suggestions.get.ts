@@ -41,7 +41,5 @@ export default defineEventHandler(async (event) => {
 		},
 	});
 
-	console.log(userSuggestions);
-
 	return { users: userSuggestions, projects: projectSuggestions };
 });
