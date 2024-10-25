@@ -85,6 +85,17 @@ const onConfirm = ({ selectedOptions }: OnConfirmOptions) => {
 const router = useRouter();
 const handleSubmit = async () => {
 	if (!user.value) return;
+
+	if (!skills.value.length) {
+		return showToast("Please add at least one skill");
+	}
+	if (!tech_stack.value.length) {
+		return showToast("Please add at least one tech stack");
+	}
+	if (!interests.value.length) {
+		return showToast("Please add at least one interest");
+	}
+
 	console.log("submitting");
 
 	await $fetch("/api/user", {
