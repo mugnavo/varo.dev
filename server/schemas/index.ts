@@ -9,6 +9,7 @@ import {
 	timestamp,
 	vector,
 } from "drizzle-orm/pg-core";
+import { useId } from "nuxt/app";
 
 // maybe convert to barrel file if we're using Nuxt Layers?
 
@@ -56,8 +57,18 @@ export const users = pgTable("users", {
 		.array()
 		.notNull()
 		.default(sql`ARRAY[]::text[]`),
+});
 
-	embedding: vector({ dimensions: 1536 }),
+export const userMessages = pgTable("user_messages", {
+	id: integer().primaryKey().generatedAlwaysAsIdentity(),
+	sender_id: integer()
+		.notNull()
+		.references(() => users.id),
+	recipient_id: integer()
+		.notNull()
+		.references(() => users.id),
+	message: text(),
+	created_at: timestamp().defaultNow().notNull(),
 });
 
 export const oauthAccounts = pgTable(
@@ -107,8 +118,18 @@ export const projects = pgTable("projects", {
 		.notNull()
 		.default(sql`ARRAY[]::text[]`),
 	help_description: text(),
+});
 
-	embedding: vector({ dimensions: 1536 }),
+export const projectMessages = pgTable("project_messages", {
+	id: integer().primaryKey().generatedAlwaysAsIdentity(),
+	sender_id: integer()
+		.notNull()
+		.references(() => users.id),
+	project_id: integer()
+		.notNull()
+		.references(() => projects.id),
+	message: text(),
+	created_at: timestamp().defaultNow().notNull(),
 });
 
 export const userMatches = pgTable(
@@ -152,6 +173,39 @@ export const projectMatches = pgTable(
 	},
 	(table) => ({ pk: primaryKey({ columns: [table.user_id, table.project_id] }) }),
 );
+
+export const userEmbeddings = pgTable("user_embeddings", {
+	id: text()
+		.primaryKey()
+		.$defaultFn(() => useId()),
+	user_id: integer()
+		.notNull()
+		.references(() => users.id),
+	embedding: vector({ dimensions: 768 }),
+});
+
+export const projectEmbeddings = pgTable("project_embeddings", {
+	id: text()
+		.primaryKey()
+		.$defaultFn(() => useId()),
+	project_id: integer()
+		.notNull()
+		.references(() => projects.id),
+	embedding: vector({ dimensions: 768 }),
+});
+
+export const userMatchRelations = relations(userMatches, ({ one }) => ({
+	user1: one(users, { fields: [userMatches.user1_id], references: [users.id] }),
+	user2: one(users, { fields: [userMatches.user2_id], references: [users.id] }),
+}));
+
+export const projectMatchRelations = relations(projectMatches, ({ one }) => ({
+	user: one(users, { fields: [projectMatches.user_id], references: [users.id] }),
+	project: one(projects, {
+		fields: [projectMatches.project_id],
+		references: [projects.id],
+	}),
+}));
 
 // TODO: add indexes for faster lookups
 
