@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 	const { user } = await getUserSession(event);
 
 	if (!user) {
-		return new Response("Unauthorized", { status: 401 });
+		throw createError({ statusCode: 401, message: "Unauthorized" });
 	}
 
 	const userConnections = await db.query.userMatches.findMany({

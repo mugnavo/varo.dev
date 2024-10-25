@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
 	const { user } = await getUserSession(event);
 
 	if (!user) {
-		return new Response("Unauthorized", { status: 401 });
+		throw createError({ statusCode: 401, message: "Unauthorized" });
 	}
 
 	await db.update(users).set(body).where(eq(users.id, user.id));

@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 	const id = Number(getRouterParam(event, "id"));
 
 	if (!id || !Number.isInteger(id)) {
-		return new Response("Invalid user ID", { status: 400 });
+		throw createError({ statusCode: 400, message: "Invalid user ID" });
 	}
 
 	const projectsResult = await db.query.projects.findMany({

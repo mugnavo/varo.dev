@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 	const id = Number(getRouterParam(event, "id"));
 
 	if (!id || !Number.isInteger(id)) {
-		return new Response("Invalid user ID", { status: 400 });
+		throw createError({ statusCode: 400, message: "Invalid user ID" });
 	}
 
 	const user = await db.query.users.findFirst({
@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
 	});
 
 	if (!user) {
-		return new Response("User not found", { status: 404 });
+		throw createError({ statusCode: 404, message: "User not found" });
 	}
 
 	return { user };
