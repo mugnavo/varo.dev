@@ -82,7 +82,7 @@ const mappedMessages = useArrayMap(messages, (m) => {
 
 <template>
 	<Fill flex-col class="hide mx-auto flex w-full max-w-sm sm:max-w-md lg:max-w-lg">
-		<Fill flex-col class="scrollbar-hidden">
+		<Fill flex-col class="scrollbar-hidden gap-2">
 			<h2 class="text-2xl font-semibold">{{ otherUser?.name }}</h2>
 			<template v-for="m in mappedMessages">
 				<ChatBubble
