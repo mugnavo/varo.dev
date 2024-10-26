@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { set } from "@vueuse/core";
-import type { DeveloperListItem } from "./index.vue";
 import Chip from "primevue/chip";
+import type { DeveloperListItem } from "./index.vue";
 
 const props = defineProps<{
 	item: DeveloperListItem;
@@ -24,10 +24,10 @@ const onConnect = ({ name, connected }: { name: string; connected?: boolean }) =
 };
 
 const onAvoid = ({ name }: { name: string }) => {
-	const description = `You have avoided ${name}, you will not be seeing them anytime soon`;
+	const description = `You have ignored the match suggestion for ${name}.`;
 
 	ask({
-		title: `Avoided ${name}`,
+		title: `Ignored ${name}`,
 		description,
 		approveText: "Ok",
 	});
@@ -125,7 +125,7 @@ const {
 				icon="pi pi-ban"
 				class="!rounded-none"
 				severity="danger"
-				v-tip="'Avoid this dev'"
+				v-tip="'Ignore'"
 				:loading="isLoading && !isAccepting"
 				:disabled="isLoading && isAccepting"
 				@click="respond(0, false)"
