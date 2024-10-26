@@ -22,15 +22,12 @@ const { items } = defineProps<{
 	loading?: boolean;
 }>();
 
-const bot = computed(
-	() =>
-		({
-			title: "Khent",
-			avatar: "/marion.png",
-			active: isNaN(other.value),
-			route: "/app",
-		}) as SidebarItem,
-);
+const bot = {
+	title: "Varobot",
+	avatar: "https://utfs.io/f/w9lPaB25Y3OzmCTA1ULmuwpHghKWZsGjrqvEX4O7L8clzxfP",
+	active: isNaN(other.value),
+	route: "/app",
+};
 
 // Current user
 const { user, clear } = useUserSession();

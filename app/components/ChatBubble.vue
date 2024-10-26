@@ -22,7 +22,7 @@ const { author, content } = defineProps<{
 		/>
 		<div class="flex flex-col gap-0.5">
 			<span class="text-xs text-zinc-400" :class="reverse ? '' : 'self-end'">{{
-				author?.name || "Bot"
+				author?.name || "Varobot"
 			}}</span>
 			<div class="rounded-md bg-zinc-900 p-2">
 				{{ content }}
