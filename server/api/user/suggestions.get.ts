@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
 				eq(userMatches.user1_status, "pending"),
 				eq(userMatches.user2_status, "pending"),
 			),
-			or(
+			and(
 				ne(userMatches.user1_status, "rejected"),
 				ne(userMatches.user2_status, "rejected"),
 			),
