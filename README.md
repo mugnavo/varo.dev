@@ -7,13 +7,11 @@
 
 The AI-powered matchmaking platform for developers, open-source projects, and indie hackers.
 
-Built with [Nuxt](https://nuxt.com), [Vue](https://vuejs.org), and [AI Vercel SDK](https://sdk.vercel.ai/).
+Built with [Nuxt](https://nuxt.com), [Vue](https://vuejs.org), and [Vercel AI SDK](https://sdk.vercel.ai/).
 
 ## Development
 
 > Node.js 20 or later is recommended.
-
-This project uses [pnpm](https://pnpm.io) as the package manager.
 
 1. Install [pnpm](https://pnpm.io/installation).
 2. Install the necessary dependencies by running `pnpm install` in the root directory of the project.
