@@ -7,6 +7,8 @@ export const Route = createFileRoute("/app")({
   beforeLoad: async ({ context }) => {
     if (!context.user) {
       throw redirect({ to: "/signin" });
+    } else if (!context.user.setup_at) {
+      throw redirect({ to: "/setup" });
     }
   },
 });

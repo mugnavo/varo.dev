@@ -60,7 +60,7 @@ export const Route = createAPIFileRoute("/api/auth/callback/github")({
         return new Response(null, {
           status: 302,
           headers: {
-            Location: "/",
+            Location: "/app",
           },
         });
       } else {
@@ -79,7 +79,7 @@ export const Route = createAPIFileRoute("/api/auth/callback/github")({
           return new Response(null, {
             status: 302,
             headers: {
-              Location: "/",
+              Location: "/app",
             },
           });
         }
@@ -108,7 +108,7 @@ export const Route = createAPIFileRoute("/api/auth/callback/github")({
       return new Response(null, {
         status: 302,
         headers: {
-          Location: "/",
+          Location: "/setup",
         },
       });
     } catch (e) {
