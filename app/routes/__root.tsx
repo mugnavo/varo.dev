@@ -27,7 +27,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       content: "width=device-width, initial-scale=1",
     },
     {
-      title: "TanStarter",
+      title: "Varo",
     },
   ],
   links: () => [{ rel: "stylesheet", href: appCss }],
@@ -53,6 +53,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />
+        {/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
+        <script
+          id="theme"
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.toggle(
+                      'dark',
+                      localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+                    )`,
+          }}
+        ></script>
       </Body>
     </Html>
   );

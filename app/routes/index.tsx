@@ -10,17 +10,13 @@ function Home() {
 
   return (
     <div className="flex flex-col gap-4 p-6">
-      <h1 className="text-4xl font-bold">TanStarter</h1>
-      <div className="flex items-center gap-2">
-        This is an unprotected page:
-        <pre className="rounded-md border bg-slate-50 p-1">routes/index.tsx</pre>
-      </div>
+      <h1 className="text-4xl font-bold">Varo</h1>
 
       {user ? (
         <div className="flex flex-col gap-2">
           <p>Welcome back, {user.name || user.first_name}!</p>
           <Button type="button" asChild className="w-fit" size="lg">
-            <Link to="/dashboard">Go to Dashboard</Link>
+            <Link to="/app">Go to Dashboard</Link>
           </Button>
           <div>
             More data:
