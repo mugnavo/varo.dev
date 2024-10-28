@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
@@ -12,6 +13,7 @@
     "db": "drizzle-kit",
     "ui": "pnpm dlx shadcn@latest"
   },
+  "packageManager": "pnpm@9.12.3",
   "dependencies": {
     "@ai-sdk/google": "^0.0.54",
     "@oslojs/crypto": "^1.0.1",
@@ -28,7 +30,7 @@
     "@tanstack/router-devtools": "^1.77.5",
     "@tanstack/start": "^1.77.5",
     "@vitejs/plugin-react": "^4.3.3",
-    "ai": "^3.4.21",
+    "ai": "^3.4.22",
     "arctic": "^2.0.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

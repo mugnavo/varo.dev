@@ -54,7 +54,7 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3(vite@5.4.10(@types/node@22.8.1)(terser@5.36.0))
       ai:
-        specifier: ^3.4.21
+        specifier: ^3.4.22
         version: 3.4.22(react@18.3.1)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.12(typescript@5.6.3))(zod@3.23.8)
       arctic:
         specifier: ^2.0.1
