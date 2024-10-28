@@ -4,7 +4,7 @@ import { AppSidebar, SidebarItem } from "~/components/AppSidebar";
 import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 
 export const Route = createFileRoute("/app")({
-  component: DashboardLayout,
+  component: AppLayout,
   beforeLoad: async ({ context }) => {
     if (!context.user) {
       throw redirect({ to: "/signin" });
@@ -34,7 +34,7 @@ const items: SidebarItem[] = [
   },
 ];
 
-function DashboardLayout() {
+function AppLayout() {
   return (
     <SidebarProvider>
       <AppSidebar items={items} />
