@@ -7,7 +7,7 @@
 
 The AI-powered matchmaking platform for developers, open-source projects, and indie hackers.
 
-Built with [Nuxt](https://nuxt.com), [Vue](https://vuejs.org), and [Vercel AI SDK](https://sdk.vercel.ai/).
+Built with [TanStack Start](https://tanstack.com/start) and [Vercel AI SDK](https://sdk.vercel.ai/).
 
 ## Development
 
@@ -17,17 +17,21 @@ Built with [Nuxt](https://nuxt.com), [Vue](https://vuejs.org), and [Vercel AI SD
 2. Install the necessary dependencies by running `pnpm install` in the root directory of the project.
 3. Create a fill in your `.env` file based on the `.env.example` file.
 
-    ```env
-     NUXT_BASE_URL="http://localhost:3000"
-     POSTGRES_URL=
+   ```env
+      DATABASE_URL=
 
-     NUXT_GITHUB_CLIENT_ID=
-     NUXT_GITHUB_CLIENT_SECRET=
-     NUXT_GITHUB_REDIRECT_PATH="/api/auth/github"
+      GOOGLE_GENERATIVE_AI_API_KEY=
 
-     NUXT_SESSION_PASSWORD=
-     NUXT_GOOGLE_GENERATIVE_AI_API_KEY=
-    ```
+      DISCORD_CLIENT_ID=
+      DISCORD_CLIENT_SECRET=
+      DISCORD_REDIRECT_URI=http://localhost:3000/api/auth/callback/discord
+      GITHUB_CLIENT_ID=
+      GITHUB_CLIENT_SECRET=
+      GITHUB_REDIRECT_URI=http://localhost:3000/api/auth/callback/github
+      GOOGLE_CLIENT_ID=
+      GOOGLE_CLIENT_SECRET=
+      GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/callback/google
+   ```
 
 4. Run the development server with `pnpm dev`.
 5. You can now access the development server at `http://localhost:3000`.

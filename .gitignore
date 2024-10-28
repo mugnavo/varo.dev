@@ -1,25 +1,18 @@
-# Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
-dist
-.netlify
-
-# Node dependencies
 node_modules
+package-lock.json
+yarn.lock
 
-# Logs
-logs
-*.log
-
-# Misc
 .DS_Store
-.fleet
-.idea
-
-# Local env files
+.cache
 .env
-.env.*
-!.env.example
+
+.vercel
+.output
+.vinxi
+.wrangler
+.netlify
+dist
+/build/
+/api/
+/server/build
+/public/build
