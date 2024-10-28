@@ -1,9 +1,7 @@
 # varo.dev
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/dc7164b7-e940-4e24-8763-74665622e1ee/deploy-status)](https://app.netlify.com/sites/varo-dev/deploys)
-
 > [!NOTE]  
-> This project is still in its early stages. If you're interested in contributing, check out the [active issues](https://github.com/mugnavo/varo.dev/issues).
+> This project is currently undergoing a rewrite. If you're interested in the code from the Cebu Hacktoberfest 2024 Hackathon, you can find it in the [`nuxt`](https://github.com/mugnavo/varo.dev/tree/nuxt) branch.
 
 The AI-powered matchmaking platform for developers, open-source projects, and indie hackers.
 
@@ -18,19 +16,19 @@ Built with [TanStack Start](https://tanstack.com/start) and [Vercel AI SDK](http
 3. Create a fill in your `.env` file based on the `.env.example` file.
 
    ```env
-      DATABASE_URL=
+   DATABASE_URL=
 
-      GOOGLE_GENERATIVE_AI_API_KEY=
+   GOOGLE_GENERATIVE_AI_API_KEY=
 
-      DISCORD_CLIENT_ID=
-      DISCORD_CLIENT_SECRET=
-      DISCORD_REDIRECT_URI=http://localhost:3000/api/auth/callback/discord
-      GITHUB_CLIENT_ID=
-      GITHUB_CLIENT_SECRET=
-      GITHUB_REDIRECT_URI=http://localhost:3000/api/auth/callback/github
-      GOOGLE_CLIENT_ID=
-      GOOGLE_CLIENT_SECRET=
-      GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/callback/google
+   DISCORD_CLIENT_ID=
+   DISCORD_CLIENT_SECRET=
+   DISCORD_REDIRECT_URI=http://localhost:3000/api/auth/callback/discord
+   GITHUB_CLIENT_ID=
+   GITHUB_CLIENT_SECRET=
+   GITHUB_REDIRECT_URI=http://localhost:3000/api/auth/callback/github
+   GOOGLE_CLIENT_ID=
+   GOOGLE_CLIENT_SECRET=
+   GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/callback/google
    ```
 
 4. Run the development server with `pnpm dev`.
