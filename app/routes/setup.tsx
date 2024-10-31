@@ -6,14 +6,7 @@ import { z } from "zod";
 import { userProfileSchema } from "~/server/functions/profile";
 
 import { Button } from "~/components/ui/button";
-import {
-  MultiSelector,
-  MultiSelectorContent,
-  MultiSelectorInput,
-  MultiSelectorItem,
-  MultiSelectorList,
-  MultiSelectorTrigger,
-} from "~/components/ui/custom/multi-select";
+import MultipleSelector, { Option } from "~/components/ui/custom/multi-select";
 import {
   Form,
   FormControl,
@@ -49,6 +42,26 @@ export const Route = createFileRoute("/setup")({
   },
   component: SetupPage,
 });
+
+const interestOptions: Option[] = [
+  { label: "Web Development", value: "web development" },
+  { label: "Mobile Development", value: "mobile development" },
+  { label: "Game Development", value: "game development" },
+  { label: "Artificial Intelligence", value: "artificial intelligence" },
+  { label: "Cybersecurity", value: "cybersecurity" },
+];
+
+const techStackOptions: Option[] = [
+  { label: "C#", value: "c#" },
+  { label: "Java", value: "java" },
+  { label: "Python", value: "python" },
+  { label: "JavaScript/TypeScript", value: "javascript" },
+  { label: "Ruby", value: "ruby" },
+  { label: "PHP", value: "php" },
+  { label: "Go", value: "go" },
+  { label: "Rust", value: "rust" },
+  { label: "Swift", value: "swift" },
+];
 
 function SetupPage() {
   const { user } = Route.useRouteContext();
@@ -231,33 +244,22 @@ function SetupPage() {
               <FormItem>
                 <FormLabel>Interests</FormLabel>
                 <FormControl>
-                  <MultiSelector
-                    onValuesChange={field.onChange}
-                    values={field.value || []}
-                  >
-                    <MultiSelectorTrigger>
-                      <MultiSelectorInput placeholder="Enter your interests" />
-                    </MultiSelectorTrigger>
-                    <MultiSelectorContent>
-                      <MultiSelectorList allowCustom>
-                        <MultiSelectorItem value="Web Development">
-                          Web Development
-                        </MultiSelectorItem>
-                        <MultiSelectorItem value="Mobile Development">
-                          Mobile Development
-                        </MultiSelectorItem>
-                        <MultiSelectorItem value="Game Development">
-                          Game Development
-                        </MultiSelectorItem>
-                        <MultiSelectorItem value="Artificial Intelligence">
-                          Artificial Intelligence
-                        </MultiSelectorItem>
-                        <MultiSelectorItem value="Cybersecurity">
-                          Cybersecurity
-                        </MultiSelectorItem>
-                      </MultiSelectorList>
-                    </MultiSelectorContent>
-                  </MultiSelector>
+                  <MultipleSelector
+                    {...field}
+                    onChange={(option) => field.onChange(option.map((o) => o.value))}
+                    value={
+                      field.value?.map(
+                        (value) =>
+                          interestOptions.find((o) => o.value === value) || {
+                            label: value,
+                            value,
+                          },
+                      ) || []
+                    }
+                    creatable
+                    defaultOptions={interestOptions}
+                    placeholder="Enter your interests"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -272,29 +274,22 @@ function SetupPage() {
               <FormItem>
                 <FormLabel>Tech stack</FormLabel>
                 <FormControl>
-                  <MultiSelector
-                    onValuesChange={field.onChange}
-                    values={field.value || []}
-                  >
-                    <MultiSelectorTrigger>
-                      <MultiSelectorInput placeholder="Enter your tech stack" />
-                    </MultiSelectorTrigger>
-                    <MultiSelectorContent>
-                      <MultiSelectorList allowCustom>
-                        <MultiSelectorItem value="C#">C#</MultiSelectorItem>
-                        <MultiSelectorItem value="Java">Java</MultiSelectorItem>
-                        <MultiSelectorItem value="Python">Python</MultiSelectorItem>
-                        <MultiSelectorItem value="JavaScript/TypeScript">
-                          JavaScript/TypeScript
-                        </MultiSelectorItem>
-                        <MultiSelectorItem value="Ruby">Ruby</MultiSelectorItem>
-                        <MultiSelectorItem value="PHP">PHP</MultiSelectorItem>
-                        <MultiSelectorItem value="Go">Go</MultiSelectorItem>
-                        <MultiSelectorItem value="Rust">Rust</MultiSelectorItem>
-                        <MultiSelectorItem value="Swift">Swift</MultiSelectorItem>
-                      </MultiSelectorList>
-                    </MultiSelectorContent>
-                  </MultiSelector>
+                  <MultipleSelector
+                    {...field}
+                    onChange={(option) => field.onChange(option.map((o) => o.value))}
+                    value={
+                      field.value?.map(
+                        (value) =>
+                          techStackOptions.find((o) => o.value === value) || {
+                            label: value,
+                            value,
+                          },
+                      ) || []
+                    }
+                    creatable
+                    defaultOptions={techStackOptions}
+                    placeholder="Enter your interests"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
