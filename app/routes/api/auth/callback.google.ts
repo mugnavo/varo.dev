@@ -94,8 +94,7 @@ export const Route = createAPIFileRoute("/api/auth/callback/google")({
           .values({
             email: providerUser.email,
             name: providerUser.name,
-            first_name: providerUser.given_name,
-            last_name: providerUser.family_name,
+            username: providerUser.email.split("@")[0],
             avatar_url: providerUser.picture,
           })
           .returning({ newId: user.id });

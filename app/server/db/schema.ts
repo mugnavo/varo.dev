@@ -21,8 +21,6 @@ export const user = pgTable("user", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   username: text().unique(),
   name: text(),
-  first_name: text(),
-  last_name: text(),
   avatar_url: text(),
   email: text().unique().notNull(),
 

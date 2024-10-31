@@ -16,7 +16,7 @@ export const SESSION_COOKIE_NAME = "session";
 
 export type SessionUser = Pick<
   User,
-  "id" | "name" | "first_name" | "last_name" | "avatar_url" | "email" | "setup_at"
+  "id" | "name" | "username" | "avatar_url" | "email" | "setup_at"
 >;
 
 export function generateSessionToken(): string {
@@ -65,8 +65,7 @@ export async function validateSessionToken(token: string) {
   const filteredUser: SessionUser = {
     id: user.id,
     name: user.name,
-    first_name: user.first_name,
-    last_name: user.last_name,
+    username: user.username,
     avatar_url: user.avatar_url,
     email: user.email,
     setup_at: user.setup_at,

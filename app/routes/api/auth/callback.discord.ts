@@ -91,6 +91,7 @@ export const Route = createAPIFileRoute("/api/auth/callback/discord")({
           .values({
             email: providerUser.email,
             name: providerUser.global_name || providerUser.username,
+            username: providerUser.username,
             avatar_url: providerUser.avatar
               ? `https://cdn.discordapp.com/avatars/${providerUser.id}/${providerUser.avatar}.png`
               : null,
