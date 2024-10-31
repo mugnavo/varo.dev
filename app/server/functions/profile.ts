@@ -30,10 +30,5 @@ export const userProfileSchema = z.object({
     ),
 
   skills: z.string().array().optional().describe("Array of user's skills"),
-  tech_stack: z
-    .string()
-    .array()
-    .optional()
-    .describe("Array of specific technologies the user is proficient in"),
   interests: z.string().array().optional().describe("Array of user's interests"),
 });

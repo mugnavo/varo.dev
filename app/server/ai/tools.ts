@@ -34,7 +34,6 @@ export function getTools(currentUser: SessionUser) {
           user_bio: user.bio,
           user_username: user.username,
           user_skills: user.skills,
-          user_tech_stack: user.tech_stack,
           user_interests: user.interests,
           user_availability: user.availability,
           user_experience: user.experience_level,

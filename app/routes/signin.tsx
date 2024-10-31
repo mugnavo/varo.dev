@@ -7,9 +7,13 @@ import { Button } from "~/components/ui/button";
 export const Route = createFileRoute("/signin")({
   component: AuthPage,
   beforeLoad: async ({ context }) => {
-    if (context.user) {
+    if (context.user?.setup_at) {
       throw redirect({
         to: "/app",
+      });
+    } else if (context.user) {
+      throw redirect({
+        to: "/setup",
       });
     }
   },

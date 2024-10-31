@@ -337,7 +337,9 @@ const MultiSelectorList = forwardRef<
 function CustomMultiSelectorItem() {
   const { inputValue } = useMultiSelect();
 
-  return <MultiSelectorItem value={inputValue}>{inputValue}</MultiSelectorItem>;
+  return inputValue ? (
+    <MultiSelectorItem value={inputValue}>{inputValue}</MultiSelectorItem>
+  ) : null;
 }
 
 MultiSelectorList.displayName = "MultiSelectorList";

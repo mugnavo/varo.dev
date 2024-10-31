@@ -44,10 +44,6 @@ export const user = pgTable("user", {
     .array()
     .notNull()
     .default(sql`ARRAY[]::text[]`),
-  tech_stack: text()
-    .array()
-    .notNull()
-    .default(sql`ARRAY[]::text[]`),
   interests: text()
     .array()
     .notNull()
@@ -111,10 +107,6 @@ export const project = pgTable("project", {
 
   match_enabled: boolean().default(false),
   skills: text()
-    .array()
-    .notNull()
-    .default(sql`ARRAY[]::text[]`),
-  tech_stack: text()
     .array()
     .notNull()
     .default(sql`ARRAY[]::text[]`),
