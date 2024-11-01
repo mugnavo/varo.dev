@@ -76,8 +76,8 @@ function SetupPage() {
       match_project: true,
       match_user: true,
 
-      experience_level: 2,
-      availability: 2,
+      experience_level: 0,
+      availability: 0,
 
       interests: [],
       skills: [],
@@ -91,13 +91,13 @@ function SetupPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8">
+    <div className="flex min-h-screen flex-col items-center gap-8 px-4 pb-8 pt-24 xl:pt-32">
       <span>Hi, {user.name || user.username}. Let's get you set up.</span>
 
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid gap-4 md:grid-cols-2"
+          className="grid w-full gap-4 md:max-w-xl md:grid-cols-2"
         >
           <FormField
             control={form.control}
@@ -129,7 +129,7 @@ function SetupPage() {
             control={form.control}
             name="bio"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="row-span-3">
                 <FormLabel>Bio</FormLabel>
                 <FormControl>
                   <Textarea
@@ -161,7 +161,7 @@ function SetupPage() {
             control={form.control}
             name="match_user"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex w-full items-center justify-between">
                 <FormLabel>Match me with users</FormLabel>
                 <FormControl>
                   <Switch checked={field.value} onCheckedChange={field.onChange} />
@@ -175,7 +175,7 @@ function SetupPage() {
             control={form.control}
             name="match_project"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex w-full items-center justify-between">
                 <FormLabel>Match me with projects</FormLabel>
                 <FormControl>
                   <Switch checked={field.value} onCheckedChange={field.onChange} />
@@ -193,7 +193,7 @@ function SetupPage() {
                 <FormLabel>Experience Level</FormLabel>
                 <Select
                   onValueChange={(value) => field.onChange(parseInt(value, 10))}
-                  defaultValue={field.value.toString()}
+                  defaultValue={field.value ? field.value.toString() : undefined}
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -219,7 +219,7 @@ function SetupPage() {
                 <FormLabel>Availability</FormLabel>
                 <Select
                   onValueChange={(value) => field.onChange(parseInt(value, 10))}
-                  defaultValue={field.value.toString()}
+                  defaultValue={field.value ? field.value.toString() : undefined}
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -256,6 +256,7 @@ function SetupPage() {
                           },
                       ) || []
                     }
+                    hideClearAllButton
                     creatable
                     defaultOptions={interestOptions}
                     placeholder="Enter your interests"
@@ -286,6 +287,7 @@ function SetupPage() {
                           },
                       ) || []
                     }
+                    hideClearAllButton
                     creatable
                     defaultOptions={techStackOptions}
                     placeholder="Enter your interests"
@@ -296,7 +298,7 @@ function SetupPage() {
             )}
           />
 
-          <Button className="md:col-span-2" type="submit">
+          <Button className="mt-4 md:col-span-2" type="submit">
             Submit
           </Button>
         </form>
