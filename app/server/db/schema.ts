@@ -71,9 +71,7 @@ export const oauthAccount = pgTable(
       .notNull()
       .references(() => user.id),
   },
-  (table) => ({
-    pk: primaryKey({ columns: [table.provider_id, table.provider_user_id] }),
-  }),
+  (table) => [primaryKey({ columns: [table.provider_id, table.provider_user_id] })],
 );
 
 export const session = pgTable("session", {
@@ -148,7 +146,7 @@ export const userMatches = pgTable(
       .notNull()
       .$onUpdate(() => new Date()),
   },
-  (table) => ({ pk: primaryKey({ columns: [table.user1_id, table.user2_id] }) }),
+  (table) => [primaryKey({ columns: [table.user1_id, table.user2_id] })],
 );
 
 export const projectMatches = pgTable(
@@ -168,7 +166,7 @@ export const projectMatches = pgTable(
       .notNull()
       .$onUpdate(() => new Date()),
   },
-  (table) => ({ pk: primaryKey({ columns: [table.user_id, table.project_id] }) }),
+  (table) => [primaryKey({ columns: [table.user_id, table.project_id] })],
 );
 
 export const userEmbedding = pgTable("user_embedding", {
