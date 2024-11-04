@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS "project" (
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	"match_enabled" boolean DEFAULT false,
 	"skills" text[] DEFAULT ARRAY[]::text[] NOT NULL,
-	"tech_stack" text[] DEFAULT ARRAY[]::text[] NOT NULL,
 	"categories" text[] DEFAULT ARRAY[]::text[] NOT NULL,
 	"help_description" text
 );
@@ -58,8 +57,6 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "user_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
 	"username" text,
 	"name" text,
-	"first_name" text,
-	"last_name" text,
 	"avatar_url" text,
 	"email" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
@@ -73,7 +70,6 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"experience_level" integer,
 	"availability" integer,
 	"skills" text[] DEFAULT ARRAY[]::text[] NOT NULL,
-	"tech_stack" text[] DEFAULT ARRAY[]::text[] NOT NULL,
 	"interests" text[] DEFAULT ARRAY[]::text[] NOT NULL,
 	CONSTRAINT "user_username_unique" UNIQUE("username"),
 	CONSTRAINT "user_email_unique" UNIQUE("email")

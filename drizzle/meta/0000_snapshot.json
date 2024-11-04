@@ -1,5 +1,5 @@
 {
-  "id": "97b718f1-2242-4bc6-814a-d5503a8949b2",
+  "id": "03014b2c-437e-42ff-a1e4-c65008fa2b9d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -53,7 +53,9 @@
         }
       },
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.project": {
       "name": "project",
@@ -134,13 +136,6 @@
           "notNull": true,
           "default": "ARRAY[]::text[]"
         },
-        "tech_stack": {
-          "name": "tech_stack",
-          "type": "text[]",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "ARRAY[]::text[]"
-        },
         "categories": {
           "name": "categories",
           "type": "text[]",
@@ -173,7 +168,9 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.project_embedding": {
       "name": "project_embedding",
@@ -229,7 +226,9 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.project_match": {
       "name": "project_match",
@@ -317,7 +316,9 @@
         }
       },
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.project_message": {
       "name": "project_message",
@@ -397,7 +398,9 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.session": {
       "name": "session",
@@ -440,7 +443,9 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.user": {
       "name": "user",
@@ -471,18 +476,6 @@
         },
         "name": {
           "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "first_name": {
-          "name": "first_name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "last_name": {
-          "name": "last_name",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -570,13 +563,6 @@
           "notNull": true,
           "default": "ARRAY[]::text[]"
         },
-        "tech_stack": {
-          "name": "tech_stack",
-          "type": "text[]",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "ARRAY[]::text[]"
-        },
         "interests": {
           "name": "interests",
           "type": "text[]",
@@ -604,7 +590,9 @@
           ]
         }
       },
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.user_embedding": {
       "name": "user_embedding",
@@ -660,7 +648,9 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.user_match": {
       "name": "user_match",
@@ -748,7 +738,9 @@
         }
       },
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.user_message": {
       "name": "user_message",
@@ -828,7 +820,9 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {
@@ -844,6 +838,8 @@
   },
   "schemas": {},
   "sequences": {},
+  "roles": {},
+  "policies": {},
   "views": {},
   "_meta": {
     "columns": {},

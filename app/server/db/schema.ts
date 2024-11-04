@@ -115,7 +115,7 @@ export const project = pgTable("project", {
   help_description: text(),
 });
 
-export const projectMessages = pgTable("project_message", {
+export const projectMessage = pgTable("project_message", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   sender_id: integer()
     .notNull()
@@ -127,7 +127,7 @@ export const projectMessages = pgTable("project_message", {
   created_at: timestamp().defaultNow().notNull(),
 });
 
-export const userMatches = pgTable(
+export const userMatch = pgTable(
   "user_match",
   {
     user1_id: integer()
@@ -149,7 +149,7 @@ export const userMatches = pgTable(
   (table) => [primaryKey({ columns: [table.user1_id, table.user2_id] })],
 );
 
-export const projectMatches = pgTable(
+export const projectMatch = pgTable(
   "project_match",
   {
     user_id: integer()
@@ -208,15 +208,15 @@ export const projectEmbeddingRelations = relations(projectEmbedding, ({ one }) =
   }),
 }));
 
-export const userMatchRelations = relations(userMatches, ({ one }) => ({
-  user1: one(user, { fields: [userMatches.user1_id], references: [user.id] }),
-  user2: one(user, { fields: [userMatches.user2_id], references: [user.id] }),
+export const userMatchRelations = relations(userMatch, ({ one }) => ({
+  user1: one(user, { fields: [userMatch.user1_id], references: [user.id] }),
+  user2: one(user, { fields: [userMatch.user2_id], references: [user.id] }),
 }));
 
-export const projectMatchRelations = relations(projectMatches, ({ one }) => ({
-  user: one(user, { fields: [projectMatches.user_id], references: [user.id] }),
+export const projectMatchRelations = relations(projectMatch, ({ one }) => ({
+  user: one(user, { fields: [projectMatch.user_id], references: [user.id] }),
   project: one(project, {
-    fields: [projectMatches.project_id],
+    fields: [projectMatch.project_id],
     references: [project.id],
   }),
 }));
