@@ -8,6 +8,7 @@ import {
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import { lazy, Suspense } from "react";
 
+import { Toaster } from "~/components/ui/sonner";
 import { getUser } from "~/server/functions";
 import appCss from "~/styles/app.css?url";
 
@@ -58,6 +59,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </Head>
       <Body>
         {children}
+        <Toaster />
         <ScrollRestoration />
         <Suspense>
           <TanStackRouterDevtools position="bottom-right" />

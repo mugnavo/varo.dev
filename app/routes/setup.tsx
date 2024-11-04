@@ -1,9 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, isRedirect, redirect, useRouter } from "@tanstack/react-router";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
-import { userProfileSchema } from "~/server/functions/profile";
+import { setupProfile, userProfileSchema } from "~/server/functions/profile";
 
 import { Button } from "~/components/ui/button";
 import MultipleSelector, { Option } from "~/components/ui/custom/multi-select";
@@ -83,11 +85,23 @@ function SetupPage() {
       skills: [],
     },
   });
+  const router = useRouter();
 
-  function onSubmit(values: z.infer<typeof userProfileSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof userProfileSchema>) {
+    try {
+      const result = await setupProfile(values);
+
+      if (result.success === false) {
+        console.log(result.message);
+        toast.error(result.message);
+      }
+    } catch (error) {
+      if (isRedirect(error)) {
+        router.history.push(error.to);
+      } else {
+        console.log(error);
+      }
+    }
   }
 
   return (
@@ -290,7 +304,7 @@ function SetupPage() {
                     hideClearAllButton
                     creatable
                     defaultOptions={techStackOptions}
-                    placeholder="Enter your interests"
+                    placeholder="Enter your tech stack"
                   />
                 </FormControl>
                 <FormMessage />
@@ -298,7 +312,14 @@ function SetupPage() {
             )}
           />
 
-          <Button className="mt-4 md:col-span-2" type="submit">
+          <Button
+            disabled={form.formState.isSubmitting}
+            className="mt-4 md:col-span-2"
+            type="submit"
+          >
+            {form.formState.isSubmitting && (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            )}
             Submit
           </Button>
         </form>
