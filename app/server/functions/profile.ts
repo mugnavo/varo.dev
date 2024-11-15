@@ -47,11 +47,10 @@ export const userProfileSchema = z.object({
     .describe("Array of user's interests"),
 });
 
-export const setupProfile = createServerFn(
-  "POST",
-  async (profile: z.infer<typeof userProfileSchema>) => {
+export const setupProfile = createServerFn({ method: "POST" })
+  .validator(userProfileSchema)
+  .handler(async ({ data: profile }) => {
     // TODO:
-    // - proper runtime validation when server fn middleware is out https://github.com/TanStack/router/pull/2513
     // - prevent inserting duplicate matches?
 
     const { user } = await getAuthSession();
@@ -217,5 +216,4 @@ export const setupProfile = createServerFn(
     }
 
     throw redirect({ to: "/app" });
-  },
-);
+  });
