@@ -1,10 +1,9 @@
 import { createServerFn, json } from "@tanstack/start";
 import { and, cosineDistance, eq, gt, ne, or, sql } from "drizzle-orm";
-import { setResponseStatus } from "vinxi/http";
 import { z } from "zod";
 
 import { redirect } from "@tanstack/react-router";
-import { getAuthSession } from "~/server/auth";
+import { authMiddleware } from "~/server/auth";
 import { db, table } from "~/server/db";
 import { generateEmbeddings } from "../ai/embedding";
 
@@ -49,16 +48,12 @@ export const userProfileSchema = z.object({
 
 export const setupProfile = createServerFn({ method: "POST" })
   .validator(userProfileSchema)
-  .handler(async ({ data: profile }) => {
+  .middleware([authMiddleware])
+  .handler(async ({ data: profile, context }) => {
     // TODO:
     // - prevent inserting duplicate matches?
 
-    const { user } = await getAuthSession();
-
-    if (!user) {
-      setResponseStatus(401);
-      throw new Error("Unauthorized");
-    }
+    const { user } = context;
 
     try {
       const chunks = [

@@ -1,8 +1,9 @@
 import { sha256 } from "@oslojs/crypto/sha2";
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
+import { createMiddleware } from "@tanstack/start";
 import { Discord, GitHub, Google } from "arctic";
 import { eq } from "drizzle-orm";
-import { deleteCookie, getCookie, setCookie } from "vinxi/http";
+import { deleteCookie, getCookie, setCookie, setResponseStatus } from "vinxi/http";
 
 import { db } from "~/server/db";
 import {
@@ -86,22 +87,6 @@ export function setSessionTokenCookie(token: string, expiresAt: Date) {
   });
 }
 
-export async function getAuthSession({ refreshCookie } = { refreshCookie: true }) {
-  const token = getCookie(SESSION_COOKIE_NAME);
-  if (!token) {
-    return { session: null, user: null };
-  }
-  const { session, user } = await validateSessionToken(token);
-  if (session === null) {
-    deleteCookie(SESSION_COOKIE_NAME);
-    return { session: null, user: null };
-  }
-  if (refreshCookie) {
-    setSessionTokenCookie(token, session.expires_at);
-  }
-  return { session, user };
-}
-
 // OAuth2 Providers
 export const discord = new Discord(
   process.env.DISCORD_CLIENT_ID as string,
@@ -118,3 +103,37 @@ export const google = new Google(
   process.env.GOOGLE_CLIENT_SECRET as string,
   process.env.GOOGLE_REDIRECT_URI as string,
 );
+
+/**
+ * Retrieves the session and user data if valid.
+ * Can be used in API routes and server functions.
+ */
+export async function getAuthSession({ refreshCookie } = { refreshCookie: true }) {
+  const token = getCookie(SESSION_COOKIE_NAME);
+  if (!token) {
+    return { session: null, user: null };
+  }
+  const { session, user } = await validateSessionToken(token);
+  if (session === null) {
+    deleteCookie(SESSION_COOKIE_NAME);
+    return { session: null, user: null };
+  }
+  if (refreshCookie) {
+    setSessionTokenCookie(token, session.expires_at);
+  }
+  return { session, user };
+}
+
+/**
+ * Middleware to force authentication on a server function, and add the user to the context.
+ */
+export const authMiddleware = createMiddleware().server(async ({ next }) => {
+  const { user } = await getAuthSession();
+
+  if (!user) {
+    setResponseStatus(401);
+    throw new Error("Unauthorized");
+  }
+
+  return next({ context: { user } });
+});
