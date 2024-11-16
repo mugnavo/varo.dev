@@ -5,11 +5,11 @@ import {
   Outlet,
   ScrollRestoration,
 } from "@tanstack/react-router";
-import { createServerFn, Meta, Scripts } from "@tanstack/start";
+import { Meta, Scripts } from "@tanstack/start";
 import { lazy, Suspense } from "react";
 
 import { Toaster } from "~/components/ui/sonner";
-import { getAuthSession } from "~/server/auth";
+import { getUser } from "~/server/functions/user";
 import appCss from "~/styles/app.css?url";
 
 const TanStackRouterDevtools =
@@ -21,11 +21,6 @@ const TanStackRouterDevtools =
           default: res.TanStackRouterDevtools,
         })),
       );
-
-const getUser = createServerFn({ method: "GET" }).handler(async () => {
-  const { user } = await getAuthSession();
-  return user;
-});
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   beforeLoad: async () => {
