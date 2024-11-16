@@ -89,7 +89,7 @@ function SetupPage() {
 
   async function onSubmit(values: z.infer<typeof userProfileSchema>) {
     try {
-      const result = await setupProfile(values);
+      const result = await setupProfile({ data: values });
 
       if (result.success === false) {
         console.log(result.message);

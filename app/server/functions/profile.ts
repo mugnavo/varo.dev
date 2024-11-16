@@ -1,11 +1,11 @@
+import { redirect } from "@tanstack/react-router";
 import { createServerFn, json } from "@tanstack/start";
 import { and, cosineDistance, eq, gt, ne, or, sql } from "drizzle-orm";
 import { z } from "zod";
 
-import { redirect } from "@tanstack/react-router";
-import { authMiddleware } from "~/server/auth";
+import { authMiddleware } from "~/middleware/auth-guard";
+import { generateEmbeddings } from "~/server/ai/embedding";
 import { db, table } from "~/server/db";
-import { generateEmbeddings } from "../ai/embedding";
 
 export const userProfileSchema = z.object({
   name: z.string().min(1, "Name is required.").describe("User's name"),
