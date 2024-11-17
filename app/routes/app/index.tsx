@@ -6,7 +6,7 @@ export const Route = createFileRoute("/app/")({
   component: AppIndex,
 });
 
-export default function AppIndex() {
+function AppIndex() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   return (
     <div className="stretch mx-auto flex w-full max-w-md flex-col py-24">
