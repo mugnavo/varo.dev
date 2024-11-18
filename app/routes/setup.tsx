@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createFileRoute, isRedirect, redirect, useRouter } from "@tanstack/react-router";
+import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/start";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -87,20 +88,18 @@ function SetupPage() {
   });
   const router = useRouter();
 
+  const submitSetup = useServerFn(setupProfile);
+
   async function onSubmit(values: z.infer<typeof userProfileSchema>) {
     try {
-      const result = await setupProfile({ data: values });
+      const result = await submitSetup({ data: values });
 
       if (result.success === false) {
         console.log(result.message);
         toast.error(result.message);
       }
     } catch (error) {
-      if (isRedirect(error)) {
-        router.history.push(error.to);
-      } else {
-        console.log(error);
-      }
+      console.log(error);
     }
   }
 
