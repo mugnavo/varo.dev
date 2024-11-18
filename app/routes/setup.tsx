@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/start";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -86,7 +86,6 @@ function SetupPage() {
       skills: [],
     },
   });
-  const router = useRouter();
 
   const submitSetup = useServerFn(setupProfile);
 
