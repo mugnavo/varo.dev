@@ -52,6 +52,8 @@ export const setupProfile = createServerFn({ method: "POST" })
   .handler(async ({ data: profile, context }) => {
     // TODO:
     // - prevent inserting duplicate matches?
+    // ^ or is this only possible if the user updates their profile?
+    //   this is the initial setup, so it should be fine since we're deleting existing matches
 
     const { user } = context;
 
@@ -119,36 +121,40 @@ export const setupProfile = createServerFn({ method: "POST" })
               embeddings[embeddings.length - 1].embedding,
             )})`;
 
-            const matchUsers = await tx
-              .selectDistinctOn([table.userEmbedding.user_id], {
-                name: table.userEmbedding.content,
-                user_similarity,
-                user_id: table.userEmbedding.user_id,
-              })
-              .from(table.userEmbedding)
-              .innerJoin(table.user, eq(table.userEmbedding.user_id, user.id))
-              .where(
-                and(
-                  gt(user_similarity, 0.5),
-                  ne(table.userEmbedding.user_id, user.id),
-                  eq(table.user.match_user, true),
-                ),
-              )
-              .limit(10);
+            try {
+              const matchUsers = await tx
+                .selectDistinctOn([table.userEmbedding.user_id], {
+                  name: table.userEmbedding.content,
+                  user_similarity,
+                  user_id: table.userEmbedding.user_id,
+                })
+                .from(table.userEmbedding)
+                .innerJoin(table.user, eq(table.userEmbedding.user_id, user.id))
+                .where(
+                  and(
+                    gt(user_similarity, 0.5),
+                    ne(table.userEmbedding.user_id, user.id),
+                    eq(table.user.match_user, true),
+                  ),
+                )
+                .limit(10);
 
-            if (matchUsers.length) {
-              console.log(`Inserting ${matchUsers.length} new user matches...`);
-              // insert new matches
-              await tx.insert(table.userMatch).values(
-                matchUsers.map((m) => ({
-                  user1_id: user.id,
-                  user2_id: m.user_id,
-                  user1_status: "pending" as const,
-                  user2_status: "pending" as const,
-                })),
-              );
-            } else {
-              console.log("No user matches found.");
+              if (matchUsers.length) {
+                console.log(`Inserting ${matchUsers.length} new user matches...`);
+                // insert new matches
+                await tx.insert(table.userMatch).values(
+                  matchUsers.map((m) => ({
+                    user1_id: user.id,
+                    user2_id: m.user_id,
+                    user1_status: "pending" as const,
+                    user2_status: "pending" as const,
+                  })),
+                );
+              } else {
+                console.log("No user matches found.");
+              }
+            } catch (error) {
+              console.log("Error while setting up user matches: ", error);
             }
           }
 
@@ -159,35 +165,39 @@ export const setupProfile = createServerFn({ method: "POST" })
               embeddings[embeddings.length - 1].embedding,
             )})`;
 
-            const matchProjects = await tx
-              .selectDistinctOn([table.projectEmbedding.project_id], {
-                name: table.projectEmbedding.content,
-                projectSimilarity,
-                project_id: table.projectEmbedding.project_id,
-              })
-              .from(table.projectEmbedding)
-              .innerJoin(
-                table.project,
-                eq(table.projectEmbedding.project_id, table.project.id),
-              )
-              .where(
-                and(gt(projectSimilarity, 0.5), eq(table.project.match_enabled, true)),
-              )
-              .limit(10);
+            try {
+              const matchProjects = await tx
+                .selectDistinctOn([table.projectEmbedding.project_id], {
+                  name: table.projectEmbedding.content,
+                  projectSimilarity,
+                  project_id: table.projectEmbedding.project_id,
+                })
+                .from(table.projectEmbedding)
+                .innerJoin(
+                  table.project,
+                  eq(table.projectEmbedding.project_id, table.project.id),
+                )
+                .where(
+                  and(gt(projectSimilarity, 0.5), eq(table.project.match_enabled, true)),
+                )
+                .limit(10);
 
-            if (matchProjects.length) {
-              console.log(`Inserting ${matchProjects.length} new project matches...`);
-              // insert new matches
-              await tx.insert(table.projectMatch).values(
-                matchProjects.map((m) => ({
-                  user_id: user.id,
-                  project_id: m.project_id,
-                  user_status: "pending" as const,
-                  project_status: "pending" as const,
-                })),
-              );
-            } else {
-              console.log("No project matches found.");
+              if (matchProjects.length) {
+                console.log(`Inserting ${matchProjects.length} new project matches...`);
+                // insert new matches
+                await tx.insert(table.projectMatch).values(
+                  matchProjects.map((m) => ({
+                    user_id: user.id,
+                    project_id: m.project_id,
+                    user_status: "pending" as const,
+                    project_status: "pending" as const,
+                  })),
+                );
+              } else {
+                console.log("No project matches found.");
+              }
+            } catch (error) {
+              console.log("Error while setting up project matches: ", error);
             }
           }
         });
