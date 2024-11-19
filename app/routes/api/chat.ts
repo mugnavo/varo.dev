@@ -15,7 +15,7 @@ export const Route = createAPIFileRoute("/api/chat")({
 
     const { messages } = await readBody();
 
-    const result = await streamText({
+    const result = streamText({
       temperature: 0.6,
       model: chatModel,
       system: `You are a matchmaking assistant for Varo; a matchmaking platform for developers, open-source projects, and indie founders where users can match with other users or projects. Keep your responses short and concise. Only respond in plaintext, avoid markdown or code responses. Call the provided tools accordingly, and respond with "I can't assist you with that" if the user asks about something irrelevant to the platform.`,
