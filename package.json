@@ -13,9 +13,9 @@
     "db": "drizzle-kit",
     "ui": "pnpm dlx shadcn@latest"
   },
-  "packageManager": "pnpm@9.13.2",
+  "packageManager": "pnpm@9.14.2",
   "dependencies": {
-    "@ai-sdk/google": "^1.0.0",
+    "@ai-sdk/google": "^1.0.3",
     "@hookform/resolvers": "^3.9.1",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
@@ -28,14 +28,14 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-switch": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.4",
-    "@tanstack/react-query": "^5.60.5",
-    "@tanstack/react-query-devtools": "^5.60.5",
-    "@tanstack/react-router": "^1.82.1",
-    "@tanstack/react-router-with-query": "^1.82.1",
-    "@tanstack/router-devtools": "^1.82.1",
-    "@tanstack/start": "^1.82.1",
+    "@tanstack/react-query": "^5.61.0",
+    "@tanstack/react-query-devtools": "^5.61.0",
+    "@tanstack/react-router": "^1.82.2",
+    "@tanstack/react-router-with-query": "^1.82.2",
+    "@tanstack/router-devtools": "^1.82.2",
+    "@tanstack/start": "^1.82.5",
     "@vitejs/plugin-react": "^4.3.3",
-    "ai": "^4.0.0",
+    "ai": "^4.0.3",
     "arctic": "^2.2.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -56,10 +56,10 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@eslint-react/eslint-plugin": "^1.16.1",
+    "@eslint-react/eslint-plugin": "^1.17.0",
     "@eslint/js": "^9.15.0",
     "@tanstack/eslint-plugin-query": "^5.60.1",
-    "@tanstack/eslint-plugin-router": "^1.81.9",
+    "@tanstack/eslint-plugin-router": "^1.82.2",
     "@types/eslint__js": "^8.42.3",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
@@ -71,10 +71,10 @@
     "globals": "^15.12.0",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.15.0",
-    "vite-tsconfig-paths": "^5.1.2"
+    "vite-tsconfig-paths": "^5.1.3"
   }
 }
