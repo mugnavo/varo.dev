@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"location" text,
 	"experience_level" integer,
 	"availability" integer,
+	"ideaOrProject" text,
 	"skills" text[] DEFAULT ARRAY[]::text[] NOT NULL,
 	"interests" text[] DEFAULT ARRAY[]::text[] NOT NULL,
 	CONSTRAINT "user_username_unique" UNIQUE("username"),

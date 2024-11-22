@@ -39,6 +39,7 @@ export const user = pgTable("user", {
   location: text(),
   experience_level: integer(),
   availability: integer(),
+  ideaOrProject: text(),
 
   skills: text()
     .array()

@@ -1,5 +1,5 @@
 {
-  "id": "03014b2c-437e-42ff-a1e4-c65008fa2b9d",
+  "id": "1551c76a-1059-4a74-aaf2-0dbd2f5b2a63",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -553,6 +553,12 @@
         "availability": {
           "name": "availability",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ideaOrProject": {
+          "name": "ideaOrProject",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
