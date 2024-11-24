@@ -47,4 +47,9 @@ export default tseslint.config(
     },
     ...react.configs["recommended-type-checked"],
   },
+  {
+    rules: {
+      "@eslint-react/prefer-read-only-props": "off",
+    },
+  },
 );
