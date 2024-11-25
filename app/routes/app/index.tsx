@@ -3,7 +3,8 @@ import { useChat } from "ai/react";
 import { motion } from "motion/react";
 import { Fragment } from "react";
 import DevProfileCard from "~/components/chat/DevProfileCard";
-import { Input } from "~/components/ui/input";
+import { Button } from "~/components/ui/button";
+import { Textarea } from "~/components/ui/textarea";
 import { SearchDevelopersReturnType } from "~/server/ai/tools";
 
 export const Route = createFileRoute("/app/")({
@@ -13,8 +14,8 @@ export const Route = createFileRoute("/app/")({
 function AppIndex() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   return (
-    <div className="stretch mx-auto flex w-full max-w-lg flex-col py-24">
-      <div className="flex flex-col">
+    <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
+      <div className="flex flex-1 flex-col pt-4">
         {messages.map((m) => (
           <Fragment key={m.id}>
             <motion.div
@@ -75,13 +76,33 @@ function AppIndex() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit}>
-        <Input
-          className="fixed bottom-0 mb-8 w-full max-w-md"
+      {messages.length === 0 && (
+        <div className="flex flex-col items-center px-2 py-4">Welcome to Varo.</div>
+      )}
+
+      <form
+        className={
+          "sticky bottom-4 flex gap-2 transition-[margin] " +
+          (messages.length ? "mb-2" : "mb-[42vh]")
+        }
+        onSubmit={handleSubmit}
+      >
+        <Textarea
+          className="min-h-8 resize-none"
           value={input}
           placeholder="Say something..."
           onChange={handleInputChange}
+          rows={2}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              handleSubmit();
+            }
+          }}
         />
+        <Button type="submit" className="h-full" size="lg">
+          Send
+        </Button>
       </form>
     </div>
   );
