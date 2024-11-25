@@ -16,6 +16,8 @@ import { Route as SetupImport } from './routes/setup'
 import { Route as AppImport } from './routes/app'
 import { Route as IndexImport } from './routes/index'
 import { Route as AppIndexImport } from './routes/app/index'
+import { Route as AppConnectionsIdImport } from './routes/app/connections.$id'
+import { Route as AppChatsIdImport } from './routes/app/chats.$id'
 
 // Create/Update Routes
 
@@ -46,6 +48,18 @@ const IndexRoute = IndexImport.update({
 const AppIndexRoute = AppIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppConnectionsIdRoute = AppConnectionsIdImport.update({
+  id: '/connections/$id',
+  path: '/connections/$id',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppChatsIdRoute = AppChatsIdImport.update({
+  id: '/chats/$id',
+  path: '/chats/$id',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -88,6 +102,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexImport
       parentRoute: typeof AppImport
     }
+    '/app/chats/$id': {
+      id: '/app/chats/$id'
+      path: '/chats/$id'
+      fullPath: '/app/chats/$id'
+      preLoaderRoute: typeof AppChatsIdImport
+      parentRoute: typeof AppImport
+    }
+    '/app/connections/$id': {
+      id: '/app/connections/$id'
+      path: '/connections/$id'
+      fullPath: '/app/connections/$id'
+      preLoaderRoute: typeof AppConnectionsIdImport
+      parentRoute: typeof AppImport
+    }
   }
 }
 
@@ -95,10 +123,14 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
+  AppChatsIdRoute: typeof AppChatsIdRoute
+  AppConnectionsIdRoute: typeof AppConnectionsIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppIndexRoute: AppIndexRoute,
+  AppChatsIdRoute: AppChatsIdRoute,
+  AppConnectionsIdRoute: AppConnectionsIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -109,6 +141,8 @@ export interface FileRoutesByFullPath {
   '/setup': typeof SetupRoute
   '/signin': typeof SigninRoute
   '/app/': typeof AppIndexRoute
+  '/app/chats/$id': typeof AppChatsIdRoute
+  '/app/connections/$id': typeof AppConnectionsIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -116,6 +150,8 @@ export interface FileRoutesByTo {
   '/setup': typeof SetupRoute
   '/signin': typeof SigninRoute
   '/app': typeof AppIndexRoute
+  '/app/chats/$id': typeof AppChatsIdRoute
+  '/app/connections/$id': typeof AppConnectionsIdRoute
 }
 
 export interface FileRoutesById {
@@ -125,14 +161,37 @@ export interface FileRoutesById {
   '/setup': typeof SetupRoute
   '/signin': typeof SigninRoute
   '/app/': typeof AppIndexRoute
+  '/app/chats/$id': typeof AppChatsIdRoute
+  '/app/connections/$id': typeof AppConnectionsIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/setup' | '/signin' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/setup'
+    | '/signin'
+    | '/app/'
+    | '/app/chats/$id'
+    | '/app/connections/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/setup' | '/signin' | '/app'
-  id: '__root__' | '/' | '/app' | '/setup' | '/signin' | '/app/'
+  to:
+    | '/'
+    | '/setup'
+    | '/signin'
+    | '/app'
+    | '/app/chats/$id'
+    | '/app/connections/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/setup'
+    | '/signin'
+    | '/app/'
+    | '/app/chats/$id'
+    | '/app/connections/$id'
   fileRoutesById: FileRoutesById
 }
 
@@ -172,7 +231,9 @@ export const routeTree = rootRoute
     "/app": {
       "filePath": "app.tsx",
       "children": [
-        "/app/"
+        "/app/",
+        "/app/chats/$id",
+        "/app/connections/$id"
       ]
     },
     "/setup": {
@@ -183,6 +244,14 @@ export const routeTree = rootRoute
     },
     "/app/": {
       "filePath": "app/index.tsx",
+      "parent": "/app"
+    },
+    "/app/chats/$id": {
+      "filePath": "app/chats.$id.tsx",
+      "parent": "/app"
+    },
+    "/app/connections/$id": {
+      "filePath": "app/connections.$id.tsx",
       "parent": "/app"
     }
   }
