@@ -4,6 +4,13 @@ import { motion } from "motion/react";
 import { Fragment } from "react";
 import DevProfileCard from "~/components/chat/DevProfileCard";
 import { Button } from "~/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "~/components/ui/carousel";
 import { Textarea } from "~/components/ui/textarea";
 import { SearchDevelopersReturnType } from "~/server/ai/tools";
 
@@ -47,27 +54,35 @@ function AppIndex() {
                   const result = toolInvoc.result as SearchDevelopersReturnType;
 
                   return (
-                    <div key={toolCallId} className="grid grid-cols-4 gap-2">
-                      {result.developers.map((dev, devIndex) => (
-                        <motion.div
-                          key={dev.user_id}
-                          initial={{ opacity: 0, scale: 1, y: 10, x: 0 }}
-                          animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
-                          exit={{ opacity: 0, scale: 1, y: 1, x: 0 }}
-                          transition={{
-                            opacity: { duration: 0.1 + devIndex * 0.25 },
-                            layout: {
-                              type: "spring",
-                              bounce: 0.3,
-                              duration: 0.1,
-                            },
-                          }}
-                          style={{ originY: 0.1 }}
-                        >
-                          <DevProfileCard dev={dev} />
-                        </motion.div>
-                      ))}
-                    </div>
+                    <Carousel key={toolCallId}>
+                      <CarouselContent>
+                        {result.developers.map((dev, devIndex) => (
+                          <CarouselItem
+                            className="md:basis-1/2 lg:basis-1/3"
+                            key={dev.user_id}
+                          >
+                            <motion.div
+                              initial={{ opacity: 0, scale: 1, y: 10, x: 0 }}
+                              animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+                              exit={{ opacity: 0, scale: 1, y: 1, x: 0 }}
+                              transition={{
+                                opacity: { duration: 0.1 + devIndex * 0.25 },
+                                layout: {
+                                  type: "spring",
+                                  bounce: 0.3,
+                                  duration: 0.1,
+                                },
+                              }}
+                              style={{ originY: 0.1 }}
+                            >
+                              <DevProfileCard dev={dev} />
+                            </motion.div>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious />
+                      <CarouselNext />
+                    </Carousel>
                   );
                 }
               }

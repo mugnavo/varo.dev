@@ -11,7 +11,7 @@ interface DevProfileCardProps {
 export default function DevProfileCard({ dev }: DevProfileCardProps) {
   const description = useMemo(() => {
     const text = dev.user_ideaOrProject || dev.user_bio || "";
-    return text.length > 60 ? text.slice(0, 60) + "..." : text;
+    return text.length > 64 ? text.slice(0, 64) + "..." : text;
   }, [dev.user_ideaOrProject, dev.user_bio]);
 
   return (
@@ -21,7 +21,7 @@ export default function DevProfileCard({ dev }: DevProfileCardProps) {
       </Avatar>
       <div className="text-sm font-medium">{dev.user_name}</div>
       <p className="text-sm">{description}</p>
-      <div className="mt-1 flex opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <div className="mt-1 flex opacity-0 transition-opacity duration-200 group-hover:opacity-100">
         <Button size="sm" className="h-7 w-full rounded-r-none text-xs">
           Connect
         </Button>
