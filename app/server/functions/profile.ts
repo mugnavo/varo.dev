@@ -1,5 +1,5 @@
 import { redirect } from "@tanstack/react-router";
-import { createServerFn, json } from "@tanstack/start";
+import { createServerFn } from "@tanstack/start";
 import { and, cosineDistance, eq, gt, ne, or, sql } from "drizzle-orm";
 import { z } from "zod";
 
@@ -207,17 +207,12 @@ export const setupProfile = createServerFn({ method: "POST" })
         .update(table.user)
         .set({ ...profile, setup_at: new Date() })
         .where(eq(table.user.id, user.id));
-
-      // return json({
-      //   success: true,
-      //   message: "Setup successful. Welcome to Varo.",
-      // });
     } catch (error) {
       console.log(error);
-      return json({
+      return {
         success: false,
         message: error instanceof Error ? error.message : "An error occurred",
-      });
+      };
     }
 
     throw redirect({ to: "/app" });
