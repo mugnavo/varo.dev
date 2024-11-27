@@ -5,7 +5,7 @@ import { chatModel } from "~/server/ai";
 import { getTools } from "~/server/ai/tools";
 import { getAuthSession } from "~/server/auth";
 
-export const Route = createAPIFileRoute("/api/chat")({
+export const APIRoute = createAPIFileRoute("/api/chat")({
   POST: async () => {
     const { user } = await getAuthSession();
 
