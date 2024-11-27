@@ -5,11 +5,15 @@ import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 export const Route = createFileRoute("/app")({
   component: AppLayout,
   beforeLoad: async ({ context }) => {
-    if (!context.user) {
+    const { user } = context;
+    if (!user) {
       throw redirect({ to: "/signin" });
-    } else if (!context.user.setup_at) {
+    } else if (!user.setup_at) {
       throw redirect({ to: "/setup" });
     }
+
+    // re-return to ensure not null
+    return { user };
   },
 });
 
