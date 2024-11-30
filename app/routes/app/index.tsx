@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useChat } from "ai/react";
 import { motion } from "motion/react";
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 import DevProfileCard from "~/components/chat/DevProfileCard";
 import { Button } from "~/components/ui/button";
 import {
@@ -60,6 +60,8 @@ function AppIndex() {
                 if (toolName === "searchDevelopers") {
                   const result = toolInvoc.result as SearchDevelopersReturnType;
 
+                  if (!result.developers.length) return null;
+
                   return (
                     <Carousel key={toolCallId} opts={{ align: "start" }}>
                       <CarouselContent>
@@ -100,7 +102,9 @@ function AppIndex() {
 
       {messages.length === 0 && (
         <>
-          <CurrentSuggestions />
+          <Suspense>
+            <CurrentSuggestions />
+          </Suspense>
           <div className="flex flex-col items-center px-2 py-4">
             Welcome to Varo, {user.name || user.username}.
           </div>
@@ -139,7 +143,7 @@ function CurrentSuggestions() {
   const { data } = useSuspenseQuery(suggestionsQueryOptions());
   const { user } = Route.useRouteContext();
 
-  return (
+  return data.users.length ? (
     <Carousel opts={{ align: "start" }}>
       <CarouselContent>
         {data.users.map((userMatch, devIndex) => (
@@ -171,5 +175,5 @@ function CurrentSuggestions() {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-  );
+  ) : null;
 }
