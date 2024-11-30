@@ -27,18 +27,19 @@ export function getTools(currentUser: SessionUser) {
         .selectDistinctOn([userEmbedding.user_id], {
           embedding_similarity: userSimilarity,
           embedding_content: userEmbedding.content,
-          user_id: userEmbedding.user_id,
-          user_name: user.name,
-          user_avatar: user.avatar_url,
-          user_location: user.location,
-          user_bio: user.bio,
-          user_username: user.username,
-          user_skills: user.skills,
-          user_interests: user.interests,
-          user_availability: user.availability,
-          user_experience: user.experience_level,
-          user_match_user: user.match_user,
-          user_match_project: user.match_project,
+          id: userEmbedding.user_id,
+          name: user.name,
+          username: user.username,
+          avatar_url: user.avatar_url,
+          location: user.location,
+          bio: user.bio,
+          skills: user.skills,
+          interests: user.interests,
+          availability: user.availability,
+          experience_level: user.experience_level,
+          match_user: user.match_user,
+          match_project: user.match_project,
+          ideaOrProject: user.ideaOrProject,
         })
         .from(userEmbedding)
         .innerJoin(user, eq(userEmbedding.user_id, user.id))
@@ -49,8 +50,7 @@ export function getTools(currentUser: SessionUser) {
             eq(user.match_user, true),
           ),
         )
-        .limit(10);
-      console.log(matchUsers);
+        .limit(5);
 
       return { developers: matchUsers };
     },
