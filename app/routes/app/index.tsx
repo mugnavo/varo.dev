@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useChat } from "ai/react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Fragment, Suspense } from "react";
 import DevProfileCard from "~/components/chat/DevProfileCard";
 import { Button } from "~/components/ui/button";

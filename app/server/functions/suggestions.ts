@@ -10,7 +10,7 @@ export const suggestionsQueryOptions = () =>
     queryFn: () => getSuggestions(),
   });
 
-export const getSuggestions = createServerFn({ method: "GET" })
+const getSuggestions = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }) => {
     const { user } = context;
