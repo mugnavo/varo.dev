@@ -15,7 +15,7 @@ const getSuggestions = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { user } = context;
 
-    const userSuggestions = await db.query.userMatch.findMany({
+    const userSuggestionsQuery = db.query.userMatch.findMany({
       where: and(
         or(eq(table.userMatch.user1_id, user.id), eq(table.userMatch.user2_id, user.id)),
         or(
@@ -33,7 +33,7 @@ const getSuggestions = createServerFn({ method: "GET" })
       },
     });
 
-    const projectSuggestions = await db.query.projectMatch.findMany({
+    const projectSuggestionsQuery = db.query.projectMatch.findMany({
       where: and(
         eq(table.projectMatch.user_id, user.id),
         and(
@@ -47,6 +47,11 @@ const getSuggestions = createServerFn({ method: "GET" })
         project: true,
       },
     });
+
+    const [userSuggestions, projectSuggestions] = await Promise.all([
+      userSuggestionsQuery,
+      projectSuggestionsQuery,
+    ]);
 
     return { users: userSuggestions, projects: projectSuggestions };
   });
