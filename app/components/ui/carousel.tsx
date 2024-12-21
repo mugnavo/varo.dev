@@ -110,8 +110,8 @@ const Carousel = React.forwardRef<
     }, [api, onSelect]);
 
     return (
-      <CarouselContext.Provider
-        // eslint-disable-next-line @eslint-react/no-unstable-context-value
+      <CarouselContext
+         
         value={{
           carouselRef,
           api: api,
@@ -133,7 +133,7 @@ const Carousel = React.forwardRef<
         >
           {children}
         </div>
-      </CarouselContext.Provider>
+      </CarouselContext>
     );
   },
 );
