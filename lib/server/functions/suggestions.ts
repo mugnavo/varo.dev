@@ -1,7 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
 import { createServerFn } from "@tanstack/start";
 import { and, eq, ne, or } from "drizzle-orm";
-import { authMiddleware } from "~/middleware/auth-guard";
+import { authMiddleware } from "~/lib/middleware/auth-guard";
 import { db, table } from "../db";
 
 export const suggestionsQueryOptions = () =>

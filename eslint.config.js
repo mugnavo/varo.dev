@@ -3,12 +3,10 @@ import js from "@eslint/js";
 import pluginQuery from "@tanstack/eslint-plugin-query";
 import pluginRouter from "@tanstack/eslint-plugin-router";
 import eslintConfigPrettier from "eslint-config-prettier";
-import reactCompiler from "eslint-plugin-react-compiler";
 import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-// TODO: clean up for better composability
 export default tseslint.config(
   {
     ignores: ["dist", ".vinxi", ".wrangler", ".vercel", ".netlify", ".output", "build/"],
@@ -48,14 +46,14 @@ export default tseslint.config(
     },
     ...react.configs["recommended-type-checked"],
   },
-  {
-    plugins: {
-      "react-compiler": reactCompiler,
-    },
-    rules: {
-      "react-compiler/react-compiler": "error",
-    },
-  },
+  // {
+  //   plugins: {
+  //     "react-compiler": reactCompiler,
+  //   },
+  //   rules: {
+  //     "react-compiler/react-compiler": "error",
+  //   },
+  // },
   {
     rules: {
       "@eslint-react/prefer-read-only-props": "off",

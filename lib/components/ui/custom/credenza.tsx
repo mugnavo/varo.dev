@@ -13,7 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "~/components/ui/dialog";
+} from "~/lib/components/ui/dialog";
 import {
   Drawer,
   DrawerClose,
@@ -23,8 +23,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "~/components/ui/drawer";
-import { useIsMobile } from "~/hooks/use-mobile";
+} from "~/lib/components/ui/drawer";
+import { useIsMobile } from "~/lib/hooks/use-mobile";
 import { cn } from "~/lib/utils";
 
 interface BaseProps {

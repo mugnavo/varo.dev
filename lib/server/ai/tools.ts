@@ -1,7 +1,7 @@
 import { tool } from "ai";
 import { and, cosineDistance, eq, gt, ne, sql } from "drizzle-orm";
 import { z } from "zod";
-import { user, userEmbedding } from "~/server/db/schema";
+import { user, userEmbedding } from "~/lib/server/db/schema";
 import { SessionUser } from "../auth";
 import { db } from "../db";
 import { generateEmbedding } from "./embedding";
@@ -14,8 +14,6 @@ export function getTools(currentUser: SessionUser) {
     }),
 
     execute: async (params) => {
-      console.log("calling searchDevelopers");
-      console.log(params);
       const embeddedQuery = await generateEmbedding(params.query);
 
       const userSimilarity = sql<number>`1 - (${cosineDistance(
@@ -52,7 +50,9 @@ export function getTools(currentUser: SessionUser) {
         )
         .limit(5);
 
-      return { developers: matchUsers };
+      return {
+        developers: matchUsers,
+      };
     },
   });
 

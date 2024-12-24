@@ -1,8 +1,8 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { Discord } from "~/components/icons/Discord";
-import { Github } from "~/components/icons/Github";
-import { Google } from "~/components/icons/Google";
-import { Button } from "~/components/ui/button";
+import { Discord } from "~/lib/components/icons/Discord";
+import { Github } from "~/lib/components/icons/Github";
+import { Google } from "~/lib/components/icons/Google";
+import { Button } from "~/lib/components/ui/button";
 
 export const Route = createFileRoute("/signin")({
   component: AuthPage,

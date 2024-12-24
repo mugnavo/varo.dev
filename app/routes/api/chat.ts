@@ -1,9 +1,9 @@
 import { createAPIFileRoute } from "@tanstack/start/api";
 import { convertToCoreMessages, streamText } from "ai";
 import { readBody } from "vinxi/http";
-import { chatModel } from "~/server/ai";
-import { getTools } from "~/server/ai/tools";
-import { getAuthSession } from "~/server/auth";
+import { chatModel } from "~/lib/server/ai";
+import { getTools } from "~/lib/server/ai/tools";
+import { getAuthSession } from "~/lib/server/auth";
 
 export const APIRoute = createAPIFileRoute("/api/chat")({
   POST: async () => {

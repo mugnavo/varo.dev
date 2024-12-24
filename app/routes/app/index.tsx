@@ -3,18 +3,18 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useChat } from "ai/react";
 import { motion } from "framer-motion";
 import { Fragment, Suspense } from "react";
-import DevProfileCard from "~/components/chat/DevProfileCard";
-import { Button } from "~/components/ui/button";
+import DevProfileCard from "~/lib/components/chat/DevProfileCard";
+import { Button } from "~/lib/components/ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "~/components/ui/carousel";
-import { Textarea } from "~/components/ui/textarea";
-import { SearchDevelopersReturnType } from "~/server/ai/tools";
-import { suggestionsQueryOptions } from "~/server/functions/suggestions";
+} from "~/lib/components/ui/carousel";
+import { Textarea } from "~/lib/components/ui/textarea";
+import { SearchDevelopersReturnType } from "~/lib/server/ai/tools";
+import { suggestionsQueryOptions } from "~/lib/server/functions/suggestions";
 
 export const Route = createFileRoute("/app/")({
   loader: ({ context }) => {

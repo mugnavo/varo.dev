@@ -3,9 +3,9 @@ import { createServerFn } from "@tanstack/start";
 import { and, cosineDistance, eq, gt, ne, or, sql } from "drizzle-orm";
 import { z } from "zod";
 
-import { authMiddleware } from "~/middleware/auth-guard";
-import { generateEmbeddings } from "~/server/ai/embedding";
-import { db, table } from "~/server/db";
+import { authMiddleware } from "~/lib/middleware/auth-guard";
+import { generateEmbeddings } from "~/lib/server/ai/embedding";
+import { db, table } from "~/lib/server/db";
 
 export const userProfileSchema = z.object({
   name: z.string().min(1, "Name is required.").describe("User's name"),
@@ -116,10 +116,22 @@ export const setupProfile = createServerFn({ method: "POST" })
           // look for new matches using the last embedding
           if (profile.match_user) {
             console.log("Looking for new user matches...");
-            const user_similarity = sql<number>`1 - (${cosineDistance(
-              table.userEmbedding.embedding,
-              embeddings[embeddings.length - 1].embedding,
-            )})`;
+            const user_similarity = sql<number>`greatest(${embeddings
+              .map(
+                (e) =>
+                  `1 - (${cosineDistance(table.userEmbedding.embedding, e.embedding)})`,
+              )
+              .join(", ")})`;
+
+            console.log("User similarity query:");
+            console.log(
+              `greatest(${embeddings
+                .map(
+                  (e) =>
+                    `1 - (${cosineDistance(table.userEmbedding.embedding, e.embedding)})`,
+                )
+                .join(", ")})`,
+            );
 
             try {
               const matchUsers = await tx

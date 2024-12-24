@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { useMemo } from "react";
-import { User } from "~/server/db/schema";
+import { User } from "~/lib/server/db/schema";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 

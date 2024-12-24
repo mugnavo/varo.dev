@@ -9,9 +9,9 @@ import {
 import { createServerFn, Meta, Scripts } from "@tanstack/start";
 import { lazy, Suspense } from "react";
 
-import { Toaster } from "~/components/ui/sonner";
-import { getAuthSession } from "~/server/auth";
-import appCss from "~/styles/app.css?url";
+import { Toaster } from "~/lib/components/ui/sonner";
+import { getAuthSession } from "~/lib/server/auth";
+import appCss from "~/lib/styles/app.css?url";
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -61,7 +61,7 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html suppressHydrationWarning>
       <head>
         <Meta />
       </head>
