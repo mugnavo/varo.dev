@@ -1,12 +1,11 @@
 import { tool } from "ai";
 import { and, cosineDistance, eq, gt, ne, sql } from "drizzle-orm";
 import { z } from "zod";
-import { user, userEmbedding } from "~/lib/server/db/schema";
-import { SessionUser } from "../auth";
+import { user, userEmbedding, type UserInsert } from "~/lib/server/schema";
 import { db } from "../db";
 import { generateEmbedding } from "./embedding";
 
-export function getTools(currentUser: SessionUser) {
+export function getTools(currentUser: UserInsert) {
   const searchDevelopers = tool({
     description: `Search for developers in the platform based on the user's prompt.`,
     parameters: z.object({
@@ -28,16 +27,16 @@ export function getTools(currentUser: SessionUser) {
           id: userEmbedding.user_id,
           name: user.name,
           username: user.username,
-          avatar_url: user.avatar_url,
+          image: user.image,
           location: user.location,
           bio: user.bio,
-          skills: user.skills,
-          interests: user.interests,
+          // skills: user.skills,
+          // interests: user.interests,
           availability: user.availability,
           experience_level: user.experience_level,
           match_user: user.match_user,
           match_project: user.match_project,
-          ideaOrProject: user.ideaOrProject,
+          idea_or_project: user.idea_or_project,
         })
         .from(userEmbedding)
         .innerJoin(user, eq(userEmbedding.user_id, user.id))
