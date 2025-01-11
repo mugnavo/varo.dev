@@ -3,7 +3,7 @@ import { createServerFn } from "@tanstack/start";
 import { and, eq, ne, or } from "drizzle-orm";
 import { authMiddleware } from "~/lib/middleware/auth-guard";
 import { db } from "~/lib/server/db";
-import * as table from "~/lib/server/db/schema";
+import * as table from "~/lib/server/schema";
 
 export const suggestionsQueryOptions = () =>
   queryOptions({

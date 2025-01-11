@@ -3,13 +3,13 @@ import { convertToCoreMessages, streamText } from "ai";
 import { readBody } from "vinxi/http";
 import { chatModel } from "~/lib/server/ai";
 import { getTools } from "~/lib/server/ai/tools";
-import { getAuthSession } from "~/lib/server/auth";
+import { auth } from "~/lib/server/auth";
 
 export const APIRoute = createAPIFileRoute("/api/chat")({
-  POST: async () => {
-    const { user } = await getAuthSession();
+  POST: async ({ request }) => {
+    const session = await auth.api.getSession({ headers: request.headers });
 
-    if (!user) {
+    if (!session) {
       return new Response("Unauthorized", { status: 401 });
     }
 
@@ -20,7 +20,7 @@ export const APIRoute = createAPIFileRoute("/api/chat")({
       model: chatModel,
       system: `You are a matchmaking assistant for Varo; a matchmaking platform for developers, open-source projects, and indie founders where users can match with other users or projects. Keep your responses short and concise. Only respond in plaintext, avoid markdown or code responses. Call the provided tools accordingly and explain the results in detail. Respond with "I can't assist you with that" if irrelevant to the platform.`,
 
-      tools: getTools(user),
+      tools: getTools(session.user),
 
       experimental_toolCallStreaming: true,
       maxSteps: 4,

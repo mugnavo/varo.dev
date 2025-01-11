@@ -13,27 +13,7 @@ Built with [TanStack Start](https://tanstack.com/start) and [Vercel AI SDK](http
 
 1. Install [pnpm](https://pnpm.io/installation).
 2. Install the necessary dependencies by running `pnpm install` in the root directory of the project.
-3. Create your own `.env` file based on `.env.example`.
-
-   ```env
-   # PostgreSQL connection
-   DATABASE_URL=
-
-   # AI API key
-   GOOGLE_GENERATIVE_AI_API_KEY=
-
-   # OAuth2 Providers
-   DISCORD_CLIENT_ID=
-   DISCORD_CLIENT_SECRET=
-   DISCORD_REDIRECT_URI=http://localhost:3000/api/auth/callback/discord
-   GITHUB_CLIENT_ID=
-   GITHUB_CLIENT_SECRET=
-   GITHUB_REDIRECT_URI=http://localhost:3000/api/auth/callback/github
-   GOOGLE_CLIENT_ID=
-   GOOGLE_CLIENT_SECRET=
-   GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/callback/google
-   ```
-
+3. Create your own `.env` file based on [`.env.example`](./.env.example).
 4. Run the development server with `pnpm dev`.
 5. You can now access the development server at `http://localhost:3000`.
 

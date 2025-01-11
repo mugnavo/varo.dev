@@ -6,7 +6,7 @@ import { z } from "zod";
 import { authMiddleware } from "~/lib/middleware/auth-guard";
 import { generateEmbeddings } from "~/lib/server/ai/embedding";
 import { db } from "~/lib/server/db";
-import * as table from "~/lib/server/db/schema";
+import * as table from "~/lib/server/schema";
 
 export const userProfileSchema = z.object({
   name: z.string().min(1, "Name is required.").describe("User's name"),
