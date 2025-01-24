@@ -1,6 +1,6 @@
 import { createAPIFileRoute } from "@tanstack/start/api";
+import { readBody } from "@tanstack/start/server";
 import { convertToCoreMessages, streamText } from "ai";
-import { readBody } from "vinxi/http";
 import { chatModel } from "~/lib/server/ai";
 import { getTools } from "~/lib/server/ai/tools";
 import { auth } from "~/lib/server/auth";
@@ -13,6 +13,7 @@ export const APIRoute = createAPIFileRoute("/api/chat")({
       return new Response("Unauthorized", { status: 401 });
     }
 
+    // @ts-expect-error TODO: properly validate with zod?
     const { messages } = await readBody();
 
     const result = streamText({

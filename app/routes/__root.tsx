@@ -7,8 +7,8 @@ import {
   ScrollRestoration,
 } from "@tanstack/react-router";
 import { createServerFn, Meta, Scripts } from "@tanstack/start";
+import { getWebRequest } from "@tanstack/start/server";
 import { lazy, Suspense } from "react";
-import { getWebRequest } from "vinxi/http";
 
 import { Toaster } from "~/lib/components/ui/sonner";
 import { auth } from "~/lib/server/auth";
@@ -25,7 +25,7 @@ const TanStackRouterDevtools =
       );
 
 const getUser = createServerFn({ method: "GET" }).handler(async () => {
-  const { headers } = getWebRequest();
+  const { headers } = getWebRequest()!;
   const session = await auth.api.getSession({ headers });
 
   return session?.user || null;
