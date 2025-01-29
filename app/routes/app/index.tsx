@@ -19,13 +19,14 @@ import { suggestionsQueryOptions } from "~/lib/server/functions/suggestions";
 export const Route = createFileRoute("/app/")({
   loader: ({ context }) => {
     context.queryClient.prefetchQuery(suggestionsQueryOptions());
+    return { user: context.user };
   },
   component: AppIndex,
 });
 
 function AppIndex() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
-  const { user } = Route.useRouteContext();
+  const { user } = Route.useLoaderData();
 
   return (
     <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
@@ -141,7 +142,7 @@ function AppIndex() {
 
 function CurrentSuggestions() {
   const { data } = useSuspenseQuery(suggestionsQueryOptions());
-  const { user } = Route.useRouteContext();
+  const { user } = Route.useLoaderData();
 
   return data.users.length ? (
     <Carousel opts={{ align: "start" }}>

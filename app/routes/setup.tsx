@@ -43,6 +43,10 @@ export const Route = createFileRoute("/setup")({
 
     return { user: context.user };
   },
+
+  loader: ({ context }) => {
+    return { user: context.user };
+  },
   component: SetupPage,
 });
 
@@ -67,7 +71,7 @@ const techStackOptions: Option[] = [
 ];
 
 function SetupPage() {
-  const { user } = Route.useRouteContext();
+  const { user } = Route.useLoaderData();
   const form = useForm<z.infer<typeof userProfileSchema>>({
     resolver: zodResolver(userProfileSchema),
     defaultValues: {
