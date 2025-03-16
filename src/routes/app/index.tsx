@@ -49,7 +49,7 @@ function AppIndex() {
               className={
                 "w-fit whitespace-pre-wrap rounded-lg" +
                 (m.role === "user"
-                  ? " self-end bg-secondary px-3.5 py-2"
+                  ? " self-end mt-6 bg-secondary px-3.5 py-2"
                   : " mt-2 self-start py-2")
               }
             >
@@ -63,7 +63,7 @@ function AppIndex() {
                   if (toolName === "searchDevelopers") {
                     const result = toolInvocation.result as SearchDevelopersReturnType;
 
-                    if (!result.developers.length) return null;
+                    if (!result?.developers?.length) return null;
 
                     return (
                       <Carousel key={toolCallId} opts={{ align: "start" }}>
