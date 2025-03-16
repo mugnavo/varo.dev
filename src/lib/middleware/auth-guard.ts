@@ -12,7 +12,7 @@ export const authMiddleware = createMiddleware().server(async ({ next }) => {
     headers,
     query: {
       // https://www.better-auth.com/docs/concepts/session-management#session-caching
-      disableCookieCache: true,
+      // disableCookieCache: true,
     },
   });
 

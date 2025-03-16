@@ -12,14 +12,15 @@ export const auth = betterAuth({
   }),
 
   // https://www.better-auth.com/docs/concepts/session-management#session-caching
-  // session: {
-  //   cookieCache: {
-  //     enabled: true,
-  //     maxAge: 5 * 60, // 5 minutes
-  //   },
-  // },
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60, // 5 minutes
+    },
+  },
   // caching this messes up with the "setup_at" field in user table,
-  // which needs to take effect immediately after initial setup
+  // which needs to take effect immediately after initial setup.
+  // for now we're disabling the cache in __root's beforeLoad
 
   // https://www.better-auth.com/docs/concepts/oauth
   socialProviders: {

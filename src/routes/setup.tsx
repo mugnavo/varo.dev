@@ -72,6 +72,8 @@ const techStackOptions: Option[] = [
 
 function SetupPage() {
   const { user } = Route.useLoaderData();
+  const { queryClient } = Route.useRouteContext();
+
   const form = useForm<z.infer<typeof userProfileSchema>>({
     resolver: zodResolver(userProfileSchema),
     defaultValues: {
@@ -95,9 +97,10 @@ function SetupPage() {
 
   async function onSubmit(values: z.infer<typeof userProfileSchema>) {
     try {
+      await queryClient.invalidateQueries({ queryKey: ["user"] });
       const result = await submitSetup({ data: values });
 
-      if (result.success === false) {
+      if (result?.success === false) {
         console.log(result.message);
         toast.error(result.message);
       }

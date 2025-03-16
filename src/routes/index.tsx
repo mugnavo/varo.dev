@@ -1,4 +1,6 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute, useRouter } from "@tanstack/react-router";
+import authClient from "~/lib/auth-client";
+import ThemeToggle from "~/lib/components/ThemeToggle";
 import { Button } from "~/lib/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -9,7 +11,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const { queryClient } = Route.useRouteContext();
   const { user } = Route.useLoaderData();
+  const router = useRouter();
 
   return (
     <div className="flex flex-col gap-4 p-6">
@@ -26,11 +30,19 @@ function Home() {
             <pre>{JSON.stringify(user, null, 2)}</pre>
           </div>
 
-          <form method="POST" action="/api/auth/logout">
-            <Button type="submit" className="w-fit" variant="destructive" size="lg">
-              Sign out
-            </Button>
-          </form>
+          <Button
+            onClick={async () => {
+              await authClient.signOut();
+              await queryClient.invalidateQueries({ queryKey: ["user"] });
+              await router.invalidate();
+            }}
+            type="button"
+            className="w-fit"
+            variant="destructive"
+            size="lg"
+          >
+            Sign out
+          </Button>
         </div>
       ) : (
         <div className="flex flex-col gap-2">
@@ -40,6 +52,8 @@ function Home() {
           </Button>
         </div>
       )}
+
+      <ThemeToggle />
     </div>
   );
 }

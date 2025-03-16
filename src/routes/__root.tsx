@@ -18,7 +18,13 @@ import appCss from "~/lib/styles/app.css?url";
 
 const getUser = createServerFn({ method: "GET" }).handler(async () => {
   const { headers } = getWebRequest()!;
-  const session = await auth.api.getSession({ headers });
+  const session = await auth.api.getSession({
+    headers,
+    query: {
+      // for setup_at field in user table to take effect immediately after initial setup
+      disableCookieCache: true,
+    },
+  });
 
   return session?.user || null;
 });
@@ -31,6 +37,7 @@ export const Route = createRootRouteWithContext<{
     const user = await context.queryClient.fetchQuery({
       queryKey: ["user"],
       queryFn: ({ signal }) => getUser({ signal }),
+      staleTime: 1000 * 60 * 5, // 5 minutes
     }); // we're using react-query for caching, see router.tsx
     return { user };
   },
