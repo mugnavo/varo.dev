@@ -1,7 +1,7 @@
 import type { BetterAuthClientPlugin } from "better-auth";
 import { usernameClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
-import type { varoAuthPlugin } from "../server/auth-plugins";
+import type { varoAuthPlugin } from "./server/auth-plugins";
 
 const varoAuthClientPlugin = () => {
   return {
