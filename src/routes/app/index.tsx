@@ -3,6 +3,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useChat } from "ai/react";
 import { motion } from "framer-motion";
 import { Fragment, Suspense } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
+
 import DevProfileCard from "~/lib/components/chat/DevProfileCard";
 import { Button } from "~/lib/components/ui/button";
 import {
@@ -30,7 +35,7 @@ function AppIndex() {
 
   return (
     <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
-      <div className="flex flex-1 flex-col pt-4">
+      <div className="flex flex-1 flex-col py-4">
         {messages.map((m) => (
           <Fragment key={m.id}>
             <motion.div
@@ -47,13 +52,15 @@ function AppIndex() {
               }}
               style={{ originY: 0.1 }}
               className={
-                "w-fit whitespace-pre-wrap rounded-lg" +
+                "w-fit rounded-lg prose dark:prose-invert prose-sm" +
                 (m.role === "user"
                   ? " self-end mt-6 bg-secondary px-3.5 py-2"
                   : " mt-2 self-start py-2")
               }
             >
-              {m.content}
+              <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize, remarkGfm]}>
+                {m.content}
+              </ReactMarkdown>
             </motion.div>
             {m.parts
               .filter((part) => part.type === "tool-invocation")
@@ -116,13 +123,13 @@ function AppIndex() {
 
       <form
         className={
-          "sticky bottom-4 flex gap-2 transition-[margin] " +
+          "sticky bottom-4 bg-background rounded-md flex gap-2 transition-[margin] " +
           (messages.length ? "mb-2" : "mb-[42vh]")
         }
         onSubmit={handleSubmit}
       >
         <Textarea
-          className="min-h-8 resize-none"
+          className="min-h-8 bg-input resize-none"
           value={input}
           placeholder="Say something..."
           onChange={handleInputChange}
