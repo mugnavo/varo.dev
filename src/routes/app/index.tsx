@@ -1,8 +1,8 @@
+import { useChat } from "@ai-sdk/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useChat } from "ai/react";
 import { motion } from "framer-motion";
-import { Fragment, Suspense } from "react";
+import { Fragment, Suspense, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
@@ -33,9 +33,15 @@ function AppIndex() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   const { user } = Route.useLoaderData();
 
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!messages.length || !messagesEndRef.current) return;
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
-    <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
-      <div className="flex flex-1 flex-col py-4">
+    <div className="mx-auto flex h-full w-full max-w-3xl flex-col">
+      <div className="flex flex-1 flex-col pt-4 pb-6">
         {messages.map((m) => (
           <Fragment key={m.id}>
             <motion.div
@@ -52,7 +58,7 @@ function AppIndex() {
               }}
               style={{ originY: 0.1 }}
               className={
-                "w-fit rounded-lg prose dark:prose-invert prose-sm" +
+                "w-fit rounded-lg prose dark:prose-invert" +
                 (m.role === "user"
                   ? " self-end mt-6 bg-secondary px-3.5 py-2"
                   : " mt-2 self-start py-2")
@@ -108,6 +114,7 @@ function AppIndex() {
               })}
           </Fragment>
         ))}
+        <div ref={messagesEndRef} />
       </div>
 
       {messages.length === 0 && (
