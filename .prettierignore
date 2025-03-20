@@ -3,4 +3,4 @@ package-lock.json
 yarn.lock
 bun.lock
 routeTree.gen.ts
-.drizzle/
+drizzle/
