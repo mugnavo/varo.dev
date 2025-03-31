@@ -18,7 +18,7 @@ export default function DevProfileCard({ dev }: DevProfileCardProps) {
   }, [dev.idea_or_project, dev.bio]);
 
   return (
-    <div className="group flex flex-col gap-1.5 rounded-lg border bg-secondary p-3">
+    <div className="group bg-secondary flex flex-col gap-1.5 rounded-lg border p-3">
       <Avatar className="rounded-sm">
         <AvatarImage src={dev.image || undefined} />
       </Avatar>
@@ -30,7 +30,7 @@ export default function DevProfileCard({ dev }: DevProfileCardProps) {
         </Button>
         <Button
           size="icon"
-          className="h-7 rounded-l-none bg-background"
+          className="bg-background h-7 rounded-l-none"
           variant="secondary"
         >
           <X className="size-4" />

@@ -58,9 +58,9 @@ function AppIndex() {
               }}
               style={{ originY: 0.1 }}
               className={
-                "w-fit rounded-lg prose dark:prose-invert" +
+                "prose dark:prose-invert w-fit rounded-lg" +
                 (m.role === "user"
-                  ? " self-end mt-6 bg-secondary px-3.5 py-2"
+                  ? " bg-secondary mt-6 self-end px-3.5 py-2"
                   : " mt-2 self-start py-2")
               }
             >
@@ -130,13 +130,13 @@ function AppIndex() {
 
       <form
         className={
-          "sticky bottom-4 bg-background rounded-md flex gap-2 transition-[margin] " +
+          "bg-background sticky bottom-4 flex gap-2 rounded-md transition-[margin] " +
           (messages.length ? "mb-2" : "mb-[42vh]")
         }
         onSubmit={handleSubmit}
       >
         <Textarea
-          className="min-h-8 bg-input resize-none"
+          className="bg-input min-h-8 resize-none"
           value={input}
           placeholder="Say something..."
           onChange={handleInputChange}

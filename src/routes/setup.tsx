@@ -110,7 +110,7 @@ function SetupPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center gap-8 px-4 pb-8 pt-24 xl:pt-32">
+    <div className="flex min-h-screen flex-col items-center gap-8 px-4 pt-24 pb-8 xl:pt-32">
       <span>Hi, {user.name || user.username}. Let's get you set up.</span>
 
       <Form {...form}>
