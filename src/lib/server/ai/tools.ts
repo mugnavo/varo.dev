@@ -1,5 +1,5 @@
 import { tool } from "ai";
-import { and, cosineDistance, eq, gt, ne, sql } from "drizzle-orm";
+import { and, cosineDistance, eq, gt, sql } from "drizzle-orm";
 import { z } from "zod";
 import { user, userEmbedding, type UserInsert } from "~/lib/server/schema";
 import { db } from "../db";
@@ -30,8 +30,8 @@ export function getTools(currentUser: UserInsert) {
           image: user.image,
           location: user.location,
           bio: user.bio,
-          // skills: user.skills,
-          // interests: user.interests,
+          skills: user.skills,
+          interests: user.interests,
           availability: user.availability,
           experience_level: user.experience_level,
           match_user: user.match_user,
@@ -43,14 +43,15 @@ export function getTools(currentUser: UserInsert) {
         .where(
           and(
             gt(userSimilarity, 0.6),
-            ne(userEmbedding.user_id, currentUser.id),
+            // ne(userEmbedding.user_id, currentUser.id),
             eq(user.match_user, true),
           ),
         )
         .limit(5);
 
       return {
-        developers: matchUsers,
+        // developers: matchUsers,
+        developers: matchUsers.length ? Array(5).fill(matchUsers[0]) : [],
       };
     },
   });

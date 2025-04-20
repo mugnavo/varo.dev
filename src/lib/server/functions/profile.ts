@@ -14,10 +14,12 @@ export const userProfileSchema = z.object({
   match_user: z
     .boolean()
     .default(true)
+    .optional()
     .describe("Whether the user wants to match with other users. True by default."),
   match_project: z
     .boolean()
     .default(true)
+    .optional()
     .describe("Whether the user wants to match with projects. True by default."),
 
   bio: z.string().optional().describe("User's bio or description"),
