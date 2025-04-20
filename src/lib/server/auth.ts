@@ -1,8 +1,8 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { username } from "better-auth/plugins";
+import { reactStartCookies } from "better-auth/react-start";
 
-import { varoAuthPlugin } from "./auth-plugins";
 import { db } from "./db";
 
 export const auth = betterAuth({
@@ -43,5 +43,51 @@ export const auth = betterAuth({
   //   enabled: true,
   // },
 
-  plugins: [username(), varoAuthPlugin()],
+  plugins: [username(), reactStartCookies()],
+
+  user: {
+    additionalFields: {
+      setup_at: {
+        type: "date",
+      },
+      terms_accepted_at: {
+        type: "date",
+      },
+      match_user: {
+        type: "boolean",
+        required: true,
+        defaultValue: true,
+      },
+      match_project: {
+        type: "boolean",
+        required: true,
+        defaultValue: true,
+      },
+      bio: {
+        type: "string",
+      },
+      location: {
+        type: "string",
+      },
+      experience_level: {
+        type: "number",
+      },
+      availability: {
+        type: "number",
+      },
+      idea_or_project: {
+        type: "string",
+      },
+      skills: {
+        type: "string[]",
+        required: true,
+        defaultValue: [],
+      },
+      interests: {
+        type: "string[]",
+        required: true,
+        defaultValue: [],
+      },
+    },
+  },
 });
