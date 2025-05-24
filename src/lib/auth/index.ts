@@ -82,13 +82,9 @@ const getAuthConfig = serverOnly(() =>
         },
         skills: {
           type: "string[]",
-          required: true,
-          defaultValue: "[]",
         },
         interests: {
           type: "string[]",
-          required: true,
-          defaultValue: "[]",
         },
       },
     },

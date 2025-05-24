@@ -1,7 +1,7 @@
 # varo.dev
 
 > [!NOTE]  
-> This project is currently undergoing a rewrite. If you're interested in the code from the Cebu Hacktoberfest 2024 Hackathon, you can find it in the [`nuxt`](https://github.com/mugnavo/varo.dev/tree/nuxt) branch.
+> This project is currently undergoing a rewrite. If you're looking for the code from the Cebu Hacktoberfest 2024 Hackathon, you can find it in the [`nuxt`](https://github.com/mugnavo/varo.dev/tree/nuxt) branch.
 
 The AI-powered matchmaking platform for developers, open-source projects, and indie hackers.
 
@@ -9,7 +9,7 @@ Built with [TanStack Start](https://tanstack.com/start) and [Vercel AI SDK](http
 
 ## Development
 
-> Node.js 20 or later is recommended.
+> Node.js 24 or later is recommended.
 
 1. Install [pnpm](https://pnpm.io/installation).
 2. Install the necessary dependencies by running `pnpm install` in the root directory of the project.

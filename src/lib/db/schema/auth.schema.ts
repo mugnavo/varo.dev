@@ -25,8 +25,8 @@ export const user = pgTable("user", {
   experience_level: integer("experience_level"),
   availability: integer("availability"),
   idea_or_project: text("idea_or_project"),
-  skills: text("skills").array().default([]).notNull(),
-  interests: text("interests").array().default([]).notNull(),
+  skills: text("skills").array(),
+  interests: text("interests").array(),
 });
 
 export const session = pgTable("session", {
