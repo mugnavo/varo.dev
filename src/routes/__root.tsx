@@ -6,28 +6,13 @@ import {
   ScriptOnce,
   Scripts,
 } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-import { getWebRequest } from "@tanstack/react-start/server";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 import { Toaster } from "~/components/ui/sonner";
-import { auth } from "~/lib/auth";
+import { getUser } from "~/lib/auth/functions/getUser";
 import appCss from "~/styles.css?url";
-
-const getUser = createServerFn({ method: "GET" }).handler(async () => {
-  const { headers } = getWebRequest()!;
-  const session = await auth.api.getSession({
-    headers,
-    query: {
-      // for setup_at field in user table to take effect immediately after initial setup
-      disableCookieCache: true,
-    },
-  });
-
-  return session?.user || null;
-});
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
