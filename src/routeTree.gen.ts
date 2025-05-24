@@ -8,200 +8,268 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import type { CreateFileRoute, FileRoutesByPath } from "@tanstack/react-router";
+
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as SigninImport } from './routes/signin'
-import { Route as SetupImport } from './routes/setup'
-import { Route as AppRouteImport } from './routes/app/route'
-import { Route as IndexImport } from './routes/index'
-import { Route as AppIndexImport } from './routes/app/index'
-import { Route as AppConnectionsIdImport } from './routes/app/connections.$id'
-import { Route as AppChatsIdImport } from './routes/app/chats.$id'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as SigninRouteImport } from "./routes/signin";
+import { Route as SetupRouteImport } from "./routes/setup";
+import { Route as AppRouteRouteImport } from "./routes/app/route";
+import { Route as IndexRouteImport } from "./routes/index";
+import { Route as AppIndexRouteImport } from "./routes/app/index";
+import { Route as AppConnectionsIdRouteImport } from "./routes/app/connections.$id";
+import { Route as AppChatsIdRouteImport } from "./routes/app/chats.$id";
 
 // Create/Update Routes
 
-const SigninRoute = SigninImport.update({
-  id: '/signin',
-  path: '/signin',
+const SigninRoute = SigninRouteImport.update({
+  id: "/signin",
+  path: "/signin",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
-const SetupRoute = SetupImport.update({
-  id: '/setup',
-  path: '/setup',
+const SetupRoute = SetupRouteImport.update({
+  id: "/setup",
+  path: "/setup",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
-const AppRouteRoute = AppRouteImport.update({
-  id: '/app',
-  path: '/app',
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: "/app",
+  path: "/app",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
-const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
+const IndexRoute = IndexRouteImport.update({
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
-const AppIndexRoute = AppIndexImport.update({
-  id: '/',
-  path: '/',
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: "/",
+  path: "/",
   getParentRoute: () => AppRouteRoute,
-} as any)
+} as any);
 
-const AppConnectionsIdRoute = AppConnectionsIdImport.update({
-  id: '/connections/$id',
-  path: '/connections/$id',
+const AppConnectionsIdRoute = AppConnectionsIdRouteImport.update({
+  id: "/connections/$id",
+  path: "/connections/$id",
   getParentRoute: () => AppRouteRoute,
-} as any)
+} as any);
 
-const AppChatsIdRoute = AppChatsIdImport.update({
-  id: '/chats/$id',
-  path: '/chats/$id',
+const AppChatsIdRoute = AppChatsIdRouteImport.update({
+  id: "/chats/$id",
+  path: "/chats/$id",
   getParentRoute: () => AppRouteRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/app': {
-      id: '/app'
-      path: '/app'
-      fullPath: '/app'
-      preLoaderRoute: typeof AppRouteImport
-      parentRoute: typeof rootRoute
-    }
-    '/setup': {
-      id: '/setup'
-      path: '/setup'
-      fullPath: '/setup'
-      preLoaderRoute: typeof SetupImport
-      parentRoute: typeof rootRoute
-    }
-    '/signin': {
-      id: '/signin'
-      path: '/signin'
-      fullPath: '/signin'
-      preLoaderRoute: typeof SigninImport
-      parentRoute: typeof rootRoute
-    }
-    '/app/': {
-      id: '/app/'
-      path: '/'
-      fullPath: '/app/'
-      preLoaderRoute: typeof AppIndexImport
-      parentRoute: typeof AppRouteImport
-    }
-    '/app/chats/$id': {
-      id: '/app/chats/$id'
-      path: '/chats/$id'
-      fullPath: '/app/chats/$id'
-      preLoaderRoute: typeof AppChatsIdImport
-      parentRoute: typeof AppRouteImport
-    }
-    '/app/connections/$id': {
-      id: '/app/connections/$id'
-      path: '/connections/$id'
-      fullPath: '/app/connections/$id'
-      preLoaderRoute: typeof AppConnectionsIdImport
-      parentRoute: typeof AppRouteImport
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/app": {
+      id: "/app";
+      path: "/app";
+      fullPath: "/app";
+      preLoaderRoute: typeof AppRouteRouteImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/setup": {
+      id: "/setup";
+      path: "/setup";
+      fullPath: "/setup";
+      preLoaderRoute: typeof SetupRouteImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/signin": {
+      id: "/signin";
+      path: "/signin";
+      fullPath: "/signin";
+      preLoaderRoute: typeof SigninRouteImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/app/": {
+      id: "/app/";
+      path: "/";
+      fullPath: "/app/";
+      preLoaderRoute: typeof AppIndexRouteImport;
+      parentRoute: typeof AppRouteRouteImport;
+    };
+    "/app/chats/$id": {
+      id: "/app/chats/$id";
+      path: "/chats/$id";
+      fullPath: "/app/chats/$id";
+      preLoaderRoute: typeof AppChatsIdRouteImport;
+      parentRoute: typeof AppRouteRouteImport;
+    };
+    "/app/connections/$id": {
+      id: "/app/connections/$id";
+      path: "/connections/$id";
+      fullPath: "/app/connections/$id";
+      preLoaderRoute: typeof AppConnectionsIdRouteImport;
+      parentRoute: typeof AppRouteRouteImport;
+    };
   }
+}
+
+// Add type-safety to the createFileRoute function across the route tree
+
+declare module "./routes/index" {
+  const createFileRoute: CreateFileRoute<
+    "/",
+    FileRoutesByPath["/"]["parentRoute"],
+    FileRoutesByPath["/"]["id"],
+    FileRoutesByPath["/"]["path"],
+    FileRoutesByPath["/"]["fullPath"]
+  >;
+}
+declare module "./routes/app/route" {
+  const createFileRoute: CreateFileRoute<
+    "/app",
+    FileRoutesByPath["/app"]["parentRoute"],
+    FileRoutesByPath["/app"]["id"],
+    FileRoutesByPath["/app"]["path"],
+    FileRoutesByPath["/app"]["fullPath"]
+  >;
+}
+declare module "./routes/setup" {
+  const createFileRoute: CreateFileRoute<
+    "/setup",
+    FileRoutesByPath["/setup"]["parentRoute"],
+    FileRoutesByPath["/setup"]["id"],
+    FileRoutesByPath["/setup"]["path"],
+    FileRoutesByPath["/setup"]["fullPath"]
+  >;
+}
+declare module "./routes/signin" {
+  const createFileRoute: CreateFileRoute<
+    "/signin",
+    FileRoutesByPath["/signin"]["parentRoute"],
+    FileRoutesByPath["/signin"]["id"],
+    FileRoutesByPath["/signin"]["path"],
+    FileRoutesByPath["/signin"]["fullPath"]
+  >;
+}
+declare module "./routes/app/index" {
+  const createFileRoute: CreateFileRoute<
+    "/app/",
+    FileRoutesByPath["/app/"]["parentRoute"],
+    FileRoutesByPath["/app/"]["id"],
+    FileRoutesByPath["/app/"]["path"],
+    FileRoutesByPath["/app/"]["fullPath"]
+  >;
+}
+declare module "./routes/app/chats.$id" {
+  const createFileRoute: CreateFileRoute<
+    "/app/chats/$id",
+    FileRoutesByPath["/app/chats/$id"]["parentRoute"],
+    FileRoutesByPath["/app/chats/$id"]["id"],
+    FileRoutesByPath["/app/chats/$id"]["path"],
+    FileRoutesByPath["/app/chats/$id"]["fullPath"]
+  >;
+}
+declare module "./routes/app/connections.$id" {
+  const createFileRoute: CreateFileRoute<
+    "/app/connections/$id",
+    FileRoutesByPath["/app/connections/$id"]["parentRoute"],
+    FileRoutesByPath["/app/connections/$id"]["id"],
+    FileRoutesByPath["/app/connections/$id"]["path"],
+    FileRoutesByPath["/app/connections/$id"]["fullPath"]
+  >;
 }
 
 // Create and export the route tree
 
 interface AppRouteRouteChildren {
-  AppIndexRoute: typeof AppIndexRoute
-  AppChatsIdRoute: typeof AppChatsIdRoute
-  AppConnectionsIdRoute: typeof AppConnectionsIdRoute
+  AppIndexRoute: typeof AppIndexRoute;
+  AppChatsIdRoute: typeof AppChatsIdRoute;
+  AppConnectionsIdRoute: typeof AppConnectionsIdRoute;
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
   AppChatsIdRoute: AppChatsIdRoute,
   AppConnectionsIdRoute: AppConnectionsIdRoute,
-}
+};
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
   AppRouteRouteChildren,
-)
+);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/app': typeof AppRouteRouteWithChildren
-  '/setup': typeof SetupRoute
-  '/signin': typeof SigninRoute
-  '/app/': typeof AppIndexRoute
-  '/app/chats/$id': typeof AppChatsIdRoute
-  '/app/connections/$id': typeof AppConnectionsIdRoute
+  "/": typeof IndexRoute;
+  "/app": typeof AppRouteRouteWithChildren;
+  "/setup": typeof SetupRoute;
+  "/signin": typeof SigninRoute;
+  "/app/": typeof AppIndexRoute;
+  "/app/chats/$id": typeof AppChatsIdRoute;
+  "/app/connections/$id": typeof AppConnectionsIdRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/setup': typeof SetupRoute
-  '/signin': typeof SigninRoute
-  '/app': typeof AppIndexRoute
-  '/app/chats/$id': typeof AppChatsIdRoute
-  '/app/connections/$id': typeof AppConnectionsIdRoute
+  "/": typeof IndexRoute;
+  "/setup": typeof SetupRoute;
+  "/signin": typeof SigninRoute;
+  "/app": typeof AppIndexRoute;
+  "/app/chats/$id": typeof AppChatsIdRoute;
+  "/app/connections/$id": typeof AppConnectionsIdRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/app': typeof AppRouteRouteWithChildren
-  '/setup': typeof SetupRoute
-  '/signin': typeof SigninRoute
-  '/app/': typeof AppIndexRoute
-  '/app/chats/$id': typeof AppChatsIdRoute
-  '/app/connections/$id': typeof AppConnectionsIdRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/app": typeof AppRouteRouteWithChildren;
+  "/setup": typeof SetupRoute;
+  "/signin": typeof SigninRoute;
+  "/app/": typeof AppIndexRoute;
+  "/app/chats/$id": typeof AppChatsIdRoute;
+  "/app/connections/$id": typeof AppConnectionsIdRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-    | '/app'
-    | '/setup'
-    | '/signin'
-    | '/app/'
-    | '/app/chats/$id'
-    | '/app/connections/$id'
-  fileRoutesByTo: FileRoutesByTo
+    | "/"
+    | "/app"
+    | "/setup"
+    | "/signin"
+    | "/app/"
+    | "/app/chats/$id"
+    | "/app/connections/$id";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/'
-    | '/setup'
-    | '/signin'
-    | '/app'
-    | '/app/chats/$id'
-    | '/app/connections/$id'
+    | "/"
+    | "/setup"
+    | "/signin"
+    | "/app"
+    | "/app/chats/$id"
+    | "/app/connections/$id";
   id:
-    | '__root__'
-    | '/'
-    | '/app'
-    | '/setup'
-    | '/signin'
-    | '/app/'
-    | '/app/chats/$id'
-    | '/app/connections/$id'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/"
+    | "/app"
+    | "/setup"
+    | "/signin"
+    | "/app/"
+    | "/app/chats/$id"
+    | "/app/connections/$id";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AppRouteRoute: typeof AppRouteRouteWithChildren
-  SetupRoute: typeof SetupRoute
-  SigninRoute: typeof SigninRoute
+  IndexRoute: typeof IndexRoute;
+  AppRouteRoute: typeof AppRouteRouteWithChildren;
+  SetupRoute: typeof SetupRoute;
+  SigninRoute: typeof SigninRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -209,11 +277,11 @@ const rootRouteChildren: RootRouteChildren = {
   AppRouteRoute: AppRouteRouteWithChildren,
   SetupRoute: SetupRoute,
   SigninRoute: SigninRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {

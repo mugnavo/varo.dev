@@ -3,59 +3,31 @@ import js from "@eslint/js";
 import pluginQuery from "@tanstack/eslint-plugin-query";
 import pluginRouter from "@tanstack/eslint-plugin-router";
 import eslintConfigPrettier from "eslint-config-prettier";
-import reactCompiler from "eslint-plugin-react-compiler";
-import reactHooks from "eslint-plugin-react-hooks";
-import globals from "globals";
+import * as reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 
-// TODO: clean up for better composability
-export default tseslint.config(
-  {
-    ignores: ["dist", ".vinxi", ".wrangler", ".vercel", ".netlify", ".output", "build/"],
-  },
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended,
-      eslintConfigPrettier,
-      ...pluginQuery.configs["flat/recommended"],
-      ...pluginRouter.configs["flat/recommended"],
-    ],
-  },
-  {
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-      },
-    },
-    plugins: {
-      "react-hooks": reactHooks,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
+export default tseslint.config({
+  ignores: ["dist", ".wrangler", ".vercel", ".netlify", ".output", "build/"],
+  files: ["**/*.{ts,tsx}"],
+  languageOptions: {
+    parser: tseslint.parser,
+    parserOptions: {
+      projectService: true,
+      tsconfigRootDir: import.meta.dirname,
     },
   },
-  reactCompiler.configs.recommended,
-  {
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: {
-      parserOptions: {
-        parser: tseslint.parser,
-        project: "./tsconfig.json",
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    ...react.configs["recommended-type-checked"],
+  extends: [
+    js.configs.recommended,
+    ...tseslint.configs.recommended,
+    eslintConfigPrettier,
+    ...pluginQuery.configs["flat/recommended"],
+    ...pluginRouter.configs["flat/recommended"],
+    reactHooks.configs.recommended,
+    react.configs["recommended-type-checked"],
+    // ...you can add plugins or configs here
+  ],
+  rules: {
+    // You can override any rules here
+    "react-hooks/react-compiler": "warn",
   },
-  {
-    rules: {
-      // You can override any rules here
-      // "@eslint-react/prefer-read-only-props": "off",
-      // "@eslint-react/no-forward-ref": "off",
-      // "@eslint-react/no-context-provider": "off",
-      "react-compiler/react-compiler": "warn",
-    },
-  },
-);
+});

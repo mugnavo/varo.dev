@@ -1,6 +1,6 @@
 import { useChat } from "@ai-sdk/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import {} from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Fragment, Suspense, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
@@ -8,20 +8,20 @@ import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
 
-import DevProfileCard from "~/lib/components/chat/DevProfileCard";
-import { Button } from "~/lib/components/ui/button";
+import DevProfileCard from "~/components/chat/DevProfileCard";
+import { Button } from "~/components/ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "~/lib/components/ui/carousel";
-import { Textarea } from "~/lib/components/ui/textarea";
-import { SearchDevelopersReturnType } from "~/lib/server/ai/tools";
-import { suggestionsQueryOptions } from "~/lib/server/functions/suggestions";
+} from "~/components/ui/carousel";
+import { Textarea } from "~/components/ui/textarea";
+import { suggestionsQueryOptions } from "~/lib/ai/functions/suggestions";
+import { SearchDevelopersReturnType } from "~/lib/ai/tools";
 
-export const Route = createFileRoute("/app/")({
+export const Route = createFileRoute({
   loader: ({ context }) => {
     context.queryClient.prefetchQuery(suggestionsQueryOptions());
     return { user: context.user };

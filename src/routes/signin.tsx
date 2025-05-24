@@ -1,12 +1,12 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { redirect } from "@tanstack/react-router";
 import { type ComponentProps } from "react";
-import authClient from "~/lib/auth-client";
-import { Button } from "~/lib/components/ui/button";
+import { Button } from "~/components/ui/button";
+import authClient from "~/lib/auth/auth-client";
 import { cn } from "~/lib/utils";
 
 const REDIRECT_URL = "/app";
 
-export const Route = createFileRoute("/signin")({
+export const Route = createFileRoute({
   component: AuthPage,
   beforeLoad: async ({ context }) => {
     if (context.user?.setup_at) {

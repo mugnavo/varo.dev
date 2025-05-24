@@ -1,9 +1,9 @@
-import { Link, createFileRoute, useRouter } from "@tanstack/react-router";
-import authClient from "~/lib/auth-client";
-import ThemeToggle from "~/lib/components/ThemeToggle";
-import { Button } from "~/lib/components/ui/button";
+import { Link, useRouter } from "@tanstack/react-router";
+import ThemeToggle from "~/components/ThemeToggle";
+import { Button } from "~/components/ui/button";
+import authClient from "~/lib/auth/auth-client";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute({
   component: Home,
   loader: ({ context }) => {
     return { user: context.user };

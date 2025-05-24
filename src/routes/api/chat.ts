@@ -1,11 +1,10 @@
-import { createAPIFileRoute } from "@tanstack/react-start/api";
 import { readBody } from "@tanstack/react-start/server";
 import { convertToCoreMessages, streamText } from "ai";
-import { chatModel } from "~/lib/server/ai";
-import { getTools } from "~/lib/server/ai/tools";
-import { auth } from "~/lib/server/auth";
+import { chatModel } from "~/lib/ai/models";
+import { getTools } from "~/lib/ai/tools";
+import { auth } from "~/lib/auth";
 
-export const APIRoute = createAPIFileRoute("/api/chat")({
+export const ServerRoute = createServerFileRoute().methods({
   POST: async ({ request }) => {
     const session = await auth.api.getSession({ headers: request.headers });
 

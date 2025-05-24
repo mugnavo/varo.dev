@@ -1,15 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { redirect } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { setupProfile, userProfileSchema } from "~/lib/server/functions/profile";
+import { setupProfile, userProfileSchema } from "~/lib/ai/functions/profile";
 
-import { Button } from "~/lib/components/ui/button";
-import MultipleSelector, { Option } from "~/lib/components/ui/custom/multi-select";
+import { Button } from "~/components/ui/button";
+import MultipleSelector, { Option } from "~/components/ui/custom/multi-select";
 import {
   Form,
   FormControl,
@@ -17,19 +17,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/lib/components/ui/form";
-import { Input } from "~/lib/components/ui/input";
+} from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "~/lib/components/ui/select";
-import { Switch } from "~/lib/components/ui/switch";
-import { Textarea } from "~/lib/components/ui/textarea";
+} from "~/components/ui/select";
+import { Switch } from "~/components/ui/switch";
+import { Textarea } from "~/components/ui/textarea";
 
-export const Route = createFileRoute("/setup")({
+export const Route = createFileRoute({
   beforeLoad: async ({ context }) => {
     if (!context.user) {
       throw redirect({

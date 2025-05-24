@@ -12,9 +12,9 @@ import { getWebRequest } from "@tanstack/react-start/server";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
-import { Toaster } from "~/lib/components/ui/sonner";
-import { auth } from "~/lib/server/auth";
-import appCss from "~/lib/styles/app.css?url";
+import { Toaster } from "~/components/ui/sonner";
+import { auth } from "~/lib/auth";
+import appCss from "~/styles.css?url";
 
 const getUser = createServerFn({ method: "GET" }).handler(async () => {
   const { headers } = getWebRequest()!;

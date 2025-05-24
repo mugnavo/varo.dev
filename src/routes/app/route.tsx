@@ -1,8 +1,8 @@
-import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
-import { AppSidebar, BotConvo, ConnectionConvo } from "~/lib/components/AppSidebar";
-import { SidebarInset, SidebarProvider } from "~/lib/components/ui/sidebar";
+import { Outlet, redirect } from "@tanstack/react-router";
+import { AppSidebar, BotConvo, ConnectionConvo } from "~/components/AppSidebar";
+import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 
-export const Route = createFileRoute("/app")({
+export const Route = createFileRoute({
   component: AppLayout,
   beforeLoad: async ({ context }) => {
     const { user } = context;
